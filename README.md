@@ -7,12 +7,35 @@ host will serve.
 ## Layout
 
 ```
-data/site.json     all content: nav, categories, image lists, bio, contact
-data/lqip.json     tiny inline blur-up previews (generated)
-src/               styles.css, app.js — copied into site/assets at build time
-scripts/           fetch-assets.mjs, build.mjs, serve.mjs
-site/              build output; this is the deployable root
+data/site.json      structure: nav, categories, image lists (media, size)
+data/i18n/en.json   every English string, including per-image alt text
+data/i18n/bg.json   the same keys in Bulgarian
+data/lqip.json      tiny inline blur-up previews (generated)
+src/                styles.css, app.js — copied into site/assets at build time
+scripts/            fetch-assets.mjs, build.mjs, serve.mjs
+site/               build output; this is the deployable root
 ```
+
+Nothing translatable lives in `site.json` — it holds only structure, so adding
+a painting is a one-line change there plus an `alt` entry in each locale file.
+
+## Languages
+
+English is the default and sits at the root; Bulgarian lives under `/bg/`:
+`/gallery/` and `/bg/gallery/`. That keeps the English URLs inherited from the
+old site intact.
+
+Each page declares `hreflang` alternates for both languages plus `x-default`,
+and the sitemap pairs every URL with its translation, so the two are understood
+as one page in two languages rather than duplicates. The header switcher links
+to the *same* page in the other language, not to its home page.
+
+Adding a language means adding `data/i18n/<code>.json`, listing the code in
+`site.locales`, and rebuilding — the build derives its routes from that list.
+
+Note the per-locale display font: Dancing Script (which the old site used) has
+no Cyrillic, so the Bulgarian pages set Caveat instead via `displayFont` in the
+locale file. Montserrat covers both alphabets and is shared.
 
 ## Working on it
 

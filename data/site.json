@@ -1,28 +1,13 @@
 {
   "site": {
-    "name": "Vasilka Sotirova",
-    "title": "Vasilka Sotirova - Artist",
-    "email": "artvasi7@gmail.com",
     "baseUrl": "https://edgarbarrantes.github.io",
-    "lang": "en",
-    "defaultTitle": "Vasilka Sotirova | Bulgarian Artist — Original Oil and Pastel Paintings",
-    "defaultDescription": "Vasilka Sotirova is a Bulgarian artist and painter from Varna, working in oil, acrylic, dry pastel and watercolour. Portraits, pet portraits, landscapes, still life and abstract art — original paintings and commissions, shipped worldwide.",
     "basePath": "/vasi-sotirova",
     "customDomain": "",
-    "keywords": [
-      "Vasilka Sotirova",
-      "Bulgarian artist",
-      "Bulgarian painter",
-      "Bulgarian art",
-      "artist from Varna",
-      "oil painting",
-      "dry pastel",
-      "watercolour",
-      "portrait commission",
-      "pet portrait",
-      "original paintings for sale",
-      "Bulgarian landscape painting",
-      "contemporary Bulgarian art"
+    "email": "artvasi7@gmail.com",
+    "defaultLocale": "en",
+    "locales": [
+      "en",
+      "bg"
     ],
     "social": [
       {
@@ -37,856 +22,647 @@
   },
   "nav": [
     {
-      "label": "Home",
+      "key": "home",
       "href": "/"
     },
     {
-      "label": "Gallery",
+      "key": "gallery",
       "href": "/gallery/"
     },
     {
-      "label": "Bio",
+      "key": "bio",
       "href": "/bio/"
     },
     {
-      "label": "Contact",
+      "key": "contact",
       "href": "/contact/"
     }
   ],
   "home": {
     "hero": {
       "media": "bd9a4d_8855ebaf6047485380abffe03d71389d~mv2.jpg",
-      "alt": "oil painting of passionate black horse galloping",
       "width": 960,
       "height": 737
-    },
-    "intro": [
-      "Vasilka Sotirova is a Bulgarian artist, born in Varna in 1965. She trained at the High School of Applied Arts in Tryavna and graduated from the University of Fine Arts in Dupnitsa, and has painted for more than three decades in oil, acrylic, dry pastel and watercolour.",
-      "Her work moves between commissioned portraits and pet portraits, the mountains, meadows and old towns of Bulgaria, still life, and abstract painting. Her paintings are held in private collections across Europe and North America, and original work is available to commission and ship worldwide."
-    ]
+    }
   },
   "bio": {
-    "title": "Bio",
-    "timeline": [
-      [
-        "1965",
-        "Born in the city of Varna."
-      ],
-      [
-        "1984",
-        "Graduated from the High School of Applied Arts in the town of Tryavna."
-      ],
-      [
-        "1989",
-        "Graduated from the University of Fine Arts \"Todor Samodumov\" in the town of Dupnitsa."
-      ],
-      [
-        "2008",
-        "Postgraduate degree in \"Pedagogy of the Plastic Arts\"."
-      ]
+    "years": [
+      "1965",
+      "1984",
+      "1989",
+      "2008"
     ],
-    "note": "Her paintings are owned by private individuals from Bulgaria, Germany, Russia, France, Norway, Sweden, Denmark, England, Canada, the USA and others.",
     "images": [
       {
         "media": "bd9a4d_b5e985c5e7b04633a76a42f222b60218~mv2.jpg",
-        "alt": "Vasilka Sotirova in her studio",
         "width": 1287,
         "height": 2048
       },
       {
         "media": "bd9a4d_44e7c0ae0e27489ca4a37c339750cf26~mv2.jpg",
-        "alt": "Vasilka Sotirova with one of her paintings",
         "width": 1067,
         "height": 1422
       }
     ]
   },
-  "contact": {
-    "title": "Contact",
-    "lead": "To order a painting or commission a portrait, get in touch by email:",
-    "note": "For commissions, please include the subject, the size you have in mind and any reference photographs. Paintings ship worldwide.",
-    "followLead": "You can also follow new work here:"
-  },
   "categories": [
     {
       "slug": "portraits",
-      "title": "Portraits",
-      "description": "Commissioned portrait paintings by Bulgarian artist Vasilka Sotirova — oil and dry pastel portraits of children, couples and families, painted from life or from photographs. Portrait commissions shipped worldwide.",
       "cover": "bd9a4d_abdd74161ad44f2a8b5e806ee6835a9e~mv2.jpg",
       "images": [
         {
           "media": "bd9a4d_abdd74161ad44f2a8b5e806ee6835a9e~mv2.jpg",
-          "alt": "Oil portrait of a bride and groom, the bride holding a bouquet of cream roses",
           "width": 1022,
           "height": 1265
         },
         {
           "media": "bd9a4d_e80dc66705fa420087f12b5c1dea6352~mv2.jpg",
-          "alt": "Pastel portrait of a smiling girl in Bulgarian folk dress on a swing, holding a basket of eggs",
           "width": 1177,
           "height": 1600
         },
         {
           "media": "bd9a4d_b2ad36052da64e839840438441754638~mv2.jpg",
-          "alt": "Oil portrait of a young woman seen from behind, her hair pinned up with small white flowers",
           "width": 546,
           "height": 800
         },
         {
           "media": "bd9a4d_c799d4d2f63844bea60661352258ea39~mv2.jpg",
-          "alt": "Oil portrait of a dark-haired girl in a knitted lilac hat",
           "width": 1307,
           "height": 1599
         },
         {
           "media": "bd9a4d_bed167e2b4654d6d8098d54e934875b4~mv2.jpg",
-          "alt": "Oil portrait of a laughing couple standing together on a wooden jetty by a river",
           "width": 1043,
           "height": 1391
         },
         {
           "media": "bd9a4d_1e05b511c5674680a4d1e84d23f54630~mv2.jpg",
-          "alt": "Oil portrait of a woman in an elaborate white ball gown beside a column",
           "width": 2021,
           "height": 2973
         },
         {
           "media": "bd9a4d_becee091e84c4b7ead0f2a43f9f7d2b8~mv2.jpg",
-          "alt": "Oil portrait of a fair-haired young boy in a navy argyle sweater",
           "width": 1308,
           "height": 1626
         },
         {
           "media": "bd9a4d_243b21899f2745e084fb8f58326c222d~mv2.jpg",
-          "alt": "Oil portrait of a blonde woman in a yellow polo neck against a blue background",
           "width": 1289,
           "height": 1600
         },
         {
           "media": "bd9a4d_b489f79ac04d4a0cb57d8eda14dda0c5~mv2.jpg",
-          "alt": "Oil portrait of a blue-eyed baby in a red checked pinafore",
           "width": 916,
           "height": 1016
         },
         {
           "media": "bd9a4d_9bc165f890de4474b0b6726191208a4e~mv2.jpg",
-          "alt": "Oil portrait of a smiling older man in a naval captain's cap",
           "width": 836,
           "height": 1146
         },
         {
           "media": "bd9a4d_0a65d88a413f464399dbb418d879bbff~mv2.jpg",
-          "alt": "Oil portrait of a girl with blonde plaits tied with pink ribbons",
           "width": 1425,
           "height": 1764
         },
         {
           "media": "bd9a4d_27396ae67ac4485ea65290b485468a2f~mv2.jpg",
-          "alt": "Oil painting of a small child crouching in the snow, hand resting on one cheek",
           "width": 793,
           "height": 960
         }
-      ],
-      "keywords": [
-        "portrait painting",
-        "portrait commission",
-        "oil portrait",
-        "pastel portrait",
-        "family portrait painting"
       ]
     },
     {
       "slug": "animal-portraits",
-      "title": "Animal Portraits",
-      "description": "Pet and animal portraits by Bulgarian painter Vasilka Sotirova — dogs, cats and horses in oil and dry pastel, including close studies of horses in movement. Custom pet portrait commissions welcome.",
       "cover": "bd9a4d_2a6279a6b94044379a4b57d3c2b884f8~mv2.jpg",
       "images": [
         {
           "media": "bd9a4d_d1f4b2e569ec4334a7e9a0943c659001~mv2.jpg",
-          "alt": "Pastel painting of two tabby kittens against a golden ochre background",
           "width": 800,
           "height": 700
         },
         {
           "media": "bd9a4d_8855ebaf6047485380abffe03d71389d~mv2.jpg",
-          "alt": "Oil painting of a black horse galloping through swirling mist",
           "width": 960,
           "height": 737
         },
         {
           "media": "bd9a4d_7e1f567ce35a4dfc8e1bfbf0916e97a1~mv2.jpg",
-          "alt": "Oil painting of a dapple-grey horse with a pale mane running through cloud",
           "width": 960,
           "height": 720
         },
         {
           "media": "bd9a4d_fc498724ed4e4176a464706107348683~mv2.jpg",
-          "alt": "Oil portrait of a black and white cocker spaniel sitting upright",
           "width": 1240,
           "height": 1600
         },
         {
           "media": "bd9a4d_27f6fe9bd5ab42cab02dac0a598615be~mv2.jpg",
-          "alt": "Blue ballpoint pen drawing of a sleeping cat's head",
           "width": 1144,
           "height": 1599
         },
         {
           "media": "bd9a4d_f3fae12adae14e13a3f8963a2ca59bf7~mv2.jpg",
-          "alt": "Oil portrait of a curly-coated black and white dog panting in a flowering meadow",
           "width": 1284,
           "height": 1600
         },
         {
           "media": "bd9a4d_1b9f9f4cbcbe48179d5da910313edda8~mv2.jpg",
-          "alt": "Pastel study of a chestnut horse's eye in close-up",
           "width": 1096,
           "height": 1600
         },
         {
           "media": "bd9a4d_3894bda540ed4b7488dacebf4e8eed76~mv2.jpg",
-          "alt": "Oil painting of a bay horse cantering along a sunlit beach",
           "width": 1600,
           "height": 1263
         },
         {
           "media": "bd9a4d_fc5445bdf45a4e36888cd5df10313cfc~mv2.jpg",
-          "alt": "Pastel close-up of a horse's dark eye and lashes against a chestnut coat",
           "width": 1046,
           "height": 1600
         },
         {
           "media": "bd9a4d_eabd45ea151c4312bea7fb852de272f6~mv2.jpg",
-          "alt": "Pastel portrait of a grey long-haired cat on a black background",
           "width": 1285,
           "height": 1600
         },
         {
           "media": "bd9a4d_0e1724db207b4e9c84389f6fba9dbea1~mv2.jpg",
-          "alt": "Pastel portrait of a ginger long-haired cat with green eyes on black",
           "width": 1130,
           "height": 1600
         },
         {
           "media": "bd9a4d_2a6279a6b94044379a4b57d3c2b884f8~mv2.jpg",
-          "alt": "Pastel portrait of a tortoiseshell cat with green eyes on a dark background",
           "width": 1176,
           "height": 1600
         }
-      ],
-      "keywords": [
-        "pet portrait",
-        "dog portrait painting",
-        "cat portrait painting",
-        "horse painting",
-        "animal portrait commission"
       ]
     },
     {
       "slug": "still-life",
-      "title": "Still Life",
-      "description": "Still life paintings by Bulgarian artist Vasilka Sotirova — poppies, sunflowers, roses and garden flowers in oil, with fruit and tabletop studies in rich, saturated colour.",
       "cover": "bd9a4d_d4cc71398e514cc3896c56ab35831a24~mv2.jpg",
       "images": [
         {
           "media": "bd9a4d_fd6c99ee39a8460c8242f281858929f2~mv2.jpg",
-          "alt": "Oil painting of red poppies and white daisies in a small ochre bowl",
           "width": 1152,
           "height": 1164
         },
         {
           "media": "bd9a4d_150db19a281140a386820a64da97faa3~mv2.jpg",
-          "alt": "Oil painting of a mixed wildflower bouquet in a white ceramic vase",
           "width": 1248,
           "height": 1238
         },
         {
           "media": "bd9a4d_ca36f74b054f4c9595672f5b10556b8b~mv2.jpg",
-          "alt": "Oil painting of red and peach roses in a pale blue vase beside a window",
           "width": 1191,
           "height": 1188
         },
         {
           "media": "bd9a4d_24e1c600ad5a4bd8a4383db944dda84a~mv2.jpg",
-          "alt": "Oil painting of pink peonies and garden flowers in a wicker basket",
           "width": 1182,
           "height": 1176
         },
         {
           "media": "bd9a4d_c8f6b2494020492cbd0b2e312465e162~mv2.jpg",
-          "alt": "Oil painting of zinnias in a white enamel jug against a deep red ground",
           "width": 1292,
           "height": 1306
         },
         {
           "media": "bd9a4d_db7a0a37770b4df4b6e1db1deeb81418~mv2.jpg",
-          "alt": "Oil painting of grapes, apples and pears in a glass tazza on red cloth",
           "width": 1446,
           "height": 1044
         },
         {
           "media": "bd9a4d_f80d4c8580394681af2cdcb571b23763~mv2.jpg",
-          "alt": "Oil painting of a summer bouquet in a white wicker basket at a blue window",
           "width": 800,
           "height": 800
         },
         {
           "media": "bd9a4d_01aa5a92c2d44b39b34f1c94b5c09fef~mv2.jpg",
-          "alt": "Oil painting of purple and pink sweet peas in a cobalt vase on a sunlit table",
           "width": 800,
           "height": 850
         },
         {
           "media": "bd9a4d_3eeb553418c4416586ad9b9f18e89d81~mv2.jpg",
-          "alt": "Oil painting of lilies, gladioli and asters in a deep blue globe vase",
           "width": 800,
           "height": 850
         },
         {
           "media": "bd9a4d_d4cc71398e514cc3896c56ab35831a24~mv2.jpg",
-          "alt": "Oil painting of sunflowers in a zinc watering can with apples on red cloth",
           "width": 1258,
           "height": 1254
         },
         {
           "media": "bd9a4d_e0f9602f9b6243d5911c952548b11921~mv2.jpg",
-          "alt": "Oil painting of white hibiscus and delphiniums in a turquoise vase",
           "width": 800,
           "height": 1046
         },
         {
           "media": "bd9a4d_a905210a6e1a4e39b4f76d1a2f0a4af0~mv2.jpg",
-          "alt": "Oil painting of daisies, gerberas and a yellow lily in a woven basket",
           "width": 1164,
           "height": 1164
         },
         {
           "media": "bd9a4d_d3b370e834994c5da99326d0792fc20a~mv2.jpg",
-          "alt": "Oil painting of tulips and yellow lilies in a shallow patterned bowl",
           "width": 800,
           "height": 800
         },
         {
           "media": "bd9a4d_be16b270b37249fd9b460c81b1169ab3~mv2.jpg",
-          "alt": "Oil painting of a sunflower with lilies and phlox in a white bowl",
           "width": 800,
           "height": 800
         },
         {
           "media": "bd9a4d_2762c5d26a634cc0981ab221c83efe22~mv2.jpg",
-          "alt": "Oil painting of pink and yellow roses in a glass vase",
           "width": 962,
           "height": 1038
         }
-      ],
-      "keywords": [
-        "still life painting",
-        "flower painting",
-        "sunflower painting",
-        "poppies painting",
-        "oil still life"
       ]
     },
     {
       "slug": "landscapes",
-      "title": "Landscapes",
-      "description": "Bulgarian landscape paintings by Vasilka Sotirova — mountain ridges, glacial lakes, wildflower meadows and the Black Sea coast, painted in oil with bold, high-key colour.",
       "cover": "bd9a4d_ade592a7ae9e45969a6d291bfc5add46~mv2.jpg",
       "images": [
         {
           "media": "bd9a4d_087fcfb8422f4ce188de7edaed60fa2f~mv2.jpg",
-          "alt": "Bold oil painting of a snow-covered river valley below sunlit autumn hills",
           "width": 1600,
           "height": 1141
         },
         {
           "media": "bd9a4d_2d4b12866af145568e0262dfd25cd7e0~mv2.jpg",
-          "alt": "Oil painting of a footpath running along a golden mountain ridge",
           "width": 1600,
           "height": 1144
         },
         {
           "media": "bd9a4d_911ef7f280e84f23adb15a4cc3c1887e~mv2.jpg",
-          "alt": "Oil painting of a sunlit track through hills covered in purple heather",
           "width": 1600,
           "height": 1070
         },
         {
           "media": "bd9a4d_e29c52cffd0b48928c3b6dec7a852a63~mv2.jpg",
-          "alt": "Oil painting of pink fireweed in flower above a mountain lake",
           "width": 1600,
           "height": 1146
         },
         {
           "media": "bd9a4d_c975dfb22cbf445a9a7f4933bd432a32~mv2.jpg",
-          "alt": "Oil painting of a mountain lake and meadow scattered with wildflowers",
           "width": 1600,
           "height": 1143
         },
         {
           "media": "bd9a4d_6bded511c1304fbf9e372c9456e8c927~mv2.jpg",
-          "alt": "Oil painting of a path over golden autumn ridges under a wide sky",
           "width": 1600,
           "height": 1281
         },
         {
           "media": "bd9a4d_6e9318c80e6745faa4a3d36f3b9dccee~mv2.jpg",
-          "alt": "Oil painting of a waterfall falling between green cliffs",
           "width": 1600,
           "height": 1143
         },
         {
           "media": "bd9a4d_0114bbca6b564ee1b32dcf2bedddf14e~mv2.jpg",
-          "alt": "Oil painting of a village nestled below dark basalt cliffs",
           "width": 1575,
           "height": 1600
         },
         {
           "media": "bd9a4d_77002ae832f74eddb60048ed13821878~mv2.jpg",
-          "alt": "Oil painting of a green hillside strewn with pale boulders",
           "width": 1600,
           "height": 1131
         },
         {
           "media": "bd9a4d_18a77e2e2ed7451e833d05609ca37dbc~mv2.jpg",
-          "alt": "Oil painting of a mountain slope in autumn gold and rust",
           "width": 1600,
           "height": 1285
         },
         {
           "media": "bd9a4d_75831cf192394f2b9c9c4edbaec4319e~mv2.jpg",
-          "alt": "Oil painting of horses on a hillside at dusk in violet light",
           "width": 1600,
           "height": 1066
         },
         {
           "media": "bd9a4d_43b6ddbbe670464db96c2656babfb4ca~mv2.jpg",
-          "alt": "Oil painting of a chamois on a rocky summit above a sea of cloud",
           "width": 1600,
           "height": 1073
         },
         {
           "media": "bd9a4d_f552616522a043a9badf4e7b43944a2d~mv2.jpg",
-          "alt": "Oil painting of two figures on a clifftop under towering clouds",
           "width": 1600,
           "height": 1066
         },
         {
           "media": "bd9a4d_92174a07d645400aa819db2707c9747e~mv2.jpg",
-          "alt": "Oil painting of a glacial lake below a rocky peak",
           "width": 1600,
           "height": 1139
         },
         {
           "media": "bd9a4d_31a1bac611b54f6e8d21436c8e570dce~mv2.jpg",
-          "alt": "Oil painting of reeds and still water under a pale blue sky",
           "width": 1600,
           "height": 1128
         },
         {
           "media": "bd9a4d_1c67006dcc394e759cba48d2703f25e5~mv2.jpg",
-          "alt": "Oil painting of a path between lavender fields and blossoming trees",
           "width": 1744,
           "height": 849
         },
         {
           "media": "bd9a4d_a804b12b2420445b987e9091d7fc0521~mv2.jpg",
-          "alt": "Oil painting of breaking waves on a sunlit shore",
           "width": 1600,
           "height": 778
         },
         {
           "media": "bd9a4d_709dd7a4580149ec829194cc41225e2e~mv2.jpg",
-          "alt": "Oil painting of a small boat under trees on a quiet bay, in a crackle-finish frame",
           "width": 1600,
           "height": 1165
         }
-      ],
-      "keywords": [
-        "Bulgarian landscape painting",
-        "mountain painting",
-        "Rila mountains art",
-        "seascape painting",
-        "landscape oil painting"
       ]
     },
     {
       "slug": "abstract-landscapes",
-      "title": "Abstract Landscapes",
-      "description": "Abstract landscape paintings by Bulgarian artist Vasilka Sotirova, where meadows, trees and distant hills dissolve into colour, texture and atmosphere.",
       "cover": "bd9a4d_6204f147c8d44a6b8f1d8cf0e70415fb~mv2.jpg",
       "images": [
         {
           "media": "bd9a4d_16cc05736c884c57be9380187ec8d467~mv2.jpg",
-          "alt": "Abstract landscape in purple, red and ochre with a slender tree and winding path",
           "width": 841,
           "height": 920
         },
         {
           "media": "bd9a4d_6204f147c8d44a6b8f1d8cf0e70415fb~mv2.jpg",
-          "alt": "Soft abstract landscape of a yellow meadow below misty blue mountains",
           "width": 1222,
           "height": 861
         },
         {
           "media": "bd9a4d_91b8f271a3bd4962a53f64d1dbf1368d~mv2.jpg",
-          "alt": "Abstract landscape in warm russet and green with flowering ground",
           "width": 684,
           "height": 683
         },
         {
           "media": "bd9a4d_b72f6d4ff6e7422d97d8659a7413da60~mv2.jpg",
-          "alt": "Abstract landscape of two windswept trees beside a pale track",
           "width": 874,
           "height": 920
         },
         {
           "media": "bd9a4d_dfca51e4b7ad4691adb6d47b6e863ebd~mv2.jpg",
-          "alt": "Textured abstract landscape with a pink path through gold and green fields",
           "width": 680,
           "height": 675
         },
         {
           "media": "bd9a4d_b6faffbebea749a48df62bd08ff4a8da~mv2.jpg",
-          "alt": "Muted abstract landscape of a farmhouse among trees in an autumn field",
           "width": 706,
           "height": 712
         },
         {
           "media": "bd9a4d_b1df7bb5d0d841da9b258f64f568aa1e~mv2.jpg",
-          "alt": "Abstract landscape of a flowering meadow under a heavy sky",
           "width": 1222,
           "height": 898
         },
         {
           "media": "bd9a4d_d1595be1f96c4d1bbb93c92d3734f0cb~mv2.jpg",
-          "alt": "Soft abstract landscape of a stream through a yellow flowering field",
           "width": 1241,
           "height": 882
         },
         {
           "media": "bd9a4d_b19dad04d78c4a0fba00f7f3c4aeda9c~mv2.jpg",
-          "alt": "Abstract landscape of a stream cutting through golden fields",
           "width": 1156,
           "height": 832
         },
         {
           "media": "bd9a4d_57d4810827c3494d8b2eab35427563aa~mv2.jpg",
-          "alt": "Abstract landscape of trees and wildflowers under a violet sky",
           "width": 1241,
           "height": 920
         },
         {
           "media": "bd9a4d_55dde2cb4f4444c3be0f624a5a3c1b9e~mv2.jpg",
-          "alt": "Impressionist landscape of a flowering meadow before a line of trees",
           "width": 1618,
           "height": 1143
         },
         {
           "media": "bd9a4d_bf781a9e9c3e4a3cad1006788850b134~mv2.jpg",
-          "alt": "Abstract landscape of birches beside a track through green and gold fields",
           "width": 900,
           "height": 726
         },
         {
           "media": "bd9a4d_c285329042d24879aed98128e0339547~mv2.jpg",
-          "alt": "Soft abstract landscape of rolling meadows below distant blue hills",
           "width": 1869,
           "height": 1299
         }
-      ],
-      "keywords": [
-        "abstract landscape",
-        "contemporary landscape painting",
-        "atmospheric painting"
       ]
     },
     {
       "slug": "architectural-landscapes",
-      "title": "Architectural Landscapes",
-      "description": "Paintings of Bulgarian Revival architecture by Vasilka Sotirova — old town streets, stone bridges, clock towers and red-roofed houses in oil and watercolour.",
       "cover": "bd9a4d_fd6fffe161bf4393baa165d268d656df~mv2.jpg",
       "images": [
         {
           "media": "bd9a4d_fd6fffe161bf4393baa165d268d656df~mv2.jpg",
-          "alt": "Oil painting of a stone bridge and clock tower in a Bulgarian old town",
           "width": 1600,
           "height": 1043
         },
         {
           "media": "bd9a4d_417932df8a894cc4acf966b2b727cf60~mv2.jpg",
-          "alt": "Vivid oil painting of a Revival-period house with red doors below wooded hills",
           "width": 1200,
           "height": 800
         },
         {
           "media": "bd9a4d_e22ba4136b49473d8ff8a6344ca96f0d~mv2.jpg",
-          "alt": "Oil painting of terracotta-roofed houses climbing a hillside",
           "width": 2027,
           "height": 1449
         },
         {
           "media": "bd9a4d_4278fc06a23f4d76bf69b5ef991d21f3~mv2.jpg",
-          "alt": "Oil painting of a whitewashed old house with stone-tiled roofs among trees",
           "width": 1018,
           "height": 720
         },
         {
           "media": "bd9a4d_aa00755c5a834e22ac85be4665707205~mv2.jpg",
-          "alt": "Oil painting of red-roofed Revival houses stacked up a steep slope",
           "width": 1980,
           "height": 1444
         },
         {
           "media": "bd9a4d_09d31912d9ee4bd4a4385fc08c7ccd29~mv2.jpg",
-          "alt": "Night oil painting of a lit hilltop church above a floodlit fortress",
           "width": 1804,
           "height": 1440
         },
         {
           "media": "bd9a4d_06db748b97d34d389a179e2e09968782~mv2.jpg",
-          "alt": "Watercolour of a timber-framed old house among autumn trees",
           "width": 1953,
           "height": 1356
         },
         {
           "media": "bd9a4d_70087be280664a2a8af99c44e11ca38a~mv2.jpg",
-          "alt": "Oil painting looking through a fortress gateway towards a hilltop church",
           "width": 1388,
           "height": 1420
         },
         {
           "media": "bd9a4d_a82a71fbeac344ad890180f53abe7567~mv2.jpg",
-          "alt": "Oil painting of a stone bridge beside a white clock-tower building by a river",
           "width": 1704,
           "height": 1332
         },
         {
           "media": "bd9a4d_7d398156c34e43f7b0d44a8bc8adeeec~mv2.jpg",
-          "alt": "Oil painting of a white house with a red gate under a bright blue sky",
           "width": 1200,
           "height": 800
         },
         {
           "media": "bd9a4d_23a160f42e9a4a9eaa5a443e6aa49ccc~mv2.jpg",
-          "alt": "Oil painting of a fortress gate and hilltop church in evening light",
           "width": 1377,
           "height": 1410
         },
         {
           "media": "bd9a4d_f5ba9a9cd3064762ad234c9d69201721~mv2.jpg",
-          "alt": "Oil painting of the approach to a hilltop fortress at dusk",
           "width": 1360,
           "height": 1376
         },
         {
           "media": "bd9a4d_1e13986118ae44a28d985aa7d4820bb1~mv2.jpg",
-          "alt": "Oil painting of a clock tower and old houses, framed in crackled paint",
           "width": 954,
           "height": 960
         },
         {
           "media": "bd9a4d_c74884fefa5046ccaf22a272f4862d17~mv2.jpg",
-          "alt": "Oil painting of a cobbled old-town street in warm evening light",
           "width": 1110,
           "height": 1097
         },
         {
           "media": "bd9a4d_cde866235b8f4e5a9553abdb4efdf8a8~mv2.jpg",
-          "alt": "Oil painting of a stone house with a vine-covered balcony on a sunlit street",
           "width": 1344,
           "height": 1302
         },
         {
           "media": "bd9a4d_0f0101c8fa1a4e8c94747933ce85c67c~mv2.jpg",
-          "alt": "Oil painting of a narrow old-town lane with a street lamp, framed in crackled paint",
           "width": 1159,
           "height": 1118
         },
         {
           "media": "bd9a4d_4fe09247368c43b1b44d8cdbc5e80280~mv2.jpg",
-          "alt": "Oil painting of a cobbled lane between flower-covered old houses",
           "width": 1362,
           "height": 1344
         },
         {
           "media": "bd9a4d_65ae6e139d29434ea20dae7542ddf5c6~mv2.jpg",
-          "alt": "Oil painting of a hexagonal clock tower rising above an old-town street",
           "width": 1707,
           "height": 1383
         }
-      ],
-      "keywords": [
-        "Bulgarian Revival architecture",
-        "old town painting",
-        "cityscape painting",
-        "architectural painting"
       ]
     },
     {
       "slug": "abstract-paintings",
-      "title": "Abstract Paintings",
-      "description": "Abstract paintings by Bulgarian artist Vasilka Sotirova — bold colour fields, and musicians and figures reduced to gesture, in oil and acrylic.",
       "cover": "bd9a4d_a6cdb69261944981806587977612a985~mv2.jpg",
       "images": [
         {
           "media": "bd9a4d_6556374f075f4a6b8b8d0c119efc6880~mv2.jpg",
-          "alt": "Abstract painting of a figure with a cello in blue, red and yellow",
           "width": 1480,
           "height": 1500
         },
         {
           "media": "bd9a4d_a6cdb69261944981806587977612a985~mv2.jpg",
-          "alt": "Abstract painting of a red figure playing a turquoise violin",
           "width": 1500,
           "height": 1478
         },
         {
           "media": "bd9a4d_008d94063f964193a56648c8b2689d91~mv2.jpg",
-          "alt": "Abstract composition of flowing blue, red and green forms on yellow",
           "width": 2040,
           "height": 1412
         },
         {
           "media": "bd9a4d_1c76f84194d0424f9ef60f43ce843ad4~mv2.jpg",
-          "alt": "Abstract painting of a white sun above a burst of colour on yellow",
           "width": 1908,
           "height": 1556
         },
         {
           "media": "bd9a4d_941e6f4076044400a0cf354849c2f57d~mv2.jpg",
-          "alt": "Bold abstract composition in red, yellow and blue",
           "width": 2280,
           "height": 1586
         },
         {
           "media": "bd9a4d_41e939aae01f4baebefa5ad60483f5d1~mv2.jpg",
-          "alt": "Abstract composition of yellow and orange forms on a deep blue ground",
           "width": 1879,
           "height": 1356
         },
         {
           "media": "bd9a4d_038dceac1f604edf8bb3c6dc6ffc3e21~mv2.jpg",
-          "alt": "Abstract painting of a swirling red and yellow form on dark blue",
           "width": 1676,
           "height": 1428
         },
         {
           "media": "bd9a4d_e4879f861ca64438b5cc7c336cba2ce4~mv2.jpg",
-          "alt": "Abstract composition in blues and greens with scattered warm accents",
           "width": 1587,
           "height": 1134
         },
         {
           "media": "bd9a4d_a0b187fb3ae64557884d8fe97a2ff1cd~mv2.jpg",
-          "alt": "Abstract painting of blue and white shards against green",
           "width": 1692,
           "height": 1455
         },
         {
           "media": "bd9a4d_0013d8dc67a84db28d0bcc4f453e2631~mv2.jpg",
-          "alt": "Abstract composition in red and yellow with a green central form",
           "width": 956,
           "height": 712
         },
         {
           "media": "bd9a4d_209228792fc44bfb8509c8491bd774ce~mv2.jpg",
-          "alt": "Abstract painting of angular yellow, red and blue forms",
           "width": 937,
           "height": 702
         },
         {
           "media": "bd9a4d_459ac89dc9ea4822bc7772d1fd288273~mv2.jpg",
-          "alt": "Abstract composition of yellow and red forms on blue and green",
           "width": 1100,
           "height": 800
         },
         {
           "media": "bd9a4d_aafa19f8c42b465e869900de83a369a2~mv2.jpg",
-          "alt": "Abstract painting of red and blue strokes across an orange ground",
           "width": 1174,
           "height": 824
         },
         {
           "media": "bd9a4d_63003023720f474f856c5f0f9ad070da~mv2.jpg",
-          "alt": "Abstract composition of yellow shapes on teal blue",
           "width": 959,
           "height": 820
         },
         {
           "media": "bd9a4d_c666ea5a9b5b41518f468b771ffc4d6a~mv2.jpeg",
-          "alt": "Abstract painting in scarlet and cream with flashes of blue",
           "width": 500,
           "height": 364
         }
-      ],
-      "keywords": [
-        "abstract painting",
-        "contemporary abstract art",
-        "Bulgarian abstract artist",
-        "acrylic abstract"
       ]
     },
     {
       "slug": "other-nature-scenes",
-      "title": "Other Nature Scenes",
-      "description": "Nature paintings by Bulgarian artist Vasilka Sotirova — butterflies, poppies, orchids and close studies drawn from the natural world.",
       "cover": "bd9a4d_a28bfe4a10fe482184fc28a04423a638~mv2.jpg",
       "images": [
         {
           "media": "bd9a4d_eaf40aaff4834f6fb3e1340740fc5513~mv2.jpg",
-          "alt": "Oil painting of butterflies resting on two orange sunflowers",
           "width": 1572,
           "height": 1600
         },
         {
           "media": "bd9a4d_700ad75a1c064aab95c5a5e3dd3454da~mv2.jpg",
-          "alt": "Oil painting of butterflies among purple flowers and green leaves",
           "width": 1581,
           "height": 1600
         },
         {
           "media": "bd9a4d_a28bfe4a10fe482184fc28a04423a638~mv2.jpg",
-          "alt": "Soft oil painting of a small mouse among pink orchids",
           "width": 1600,
           "height": 1600
         },
         {
           "media": "bd9a4d_7b5040b4342043d9a32f81b85615520f~mv2.jpg",
-          "alt": "Oil painting of red poppies and seed heads on a patchwork of green and blue",
           "width": 1568,
           "height": 1600
         },
         {
           "media": "bd9a4d_504f7cdf6da54d25b0af71ee067360ef~mv2.jpg",
-          "alt": "Oil painting of a pale butterfly on a pink thistle flower",
           "width": 960,
           "height": 672
         },
         {
           "media": "bd9a4d_58ef9575d6c045249f97d76861256948~mv2.jpg",
-          "alt": "Oil painting of deep pink flowers against silvery foliage",
           "width": 884,
           "height": 1094
         }
-      ],
-      "keywords": [
-        "nature painting",
-        "butterfly painting",
-        "floral art"
       ]
     },
     {
       "slug": "current-exhibition",
-      "title": "Current Exhibition",
-      "description": "The most recently exhibited paintings by Bulgarian artist Vasilka Sotirova, available as originals and prints.",
       "cover": "bd9a4d_05bc9c79d617490dad48fc439838c5c6~mv2.jpg",
-      "images": [],
-      "keywords": [
-        "exhibition",
-        "paintings for sale",
-        "original art"
-      ]
+      "images": []
     }
   ]
 }

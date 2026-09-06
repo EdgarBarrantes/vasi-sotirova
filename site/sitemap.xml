@@ -1,79 +1,210 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://edgarbarrantes.github.io/vasi-sotirova/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/"/>
     <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://edgarbarrantes.github.io/vasi-sotirova/gallery/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/gallery/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/gallery/"/>
     <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://edgarbarrantes.github.io/vasi-sotirova/portraits/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/portraits/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/portraits/"/>
     <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://edgarbarrantes.github.io/vasi-sotirova/animal-portraits/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/animal-portraits/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/animal-portraits/"/>
     <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://edgarbarrantes.github.io/vasi-sotirova/still-life/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/still-life/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/still-life/"/>
     <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://edgarbarrantes.github.io/vasi-sotirova/landscapes/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/landscapes/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/landscapes/"/>
     <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://edgarbarrantes.github.io/vasi-sotirova/abstract-landscapes/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/abstract-landscapes/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/abstract-landscapes/"/>
     <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://edgarbarrantes.github.io/vasi-sotirova/architectural-landscapes/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/architectural-landscapes/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/architectural-landscapes/"/>
     <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://edgarbarrantes.github.io/vasi-sotirova/abstract-paintings/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/abstract-paintings/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/abstract-paintings/"/>
     <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://edgarbarrantes.github.io/vasi-sotirova/other-nature-scenes/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/other-nature-scenes/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/other-nature-scenes/"/>
     <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://edgarbarrantes.github.io/vasi-sotirova/current-exhibition/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/current-exhibition/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/current-exhibition/"/>
     <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://edgarbarrantes.github.io/vasi-sotirova/bio/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/bio/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/bio/"/>
     <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://edgarbarrantes.github.io/vasi-sotirova/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/contact/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/contact/"/>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edgarbarrantes.github.io/vasi-sotirova/bg/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/"/>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://edgarbarrantes.github.io/vasi-sotirova/bg/gallery/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/gallery/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/gallery/"/>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edgarbarrantes.github.io/vasi-sotirova/bg/portraits/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/portraits/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/portraits/"/>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edgarbarrantes.github.io/vasi-sotirova/bg/animal-portraits/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/animal-portraits/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/animal-portraits/"/>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edgarbarrantes.github.io/vasi-sotirova/bg/still-life/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/still-life/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/still-life/"/>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edgarbarrantes.github.io/vasi-sotirova/bg/landscapes/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/landscapes/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/landscapes/"/>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edgarbarrantes.github.io/vasi-sotirova/bg/abstract-landscapes/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/abstract-landscapes/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/abstract-landscapes/"/>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edgarbarrantes.github.io/vasi-sotirova/bg/architectural-landscapes/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/architectural-landscapes/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/architectural-landscapes/"/>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edgarbarrantes.github.io/vasi-sotirova/bg/abstract-paintings/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/abstract-paintings/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/abstract-paintings/"/>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edgarbarrantes.github.io/vasi-sotirova/bg/other-nature-scenes/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/other-nature-scenes/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/other-nature-scenes/"/>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edgarbarrantes.github.io/vasi-sotirova/bg/current-exhibition/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/current-exhibition/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/current-exhibition/"/>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edgarbarrantes.github.io/vasi-sotirova/bg/bio/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/bio/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/bio/"/>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://edgarbarrantes.github.io/vasi-sotirova/bg/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/contact/"/>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/contact/"/>
     <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

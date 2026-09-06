@@ -9,12 +9,17 @@
   <meta name="author" content="Vasilka Sotirova">
   <meta name="robots" content="noindex, follow">
   <link rel="canonical" href="https://edgarbarrantes.github.io/vasi-sotirova/bio/">
+  <link rel="alternate" hreflang="en" href="https://edgarbarrantes.github.io/vasi-sotirova/bio/">
+  <link rel="alternate" hreflang="bg" href="https://edgarbarrantes.github.io/vasi-sotirova/bg/bio/">
+  <link rel="alternate" hreflang="x-default" href="https://edgarbarrantes.github.io/vasi-sotirova/bio/">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Vasilka Sotirova - Artist">
   <meta property="og:title" content="Biography | Vasilka Sotirova, Bulgarian Painter">
   <meta property="og:description" content="Biography of Vasilka Sotirova, a Bulgarian painter born in Varna in 1965 — training in Tryavna and Dupnitsa, and paintings held in private collections across Europe and North America.">
   <meta property="og:url" content="https://edgarbarrantes.github.io/vasi-sotirova/bio/">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:locale:alternate" content="bg_BG">
   <meta property="og:image" content="https://edgarbarrantes.github.io/vasi-sotirova/assets/img/b5e985c5e7b0-960.webp">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -23,8 +28,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Montserrat:wght@300;400;600&display=swap">
   <link rel="stylesheet" href="/vasi-sotirova/assets/styles.css">
+  <!-- Dancing Script has no Cyrillic, so each locale names its own display
+       face; Montserrat covers both alphabets and is shared. -->
+  <style>:root{--display:"Dancing Script", "Apple Chancery", cursive;--display-scale:1}</style>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://edgarbarrantes.github.io/vasi-sotirova/"},{"@type":"ListItem","position":2,"name":"Bio","item":"https://edgarbarrantes.github.io/vasi-sotirova/bio/"}]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Vasilka Sotirova","alternateName":"Vasi Sotirova","jobTitle":"Artist","description":"Vasilka Sotirova is a Bulgarian artist and painter from Varna, working in oil, acrylic, dry pastel and watercolour. Portraits, pet portraits, landscapes, still life and abstract art — original paintings and commissions, shipped worldwide.","email":"mailto:artvasi7@gmail.com","url":"https://edgarbarrantes.github.io/vasi-sotirova/","image":"https://edgarbarrantes.github.io/vasi-sotirova/assets/img/b5e985c5e7b0-960.webp","nationality":{"@type":"Country","name":"Bulgaria"},"birthPlace":{"@type":"Place","name":"Varna, Bulgaria"},"birthDate":"1965","alumniOf":[{"@type":"EducationalOrganization","name":"High School of Applied Arts, Tryavna"},{"@type":"EducationalOrganization","name":"University of Fine Arts \"Todor Samodumov\", Dupnitsa"}],"knowsAbout":["Oil painting","Acrylic painting","Dry pastel","Watercolour","Portrait painting","Pet portraits","Landscape painting","Still life","Abstract painting"],"sameAs":["https://www.facebook.com/vasilka.d.sotirova","https://www.instagram.com/vassilkasotirova/"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Vasilka Sotirova","jobTitle":"Artist","description":"Vasilka Sotirova is a Bulgarian artist and painter from Varna, working in oil, acrylic, dry pastel and watercolour. Portraits, pet portraits, landscapes, still life and abstract art — original paintings and commissions, shipped worldwide.","email":"mailto:artvasi7@gmail.com","url":"https://edgarbarrantes.github.io/vasi-sotirova/","image":"https://edgarbarrantes.github.io/vasi-sotirova/assets/img/b5e985c5e7b0-960.webp","nationality":{"@type":"Country","name":"Bulgaria"},"birthPlace":{"@type":"Place","name":"Varna, Bulgaria"},"birthDate":"1965","knowsLanguage":["bg","en"],"sameAs":["https://www.facebook.com/vasilka.d.sotirova","https://www.instagram.com/vassilkasotirova/"]}</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -34,12 +42,18 @@
       <p class="masthead__title"><a href="/vasi-sotirova/">Vasilka Sotirova - Artist</a></p>
     </div>
     <nav class="nav" aria-label="Primary">
-      <div class="shell">
+      <div class="shell nav__inner">
         <ul class="nav__list">
             <li><a class="nav__link" href="/vasi-sotirova/">Home</a></li>
             <li><a class="nav__link" href="/vasi-sotirova/gallery/">Gallery</a></li>
             <li><a class="nav__link" href="/vasi-sotirova/bio/" aria-current="page">Bio</a></li>
             <li><a class="nav__link" href="/vasi-sotirova/contact/">Contact</a></li>
+        </ul>
+        <ul class="lang" aria-label="Language">
+          <li><a class="lang__link" href="/vasi-sotirova/bio/" hreflang="en" lang="en"
+             aria-current="true"><span class="lang__code">EN</span><span class="visually-hidden">English</span></a></li>
+          <li><a class="lang__link" href="/vasi-sotirova/bg/bio/" hreflang="bg" lang="bg"
+             ><span class="lang__code">BG</span><span class="visually-hidden">Български</span></a></li>
         </ul>
       </div>
     </nav>
@@ -99,7 +113,7 @@
         <a href="https://www.facebook.com/vasilka.d.sotirova" rel="me noopener" target="_blank">Facebook</a>
         <a href="https://www.instagram.com/vassilkasotirova/" rel="me noopener" target="_blank">Instagram</a>
       </p>
-      <p class="footer__line">Paintings and images &copy; 2026 Vasilka Sotirova. All rights reserved.</p>
+      <p class="footer__line">Paintings and images © 2026 Vasilka Sotirova. All rights reserved.</p>
     </div>
   </footer>
 

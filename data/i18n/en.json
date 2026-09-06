@@ -1,0 +1,319 @@
+{
+  "locale": "en",
+  "htmlLang": "en",
+  "ogLocale": "en_GB",
+  "label": "English",
+  "name": "Vasilka Sotirova",
+  "title": "Vasilka Sotirova - Artist",
+  "keywords": [
+    "Vasilka Sotirova",
+    "Bulgarian artist",
+    "Bulgarian painter",
+    "Bulgarian art",
+    "artist from Varna",
+    "oil painting",
+    "dry pastel",
+    "watercolour",
+    "portrait commission",
+    "pet portrait",
+    "original paintings for sale",
+    "Bulgarian landscape painting",
+    "contemporary Bulgarian art"
+  ],
+  "nav": {
+    "home": "Home",
+    "gallery": "Gallery",
+    "bio": "Bio",
+    "contact": "Contact"
+  },
+  "ui": {
+    "skip": "Skip to content",
+    "backToGallery": "Back to gallery",
+    "viewGallery": "View the gallery",
+    "works": {
+      "one": "{n} work",
+      "other": "{n} works"
+    },
+    "comingSoon": "Coming soon",
+    "viewLarger": "View {alt} larger",
+    "close": "Close viewer",
+    "prev": "Previous artwork",
+    "next": "Next artwork",
+    "viewer": "Artwork viewer",
+    "languageLabel": "Language",
+    "rights": "Paintings and images © {year} {name}. All rights reserved.",
+    "redirectNotice": "This page has moved to",
+    "primaryNav": "Primary"
+  },
+  "home": {
+    "title": "Vasilka Sotirova | Bulgarian Artist — Original Oil and Pastel Paintings",
+    "description": "Vasilka Sotirova is a Bulgarian artist and painter from Varna, working in oil, acrylic, dry pastel and watercolour. Portraits, pet portraits, landscapes, still life and abstract art — original paintings and commissions, shipped worldwide.",
+    "intro": [
+      "Vasilka Sotirova is a Bulgarian artist, born in Varna in 1965. She trained at the High School of Applied Arts in Tryavna and graduated from the University of Fine Arts in Dupnitsa, and has painted for more than three decades in oil, acrylic, dry pastel and watercolour.",
+      "Her work moves between commissioned portraits and pet portraits, the mountains, meadows and old towns of Bulgaria, still life, and abstract painting. Her paintings are held in private collections across Europe and North America, and original work is available to commission and ship worldwide."
+    ]
+  },
+  "gallery": {
+    "heading": "Gallery",
+    "lead": "Portraits, landscapes, still life and abstract work in oil, acrylic, dry pastel and watercolour. Choose a collection to see the paintings.",
+    "title": "Gallery | Paintings by Vasilka Sotirova, Bulgarian Artist",
+    "description": "Browse original paintings by Bulgarian artist Vasilka Sotirova by collection: portraits, pet portraits, still life, Bulgarian landscapes, architectural scenes and abstract work.",
+    "keywords": [
+      "art gallery",
+      "original paintings",
+      "Bulgarian paintings",
+      "paintings for sale"
+    ]
+  },
+  "categories": {
+    "portraits": {
+      "title": "Portraits",
+      "description": "Commissioned portrait paintings by Bulgarian artist Vasilka Sotirova — oil and dry pastel portraits of children, couples and families, painted from life or from photographs. Portrait commissions shipped worldwide.",
+      "keywords": [
+        "portrait painting",
+        "portrait commission",
+        "oil portrait",
+        "pastel portrait",
+        "family portrait painting"
+      ]
+    },
+    "animal-portraits": {
+      "title": "Animal Portraits",
+      "description": "Pet and animal portraits by Bulgarian painter Vasilka Sotirova — dogs, cats and horses in oil and dry pastel, including close studies of horses in movement. Custom pet portrait commissions welcome.",
+      "keywords": [
+        "pet portrait",
+        "dog portrait painting",
+        "cat portrait painting",
+        "horse painting",
+        "animal portrait commission"
+      ]
+    },
+    "still-life": {
+      "title": "Still Life",
+      "description": "Still life paintings by Bulgarian artist Vasilka Sotirova — poppies, sunflowers, roses and garden flowers in oil, with fruit and tabletop studies in rich, saturated colour.",
+      "keywords": [
+        "still life painting",
+        "flower painting",
+        "sunflower painting",
+        "poppies painting",
+        "oil still life"
+      ]
+    },
+    "landscapes": {
+      "title": "Landscapes",
+      "description": "Bulgarian landscape paintings by Vasilka Sotirova — mountain ridges, glacial lakes, wildflower meadows and the Black Sea coast, painted in oil with bold, high-key colour.",
+      "keywords": [
+        "Bulgarian landscape painting",
+        "mountain painting",
+        "Rila mountains art",
+        "seascape painting",
+        "landscape oil painting"
+      ]
+    },
+    "abstract-landscapes": {
+      "title": "Abstract Landscapes",
+      "description": "Abstract landscape paintings by Bulgarian artist Vasilka Sotirova, where meadows, trees and distant hills dissolve into colour, texture and atmosphere.",
+      "keywords": [
+        "abstract landscape",
+        "contemporary landscape painting",
+        "atmospheric painting"
+      ]
+    },
+    "architectural-landscapes": {
+      "title": "Architectural Landscapes",
+      "description": "Paintings of Bulgarian Revival architecture by Vasilka Sotirova — old town streets, stone bridges, clock towers and red-roofed houses in oil and watercolour.",
+      "keywords": [
+        "Bulgarian Revival architecture",
+        "old town painting",
+        "cityscape painting",
+        "architectural painting"
+      ]
+    },
+    "abstract-paintings": {
+      "title": "Abstract Paintings",
+      "description": "Abstract paintings by Bulgarian artist Vasilka Sotirova — bold colour fields, and musicians and figures reduced to gesture, in oil and acrylic.",
+      "keywords": [
+        "abstract painting",
+        "contemporary abstract art",
+        "Bulgarian abstract artist",
+        "acrylic abstract"
+      ]
+    },
+    "other-nature-scenes": {
+      "title": "Other Nature Scenes",
+      "description": "Nature paintings by Bulgarian artist Vasilka Sotirova — butterflies, poppies, orchids and close studies drawn from the natural world.",
+      "keywords": [
+        "nature painting",
+        "butterfly painting",
+        "floral art"
+      ]
+    },
+    "current-exhibition": {
+      "title": "Current Exhibition",
+      "description": "The most recently exhibited paintings by Bulgarian artist Vasilka Sotirova, available as originals and prints.",
+      "keywords": [
+        "exhibition",
+        "paintings for sale",
+        "original art"
+      ]
+    }
+  },
+  "emptyCategory": "There are no works on show here just yet — please check back soon, or {link} to ask what is currently available.",
+  "emptyCategoryLink": "get in touch",
+  "bio": {
+    "heading": "Bio",
+    "title": "Biography | Vasilka Sotirova, Bulgarian Painter",
+    "description": "Biography of Vasilka Sotirova, a Bulgarian painter born in Varna in 1965 — training in Tryavna and Dupnitsa, and paintings held in private collections across Europe and North America.",
+    "keywords": [
+      "Bulgarian painter biography",
+      "Varna artist",
+      "Bulgarian art education",
+      "artist biography"
+    ],
+    "timeline": [
+      "Born in the city of Varna.",
+      "Graduated from the High School of Applied Arts in the town of Tryavna.",
+      "Graduated from the University of Fine Arts \"Todor Samodumov\" in the town of Dupnitsa.",
+      "Postgraduate degree in \"Pedagogy of the Plastic Arts\"."
+    ],
+    "note": "Her paintings are owned by private individuals from Bulgaria, Germany, Russia, France, Norway, Sweden, Denmark, England, Canada, the USA and others."
+  },
+  "contact": {
+    "heading": "Contact",
+    "title": "Contact | Commission a Painting from Vasilka Sotirova",
+    "description": "Contact Bulgarian artist Vasilka Sotirova to order an original painting or commission a portrait or pet portrait. Paintings ship worldwide.",
+    "keywords": [
+      "commission a painting",
+      "buy Bulgarian art",
+      "portrait commission",
+      "contact artist"
+    ],
+    "lead": "To order a painting or commission a portrait, get in touch by email:",
+    "note": "For commissions, please include the subject, the size you have in mind and any reference photographs. Paintings ship worldwide.",
+    "followLead": "You can also follow new work here:"
+  },
+  "notFound": {
+    "heading": "Page not found",
+    "title": "Page not found | Vasilka Sotirova",
+    "lead": "That page has moved or never existed. Try the {link} instead.",
+    "linkText": "gallery"
+  },
+  "alt": {
+    "abdd74161ad4": "Oil portrait of a bride and groom, the bride holding a bouquet of cream roses",
+    "e80dc66705fa": "Pastel portrait of a smiling girl in Bulgarian folk dress on a swing, holding a basket of eggs",
+    "b2ad36052da6": "Oil portrait of a young woman seen from behind, her hair pinned up with small white flowers",
+    "c799d4d2f638": "Oil portrait of a dark-haired girl in a knitted lilac hat",
+    "bed167e2b465": "Oil portrait of a laughing couple standing together on a wooden jetty by a river",
+    "1e05b511c567": "Oil portrait of a woman in an elaborate white ball gown beside a column",
+    "becee091e84c": "Oil portrait of a fair-haired young boy in a navy argyle sweater",
+    "243b21899f27": "Oil portrait of a blonde woman in a yellow polo neck against a blue background",
+    "b489f79ac04d": "Oil portrait of a blue-eyed baby in a red checked pinafore",
+    "9bc165f890de": "Oil portrait of a smiling older man in a naval captain's cap",
+    "0a65d88a413f": "Oil portrait of a girl with blonde plaits tied with pink ribbons",
+    "27396ae67ac4": "Oil painting of a small child crouching in the snow, hand resting on one cheek",
+    "d1f4b2e569ec": "Pastel painting of two tabby kittens against a golden ochre background",
+    "8855ebaf6047": "Oil painting of a black horse galloping through swirling mist",
+    "7e1f567ce35a": "Oil painting of a dapple-grey horse with a pale mane running through cloud",
+    "fc498724ed4e": "Oil portrait of a black and white cocker spaniel sitting upright",
+    "27f6fe9bd5ab": "Blue ballpoint pen drawing of a sleeping cat's head",
+    "f3fae12adae1": "Oil portrait of a curly-coated black and white dog panting in a flowering meadow",
+    "1b9f9f4cbcbe": "Pastel study of a chestnut horse's eye in close-up",
+    "3894bda540ed": "Oil painting of a bay horse cantering along a sunlit beach",
+    "fc5445bdf45a": "Pastel close-up of a horse's dark eye and lashes against a chestnut coat",
+    "eabd45ea151c": "Pastel portrait of a grey long-haired cat on a black background",
+    "0e1724db207b": "Pastel portrait of a ginger long-haired cat with green eyes on black",
+    "2a6279a6b940": "Pastel portrait of a tortoiseshell cat with green eyes on a dark background",
+    "fd6c99ee39a8": "Oil painting of red poppies and white daisies in a small ochre bowl",
+    "150db19a2811": "Oil painting of a mixed wildflower bouquet in a white ceramic vase",
+    "ca36f74b054f": "Oil painting of red and peach roses in a pale blue vase beside a window",
+    "24e1c600ad5a": "Oil painting of pink peonies and garden flowers in a wicker basket",
+    "c8f6b2494020": "Oil painting of zinnias in a white enamel jug against a deep red ground",
+    "db7a0a37770b": "Oil painting of grapes, apples and pears in a glass tazza on red cloth",
+    "f80d4c858039": "Oil painting of a summer bouquet in a white wicker basket at a blue window",
+    "01aa5a92c2d4": "Oil painting of purple and pink sweet peas in a cobalt vase on a sunlit table",
+    "3eeb553418c4": "Oil painting of lilies, gladioli and asters in a deep blue globe vase",
+    "d4cc71398e51": "Oil painting of sunflowers in a zinc watering can with apples on red cloth",
+    "e0f9602f9b62": "Oil painting of white hibiscus and delphiniums in a turquoise vase",
+    "a905210a6e1a": "Oil painting of daisies, gerberas and a yellow lily in a woven basket",
+    "d3b370e83499": "Oil painting of tulips and yellow lilies in a shallow patterned bowl",
+    "be16b270b372": "Oil painting of a sunflower with lilies and phlox in a white bowl",
+    "2762c5d26a63": "Oil painting of pink and yellow roses in a glass vase",
+    "087fcfb8422f": "Bold oil painting of a snow-covered river valley below sunlit autumn hills",
+    "2d4b12866af1": "Oil painting of a footpath running along a golden mountain ridge",
+    "911ef7f280e8": "Oil painting of a sunlit track through hills covered in purple heather",
+    "e29c52cffd0b": "Oil painting of pink fireweed in flower above a mountain lake",
+    "c975dfb22cbf": "Oil painting of a mountain lake and meadow scattered with wildflowers",
+    "6bded511c130": "Oil painting of a path over golden autumn ridges under a wide sky",
+    "6e9318c80e67": "Oil painting of a waterfall falling between green cliffs",
+    "0114bbca6b56": "Oil painting of a village nestled below dark basalt cliffs",
+    "77002ae832f7": "Oil painting of a green hillside strewn with pale boulders",
+    "18a77e2e2ed7": "Oil painting of a mountain slope in autumn gold and rust",
+    "75831cf19239": "Oil painting of horses on a hillside at dusk in violet light",
+    "43b6ddbbe670": "Oil painting of a chamois on a rocky summit above a sea of cloud",
+    "f552616522a0": "Oil painting of two figures on a clifftop under towering clouds",
+    "92174a07d645": "Oil painting of a glacial lake below a rocky peak",
+    "31a1bac611b5": "Oil painting of reeds and still water under a pale blue sky",
+    "1c67006dcc39": "Oil painting of a path between lavender fields and blossoming trees",
+    "a804b12b2420": "Oil painting of breaking waves on a sunlit shore",
+    "709dd7a45801": "Oil painting of a small boat under trees on a quiet bay, in a crackle-finish frame",
+    "16cc05736c88": "Abstract landscape in purple, red and ochre with a slender tree and winding path",
+    "6204f147c8d4": "Soft abstract landscape of a yellow meadow below misty blue mountains",
+    "91b8f271a3bd": "Abstract landscape in warm russet and green with flowering ground",
+    "b72f6d4ff6e7": "Abstract landscape of two windswept trees beside a pale track",
+    "dfca51e4b7ad": "Textured abstract landscape with a pink path through gold and green fields",
+    "b6faffbebea7": "Muted abstract landscape of a farmhouse among trees in an autumn field",
+    "b1df7bb5d0d8": "Abstract landscape of a flowering meadow under a heavy sky",
+    "d1595be1f96c": "Soft abstract landscape of a stream through a yellow flowering field",
+    "b19dad04d78c": "Abstract landscape of a stream cutting through golden fields",
+    "57d4810827c3": "Abstract landscape of trees and wildflowers under a violet sky",
+    "55dde2cb4f44": "Impressionist landscape of a flowering meadow before a line of trees",
+    "bf781a9e9c3e": "Abstract landscape of birches beside a track through green and gold fields",
+    "c285329042d2": "Soft abstract landscape of rolling meadows below distant blue hills",
+    "fd6fffe161bf": "Oil painting of a stone bridge and clock tower in a Bulgarian old town",
+    "417932df8a89": "Vivid oil painting of a Revival-period house with red doors below wooded hills",
+    "e22ba4136b49": "Oil painting of terracotta-roofed houses climbing a hillside",
+    "4278fc06a23f": "Oil painting of a whitewashed old house with stone-tiled roofs among trees",
+    "aa00755c5a83": "Oil painting of red-roofed Revival houses stacked up a steep slope",
+    "09d31912d9ee": "Night oil painting of a lit hilltop church above a floodlit fortress",
+    "06db748b97d3": "Watercolour of a timber-framed old house among autumn trees",
+    "70087be28066": "Oil painting looking through a fortress gateway towards a hilltop church",
+    "a82a71fbeac3": "Oil painting of a stone bridge beside a white clock-tower building by a river",
+    "7d398156c34e": "Oil painting of a white house with a red gate under a bright blue sky",
+    "23a160f42e9a": "Oil painting of a fortress gate and hilltop church in evening light",
+    "f5ba9a9cd306": "Oil painting of the approach to a hilltop fortress at dusk",
+    "1e13986118ae": "Oil painting of a clock tower and old houses, framed in crackled paint",
+    "c74884fefa50": "Oil painting of a cobbled old-town street in warm evening light",
+    "cde866235b8f": "Oil painting of a stone house with a vine-covered balcony on a sunlit street",
+    "0f0101c8fa1a": "Oil painting of a narrow old-town lane with a street lamp, framed in crackled paint",
+    "4fe09247368c": "Oil painting of a cobbled lane between flower-covered old houses",
+    "65ae6e139d29": "Oil painting of a hexagonal clock tower rising above an old-town street",
+    "6556374f075f": "Abstract painting of a figure with a cello in blue, red and yellow",
+    "a6cdb6926194": "Abstract painting of a red figure playing a turquoise violin",
+    "008d94063f96": "Abstract composition of flowing blue, red and green forms on yellow",
+    "1c76f84194d0": "Abstract painting of a white sun above a burst of colour on yellow",
+    "941e6f407604": "Bold abstract composition in red, yellow and blue",
+    "41e939aae01f": "Abstract composition of yellow and orange forms on a deep blue ground",
+    "038dceac1f60": "Abstract painting of a swirling red and yellow form on dark blue",
+    "e4879f861ca6": "Abstract composition in blues and greens with scattered warm accents",
+    "a0b187fb3ae6": "Abstract painting of blue and white shards against green",
+    "0013d8dc67a8": "Abstract composition in red and yellow with a green central form",
+    "209228792fc4": "Abstract painting of angular yellow, red and blue forms",
+    "459ac89dc9ea": "Abstract composition of yellow and red forms on blue and green",
+    "aafa19f8c42b": "Abstract painting of red and blue strokes across an orange ground",
+    "63003023720f": "Abstract composition of yellow shapes on teal blue",
+    "c666ea5a9b5b": "Abstract painting in scarlet and cream with flashes of blue",
+    "eaf40aaff483": "Oil painting of butterflies resting on two orange sunflowers",
+    "700ad75a1c06": "Oil painting of butterflies among purple flowers and green leaves",
+    "a28bfe4a10fe": "Soft oil painting of a small mouse among pink orchids",
+    "7b5040b43420": "Oil painting of red poppies and seed heads on a patchwork of green and blue",
+    "504f7cdf6da5": "Oil painting of a pale butterfly on a pink thistle flower",
+    "58ef9575d6c0": "Oil painting of deep pink flowers against silvery foliage",
+    "b5e985c5e7b0": "Vasilka Sotirova in her studio",
+    "44e7c0ae0e27": "Vasilka Sotirova with one of her paintings"
+  },
+  "displayFont": {
+    "google": "Dancing+Script:wght@600;700",
+    "stack": "\"Dancing Script\", \"Apple Chancery\", cursive",
+    "scale": "1"
+  }
+}

@@ -1,10 +1,15 @@
 #!/usr/bin/env node
 /**
- * Renders the static site into site/ from data/site.json.
+ * Renders the static site into site/ from data/site.json (structure) and
+ * data/i18n/<locale>.json (every piece of text).
  *
- * No framework and no dependencies — the output is plain HTML that a browser
- * can open straight off disk or that any static host can serve as-is.
- * Images are expected in site/assets/img/ (see scripts/fetch-assets.mjs).
+ * The default locale lives at the root and each additional locale under its
+ * own prefix — "/gallery/" and "/bg/gallery/" — so the English URLs carried
+ * over from the old site keep working.
+ *
+ * No framework and no dependencies: the output is plain HTML that any static
+ * host can serve as-is. Images are expected in site/assets/img/
+ * (see scripts/fetch-assets.mjs).
  */
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
@@ -20,6 +25,11 @@ const site = JSON.parse(await fs.readFile(path.join(ROOT, 'data', 'site.json'), 
 const lqip = JSON.parse(await fs.readFile(path.join(ROOT, 'data', 'lqip.json'), 'utf8'));
 
 const S = site.site;
+const DEFAULT_LOCALE = S.defaultLocale;
+const LOCALES = Object.fromEntries(await Promise.all(S.locales.map(async (code) => [
+  code,
+  JSON.parse(await fs.readFile(path.join(ROOT, 'data', 'i18n', `${code}.json`), 'utf8')),
+])));
 
 /* ------------------------------------------------------------- helpers */
 
@@ -32,15 +42,29 @@ const esc = (value = '') => String(value)
 const attr = (value = '') => esc(value).replace(/'/g, '&#39;');
 
 /**
- * Every internal path is written root-relative ("/gallery/") and passed
- * through url() so the whole site can be served from a subdirectory —
- * a GitHub Pages project URL, for instance. Set site.basePath to "" once
- * it lives at a domain root.
+ * Every internal path is written locale-independently ("/gallery/") and passed
+ * through these two helpers: localised() puts it under the right language
+ * prefix, url() puts it under site.basePath so the whole site can be served
+ * from a subdirectory. Set site.basePath to "" once it lives at a domain root.
  */
 const BASE = (S.basePath || '').replace(/\/$/, '');
+const localised = (locale, href) => (locale === DEFAULT_LOCALE ? href : `/${locale}${href}`);
 const url = (href) => `${BASE}${href}`;
+const href = (locale, path_) => url(localised(locale, path_));
+const abs = (locale, path_) => new URL(href(locale, path_), S.baseUrl).href;
 
-const abs = (href) => new URL(url(href), S.baseUrl).href;
+/** Fills {placeholders} in a translated string. */
+const fill = (template, values) =>
+  String(template).replace(/\{(\w+)\}/g, (m, k) => (k in values ? values[k] : m));
+
+const plural = (forms, n) => fill(n === 1 ? forms.one : forms.other, { n });
+
+/**
+ * Search engines should only ever index the real site. While this builds for
+ * the temporary Pages URL (no custom domain configured) every page is marked
+ * noindex, so the staging copy cannot compete with vasisotirova.com.
+ */
+const INDEXABLE = Boolean(S.customDomain);
 
 function srcset(key, ext) {
   if (ext === 'webp') return url(`/assets/img/${key}-${FALLBACK_WIDTH}.webp`);
@@ -52,7 +76,7 @@ function srcset(key, ext) {
  * width/height stop the page reflowing, and the inline blur-up preview fills
  * the frame until the real file decodes.
  */
-function picture(img, { sizes, loading = 'lazy', className = '', fetchpriority } = {}) {
+function picture(img, alt, { sizes, loading = 'lazy', className = '', fetchpriority } = {}) {
   const key = keyFor(img.media);
   const w = img.width || 1200;
   const h = img.height || 1600;
@@ -60,82 +84,142 @@ function picture(img, { sizes, loading = 'lazy', className = '', fetchpriority }
   return `<picture class="${`blur-up ${className}`.trim()}"${placeholder}>
         <source type="image/avif" srcset="${srcset(key, 'avif')}" sizes="${attr(sizes)}">
         <img src="${url(`/assets/img/${key}-${FALLBACK_WIDTH}.webp`)}" width="${w}" height="${h}"
-             alt="${attr(img.alt || '')}" loading="${loading}" decoding="async"${
+             alt="${attr(alt || '')}" loading="${loading}" decoding="async"${
     fetchpriority ? ` fetchpriority="${fetchpriority}"` : ''
   }>
       </picture>`;
 }
 
-function jsonLd(data) {
-  return `<script type="application/ld+json">${JSON.stringify(data)}</script>`;
+const jsonLd = (data) =>
+  `<script type="application/ld+json">${JSON.stringify(data)}</script>`;
+
+/**
+ * The Person record is what search engines read to connect the name, the
+ * profession, the country and the social accounts into one entity — the thing
+ * that surfaces her for "Bulgarian artist" rather than only for her own name.
+ */
+function personSchema(locale) {
+  const t = LOCALES[locale];
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: t.name,
+    jobTitle: locale === 'bg' ? 'Художник' : 'Artist',
+    description: t.home.description,
+    email: `mailto:${S.email}`,
+    url: abs(locale, '/'),
+    image: abs(locale, `/assets/img/${keyFor(site.bio.images[0].media)}-960.webp`),
+    nationality: { '@type': 'Country', name: locale === 'bg' ? 'България' : 'Bulgaria' },
+    birthPlace: { '@type': 'Place', name: locale === 'bg' ? 'Варна, България' : 'Varna, Bulgaria' },
+    birthDate: '1965',
+    knowsLanguage: ['bg', 'en'],
+    sameAs: (S.social || []).map((s) => s.href),
+  };
+}
+
+/** Breadcrumb trail, so results show Gallery › Portraits rather than a bare URL. */
+function breadcrumbs(locale, trail) {
+  const t = LOCALES[locale];
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [[t.nav.home, '/'], ...trail].map(([name, to], i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name,
+      item: abs(locale, to),
+    })),
+  };
 }
 
 /* -------------------------------------------------------------- layout */
 
-/**
- * Search engines should only ever index the real site. While this builds for
- * the temporary Pages URL (no custom domain configured) every page is marked
- * noindex, so the staging copy cannot compete with vasisotirova.com.
- */
-const INDEXABLE = Boolean(S.customDomain);
-
 function layout({
-  title, description, path: pagePath, body, ogImage, keywords = [],
+  locale, title, description, path: pagePath, body, ogImage, keywords = [],
   structuredData = [], isHome = false,
 }) {
-  const canonical = abs(pagePath);
-  const image = ogImage ? abs(`/assets/img/${keyFor(ogImage)}-${FALLBACK_WIDTH}.webp`) : null;
+  const t = LOCALES[locale];
+  const canonical = abs(locale, pagePath);
+  const image = ogImage ? abs(locale, `/assets/img/${keyFor(ogImage)}-${FALLBACK_WIDTH}.webp`) : null;
+
   const nav = site.nav.map((item) => {
     const current = item.href === pagePath ? ' aria-current="page"' : '';
-    return `<li><a class="nav__link" href="${url(item.href)}"${current}>${esc(item.label)}</a></li>`;
+    return `<li><a class="nav__link" href="${href(locale, item.href)}"${current}>${esc(t.nav[item.key])}</a></li>`;
   }).join('\n            ');
+
+  // Same page, other language. Screen readers get the language name; sighted
+  // users get the short code, so the switcher stays out of the way.
+  const langs = S.locales.map((code) => {
+    const other = LOCALES[code];
+    const current = code === locale;
+    return `<li><a class="lang__link" href="${href(code, pagePath)}" hreflang="${code}" lang="${code}"
+             ${current ? 'aria-current="true"' : ''}><span class="lang__code">${esc(code.toUpperCase())}</span><span class="visually-hidden">${esc(other.label)}</span></a></li>`;
+  }).join('\n          ');
+
+  const alternates = [
+    ...S.locales.map((code) =>
+      `<link rel="alternate" hreflang="${code}" href="${abs(code, pagePath)}">`),
+    `<link rel="alternate" hreflang="x-default" href="${abs(DEFAULT_LOCALE, pagePath)}">`,
+  ].join('\n  ');
+
   const social = (S.social || []).map((s) =>
     `<a href="${attr(s.href)}" rel="me noopener" target="_blank">${esc(s.label)}</a>`
   ).join('\n        ');
+
   // On the home page the site name is the page's main heading; elsewhere the
   // page's own <h1> holds that role.
   const titleTag = isHome ? 'h1' : 'p';
-  const allKeywords = [...new Set([...(S.keywords || []), ...keywords])];
+  const allKeywords = [...new Set([...(t.keywords || []), ...keywords])];
 
   return `<!DOCTYPE html>
-<html lang="${S.lang}" class="no-js">
+<html lang="${t.htmlLang}" class="no-js">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${esc(title)}</title>
   <meta name="description" content="${attr(description)}">
   ${allKeywords.length ? `<meta name="keywords" content="${attr(allKeywords.join(', '))}">` : ''}
-  <meta name="author" content="${attr(S.name)}">
+  <meta name="author" content="${attr(t.name)}">
   ${INDEXABLE ? '<meta name="robots" content="index, follow, max-image-preview:large">'
               : '<meta name="robots" content="noindex, follow">'}
   <link rel="canonical" href="${canonical}">
+  ${alternates}
 
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="${attr(S.title)}">
+  <meta property="og:site_name" content="${attr(t.title)}">
   <meta property="og:title" content="${attr(title)}">
   <meta property="og:description" content="${attr(description)}">
   <meta property="og:url" content="${canonical}">
+  <meta property="og:locale" content="${t.ogLocale}">
+  ${S.locales.filter((c) => c !== locale)
+      .map((c) => `<meta property="og:locale:alternate" content="${LOCALES[c].ogLocale}">`).join('\n  ')}
   ${image ? `<meta property="og:image" content="${image}">` : ''}
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="${url('/assets/favicon.svg')}" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Montserrat:wght@300;400;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=${t.displayFont.google}&family=Montserrat:wght@300;400;600&display=swap">
   <link rel="stylesheet" href="${url('/assets/styles.css')}">
+  <!-- Dancing Script has no Cyrillic, so each locale names its own display
+       face; Montserrat covers both alphabets and is shared. -->
+  <style>:root{--display:${t.displayFont.stack};--display-scale:${t.displayFont.scale}}</style>
   ${structuredData.map(jsonLd).join('\n  ')}
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main">${esc(t.ui.skip)}</a>
 
   <header class="masthead">
     <div class="shell">
-      <${titleTag} class="masthead__title"><a href="${url('/')}">${esc(S.title)}</a></${titleTag}>
+      <${titleTag} class="masthead__title"><a href="${href(locale, '/')}">${esc(t.title)}</a></${titleTag}>
     </div>
-    <nav class="nav" aria-label="Primary">
-      <div class="shell">
+    <nav class="nav" aria-label="${attr(t.ui.primaryNav)}">
+      <div class="shell nav__inner">
         <ul class="nav__list">
             ${nav}
+        </ul>
+        <ul class="lang" aria-label="${attr(t.ui.languageLabel)}">
+          ${langs}
         </ul>
       </div>
     </nav>
@@ -153,7 +237,7 @@ ${body}
       <p class="footer__line footer__social">
         ${social}
       </p>
-      <p class="footer__line">Paintings and images &copy; ${new Date().getFullYear()} ${esc(S.name)}. All rights reserved.</p>
+      <p class="footer__line">${esc(fill(t.ui.rights, { year: new Date().getFullYear(), name: t.name }))}</p>
     </div>
   </footer>
 
@@ -165,227 +249,202 @@ ${body}
 
 /* --------------------------------------------------------------- pages */
 
-function artworkGrid(category) {
+function artworkGrid(locale, category) {
+  const t = LOCALES[locale];
+  const cat = t.categories[category.slug];
+
   if (!category.images.length) {
-    return `      <p class="empty-note">There are no works on show here just yet — please check back soon, or
-        <a href="${url('/contact/')}">get in touch</a> to ask what is currently available.</p>`;
+    const link = `<a href="${href(locale, '/contact/')}">${esc(t.emptyCategoryLink)}</a>`;
+    return `      <p class="empty-note">${fill(esc(t.emptyCategory), { link })}</p>`;
   }
+
   const items = category.images.map((img, i) => {
     const key = keyFor(img.media);
-    const alt = img.alt || `${category.title.replace(/s$/, '')} painting by ${S.name}`;
+    const alt = t.alt[key] || cat.title;
     return `        <li class="artwork">
           <button class="artwork__button" type="button"
                   data-lightbox data-full="${url(`/assets/img/${key}-1600.avif`)}"
                   data-fullset="${srcset(key, 'avif')}"
                   data-alt="${attr(alt)}" data-width="${img.width || ''}" data-height="${img.height || ''}"
-                  aria-label="View ${attr(alt)} larger">
-            ${picture({ ...img, alt }, {
+                  aria-label="${attr(fill(t.ui.viewLarger, { alt }))}">
+            ${picture(img, alt, {
               sizes: '(min-width: 1100px) 360px, (min-width: 700px) 45vw, 92vw',
               loading: i < 6 ? 'eager' : 'lazy',
             })}
           </button>
         </li>`;
   }).join('\n');
+
   return `      <ul class="artworks">\n${items}\n      </ul>`;
 }
 
-function homePage() {
+function homePage(locale) {
+  const t = LOCALES[locale];
   const hero = site.home.hero;
-  const intro = [].concat(site.home.intro)
-    .map((p) => `          <p>${esc(p)}</p>`)
-    .join('\n');
+  const intro = [].concat(t.home.intro).map((p) => `          <p>${esc(p)}</p>`).join('\n');
   const body = `      <section class="hero">
         <div class="hero__frame">
-          ${picture(hero, { sizes: '(min-width: 800px) 760px, 100vw', loading: 'eager', fetchpriority: 'high' })}
+          ${picture(hero, t.alt[keyFor(hero.media)], {
+            sizes: '(min-width: 800px) 760px, 100vw', loading: 'eager', fetchpriority: 'high',
+          })}
         </div>
         <div class="hero__intro">
 ${intro}
         </div>
-        <a class="button" href="${url('/gallery/')}">View the gallery</a>
+        <a class="button" href="${href(locale, '/gallery/')}">${esc(t.ui.viewGallery)}</a>
       </section>`;
+
   return {
+    locale,
     file: 'index.html',
     path: '/',
     html: layout({
-      title: S.defaultTitle,
-      description: S.defaultDescription,
+      locale,
+      title: t.home.title,
+      description: t.home.description,
       path: '/',
       ogImage: hero.media,
       isHome: true,
       body,
-      structuredData: [personSchema(), {
+      structuredData: [personSchema(locale), {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
-        name: S.title,
-        url: abs('/'),
-        about: { '@type': 'Person', name: S.name },
+        name: t.title,
+        url: abs(locale, '/'),
+        inLanguage: t.htmlLang,
+        about: { '@type': 'Person', name: t.name },
       }],
     }),
   };
 }
 
-/**
- * The Person record is what search engines read to connect the name, the
- * profession, the country and the social accounts into one entity — the thing
- * that gets her surfaced for "Bulgarian artist" rather than just her own name.
- */
-function personSchema() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    name: S.name,
-    alternateName: 'Vasi Sotirova',
-    jobTitle: 'Artist',
-    description: S.defaultDescription,
-    email: `mailto:${S.email}`,
-    url: abs('/'),
-    image: abs(`/assets/img/${keyFor(site.bio.images[0].media)}-960.webp`),
-    nationality: { '@type': 'Country', name: 'Bulgaria' },
-    birthPlace: { '@type': 'Place', name: 'Varna, Bulgaria' },
-    birthDate: '1965',
-    alumniOf: [
-      { '@type': 'EducationalOrganization', name: 'High School of Applied Arts, Tryavna' },
-      { '@type': 'EducationalOrganization', name: 'University of Fine Arts "Todor Samodumov", Dupnitsa' },
-    ],
-    knowsAbout: [
-      'Oil painting', 'Acrylic painting', 'Dry pastel', 'Watercolour',
-      'Portrait painting', 'Pet portraits', 'Landscape painting',
-      'Still life', 'Abstract painting',
-    ],
-    sameAs: (S.social || []).map((s) => s.href),
-  };
-}
-
-function galleryPage() {
+function galleryPage(locale) {
+  const t = LOCALES[locale];
   const cards = site.categories.map((cat) => {
+    const c = t.categories[cat.slug];
     // The link already reads out the collection name, so the cover is decorative.
-    const cover = { media: cat.cover, alt: '', width: 900, height: 1200 };
+    const cover = { media: cat.cover, width: 900, height: 1200 };
     const count = cat.images.length;
     return `        <li>
-          <a class="category" href="${url(`/${cat.slug}/`)}">
+          <a class="category" href="${href(locale, `/${cat.slug}/`)}">
             <span class="category__frame">
-              ${picture(cover, { sizes: '(min-width: 1100px) 280px, (min-width: 700px) 30vw, 92vw' })}
+              ${picture(cover, '', { sizes: '(min-width: 1100px) 280px, (min-width: 700px) 30vw, 92vw' })}
             </span>
-            <span class="category__name">${esc(cat.title)}
-              <span class="category__count">${count ? `${count} work${count === 1 ? '' : 's'}` : 'Coming soon'}</span>
+            <span class="category__name">${esc(c.title)}
+              <span class="category__count">${esc(count ? plural(t.ui.works, count) : t.ui.comingSoon)}</span>
             </span>
           </a>
         </li>`;
   }).join('\n');
 
   const body = `      <div class="page-head">
-        <h1 class="page-head__title">Gallery</h1>
-        <p class="page-head__lead">Portraits, landscapes, still life and abstract work in oil, acrylic,
-          dry pastel and watercolour. Choose a collection to see the paintings.</p>
+        <h1 class="page-head__title">${esc(t.gallery.heading)}</h1>
+        <p class="page-head__lead">${esc(t.gallery.lead)}</p>
       </div>
       <ul class="categories">
 ${cards}
       </ul>`;
 
   return {
+    locale,
     file: 'gallery/index.html',
     path: '/gallery/',
     html: layout({
-      title: `Gallery | Paintings by ${S.name}, Bulgarian Artist`,
-      description: `Browse original paintings by Bulgarian artist ${S.name} by collection: portraits, pet portraits, still life, Bulgarian landscapes, architectural scenes and abstract work.`,
+      locale,
+      title: t.gallery.title,
+      description: t.gallery.description,
       path: '/gallery/',
       ogImage: site.categories[0]?.cover,
-      keywords: ['art gallery', 'original paintings', 'Bulgarian paintings', 'paintings for sale'],
+      keywords: t.gallery.keywords,
       body,
-      structuredData: [breadcrumbs([['Gallery', '/gallery/']]), {
+      structuredData: [breadcrumbs(locale, [[t.gallery.heading, '/gallery/']]), {
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
-        name: 'Gallery',
-        url: abs('/gallery/'),
+        name: t.gallery.heading,
+        url: abs(locale, '/gallery/'),
+        inLanguage: t.htmlLang,
         hasPart: site.categories.map((c) => ({
           '@type': 'CollectionPage',
-          name: c.title,
-          url: abs(`/${c.slug}/`),
+          name: t.categories[c.slug].title,
+          url: abs(locale, `/${c.slug}/`),
         })),
       }],
     }),
   };
 }
 
-function categoryPage(cat) {
-  const body = `      <a class="backlink" href="${url('/gallery/')}">Back to gallery</a>
+function categoryPage(locale, cat) {
+  const t = LOCALES[locale];
+  const c = t.categories[cat.slug];
+  const body = `      <a class="backlink" href="${href(locale, '/gallery/')}">${esc(t.ui.backToGallery)}</a>
       <div class="page-head">
-        <h1 class="page-head__title">${esc(cat.title)}</h1>
-        <p class="page-head__lead">${esc(cat.description)}</p>
+        <h1 class="page-head__title">${esc(c.title)}</h1>
+        <p class="page-head__lead">${esc(c.description)}</p>
       </div>
-${artworkGrid(cat)}`;
+${artworkGrid(locale, cat)}`;
 
   return {
+    locale,
     file: `${cat.slug}/index.html`,
     path: `/${cat.slug}/`,
     html: layout({
-      title: `${cat.title} by ${S.name} | Bulgarian Artist`,
-      description: cat.description,
+      locale,
+      title: `${c.title} — ${t.name} | ${locale === 'bg' ? 'българска художничка' : 'Bulgarian Artist'}`,
+      description: c.description,
       path: `/${cat.slug}/`,
       ogImage: cat.cover || cat.images[0]?.media,
-      keywords: cat.keywords || [],
+      keywords: c.keywords || [],
       body,
-      structuredData: [breadcrumbs([['Gallery', '/gallery/'], [cat.title, `/${cat.slug}/`]]),
+      structuredData: [
+        breadcrumbs(locale, [[t.gallery.heading, '/gallery/'], [c.title, `/${cat.slug}/`]]),
         ...(cat.images.length ? [{
-        '@context': 'https://schema.org',
-        '@type': 'CollectionPage',
-        name: cat.title,
-        url: abs(`/${cat.slug}/`),
-        description: cat.description,
-        mainEntity: {
-          '@type': 'ItemList',
-          numberOfItems: cat.images.length,
-          itemListElement: cat.images.map((img, i) => ({
-            '@type': 'ListItem',
-            position: i + 1,
-            item: {
-              '@type': 'VisualArtwork',
-              name: img.alt || `${cat.title} painting`,
-              creator: { '@type': 'Person', name: S.name, nationality: 'Bulgarian' },
-              artform: 'Painting',
-              image: abs(`/assets/img/${keyFor(img.media)}-1600.avif`),
-            },
-          })),
-        },
-      }] : [])],
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: c.title,
+          url: abs(locale, `/${cat.slug}/`),
+          description: c.description,
+          inLanguage: t.htmlLang,
+          mainEntity: {
+            '@type': 'ItemList',
+            numberOfItems: cat.images.length,
+            itemListElement: cat.images.map((img, i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              item: {
+                '@type': 'VisualArtwork',
+                name: t.alt[keyFor(img.media)] || c.title,
+                creator: { '@type': 'Person', name: t.name },
+                artform: locale === 'bg' ? 'Живопис' : 'Painting',
+                image: abs(locale, `/assets/img/${keyFor(img.media)}-1600.avif`),
+              },
+            })),
+          },
+        }] : []),
+      ],
     }),
   };
 }
 
-/** Breadcrumb trail, so results show Gallery › Portraits rather than a bare URL. */
-function breadcrumbs(trail) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [['Home', '/'], ...trail].map(([name, href], i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name,
-      item: abs(href),
-    })),
-  };
-}
-
-function bioPage() {
-  const bio = site.bio;
-  const rows = bio.timeline.map(([year, text]) => `          <div class="timeline__row">
+function bioPage(locale) {
+  const t = LOCALES[locale];
+  const rows = site.bio.years.map((year, i) => `          <div class="timeline__row">
             <dt>${esc(year)}</dt>
-            <dd>${esc(text)}</dd>
+            <dd>${esc(t.bio.timeline[i])}</dd>
           </div>`).join('\n');
 
-  const portraits = bio.images.map((img) => `          <figure>
-            ${picture(img, { sizes: '(min-width: 900px) 240px, 45vw' })}
+  const portraits = site.bio.images.map((img) => `          <figure>
+            ${picture(img, t.alt[keyFor(img.media)], { sizes: '(min-width: 900px) 240px, 45vw' })}
           </figure>`).join('\n');
 
   const body = `      <div class="page-head">
-        <h1 class="page-head__title">${esc(bio.title)}</h1>
+        <h1 class="page-head__title">${esc(t.bio.heading)}</h1>
       </div>
       <div class="bio">
         <div>
           <dl class="timeline">
 ${rows}
           </dl>
-          <p class="bio__note">${esc(bio.note)}</p>
+          <p class="bio__note">${esc(t.bio.note)}</p>
         </div>
         <div class="bio__portraits">
 ${portraits}
@@ -393,87 +452,103 @@ ${portraits}
       </div>`;
 
   return {
+    locale,
     file: 'bio/index.html',
     path: '/bio/',
     html: layout({
-      title: `Biography | ${S.name}, Bulgarian Painter`,
-      description: `Biography of ${S.name}, a Bulgarian painter born in Varna in 1965 — training in Tryavna and Dupnitsa, and paintings held in private collections across Europe and North America.`,
+      locale,
+      title: t.bio.title,
+      description: t.bio.description,
       path: '/bio/',
-      ogImage: bio.images[0]?.media,
-      keywords: ['Bulgarian painter biography', 'Varna artist', 'Bulgarian art education', 'artist biography'],
+      ogImage: site.bio.images[0]?.media,
+      keywords: t.bio.keywords,
       body,
-      structuredData: [breadcrumbs([['Bio', '/bio/']]), personSchema()],
+      structuredData: [breadcrumbs(locale, [[t.bio.heading, '/bio/']]), personSchema(locale)],
     }),
   };
 }
 
-function contactPage() {
-  const c = site.contact;
+function contactPage(locale) {
+  const t = LOCALES[locale];
   const links = (S.social || []).map((s) =>
     `          <li><a class="social-link" href="${attr(s.href)}" rel="me noopener" target="_blank">${esc(s.label)}</a></li>`
   ).join('\n');
 
   const body = `      <div class="page-head">
-        <h1 class="page-head__title">${esc(c.title)}</h1>
+        <h1 class="page-head__title">${esc(t.contact.heading)}</h1>
       </div>
       <div class="contact">
-        <p>${esc(c.lead)}</p>
+        <p>${esc(t.contact.lead)}</p>
         <a class="contact__email" href="mailto:${attr(S.email)}">${esc(S.email)}</a>
-        <p class="contact__note">${esc(c.note)}</p>
+        <p class="contact__note">${esc(t.contact.note)}</p>
 
-        <p class="contact__follow">${esc(c.followLead)}</p>
+        <p class="contact__follow">${esc(t.contact.followLead)}</p>
         <ul class="social">
 ${links}
         </ul>
       </div>`;
 
   return {
+    locale,
     file: 'contact/index.html',
     path: '/contact/',
     html: layout({
-      title: `Contact | Commission a Painting from ${S.name}`,
-      description: `Contact Bulgarian artist ${S.name} to order an original painting or commission a portrait or pet portrait. Paintings ship worldwide.`,
+      locale,
+      title: t.contact.title,
+      description: t.contact.description,
       path: '/contact/',
-      keywords: ['commission a painting', 'buy Bulgarian art', 'portrait commission', 'contact artist'],
+      keywords: t.contact.keywords,
       body,
       structuredData: [{
         '@context': 'https://schema.org',
         '@type': 'ContactPage',
-        url: abs('/contact/'),
-        mainEntity: personSchema(),
+        url: abs(locale, '/contact/'),
+        inLanguage: t.htmlLang,
+        mainEntity: personSchema(locale),
       }],
     }),
   };
 }
 
+/** GitHub Pages serves one 404 for the whole site, so it stays at the root. */
 function notFoundPage() {
+  const locale = DEFAULT_LOCALE;
+  const t = LOCALES[locale];
+  const link = `<a href="${href(locale, '/gallery/')}">${esc(t.notFound.linkText)}</a>`;
   const body = `      <div class="page-head">
-        <h1 class="page-head__title">Page not found</h1>
-        <p class="page-head__lead">That page has moved or never existed.
-          Try the <a href="${url('/gallery/')}">gallery</a> instead.</p>
+        <h1 class="page-head__title">${esc(t.notFound.heading)}</h1>
+        <p class="page-head__lead">${fill(esc(t.notFound.lead), { link })}</p>
       </div>`;
   return {
+    locale,
     file: '404.html',
     path: '/404.html',
-    html: layout({ title: `Page not found | ${S.name}`, description: 'Page not found.', path: '/404.html', body }),
+    html: layout({
+      locale, title: t.notFound.title, description: t.notFound.heading, path: '/404.html', body,
+    }),
   };
 }
 
 /** The old Wix site published the biography at /bio-1 — keep that URL alive. */
 function redirect(from, to) {
+  const locale = DEFAULT_LOCALE;
+  const t = LOCALES[locale];
+  const target = href(locale, to);
   return {
+    locale,
     file: `${from.replace(/^\/|\/$/g, '')}/index.html`,
     path: from,
+    redirect: true,
     html: `<!DOCTYPE html>
-<html lang="${S.lang}">
+<html lang="${t.htmlLang}">
 <head>
   <meta charset="utf-8">
-  <title>Redirecting…</title>
-  <link rel="canonical" href="${abs(to)}">
-  <meta http-equiv="refresh" content="0; url=${url(to)}">
+  <title>${esc(t.ui.redirectNotice)} ${esc(to)}</title>
+  <link rel="canonical" href="${abs(locale, to)}">
+  <meta http-equiv="refresh" content="0; url=${target}">
   <meta name="robots" content="noindex">
 </head>
-<body><p>This page has moved to <a href="${url(to)}">${to}</a>.</p></body>
+<body><p>${esc(t.ui.redirectNotice)} <a href="${target}">${esc(to)}</a>.</p></body>
 </html>
 `,
   };
@@ -481,15 +556,17 @@ function redirect(from, to) {
 
 /* ---------------------------------------------------------------- write */
 
-const pages = [
-  homePage(),
-  galleryPage(),
-  ...site.categories.map(categoryPage),
-  bioPage(),
-  contactPage(),
-  notFoundPage(),
-  redirect('/bio-1/', '/bio/'),
-];
+const pages = [];
+for (const locale of S.locales) {
+  pages.push(
+    homePage(locale),
+    galleryPage(locale),
+    ...site.categories.map((cat) => categoryPage(locale, cat)),
+    bioPage(locale),
+    contactPage(locale),
+  );
+}
+pages.push(notFoundPage(), redirect('/bio-1/', '/bio/'));
 
 const FAVICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" fill="#111"/>
@@ -501,7 +578,7 @@ const ROBOTS = INDEXABLE
   ? `User-agent: *
 Allow: /
 
-Sitemap: ${abs('/sitemap.xml')}
+Sitemap: ${abs(DEFAULT_LOCALE, '/sitemap.xml')}
 `
   : `# Staging build (no custom domain configured) — keep it out of the index
 # so it cannot compete with the live site.
@@ -509,26 +586,39 @@ User-agent: *
 Disallow: /
 `;
 
+/** Each URL lists its translations, so the pair is understood as one page. */
 function sitemap() {
   const today = new Date().toISOString().slice(0, 10);
-  const urls = pages
-    .filter((p) => !p.file.endsWith('404.html') && p.path !== '/bio-1/')
-    .map((p) => `  <url>
-    <loc>${abs(p.path)}</loc>
+  const seen = new Set();
+  const entries = [];
+  for (const page of pages) {
+    if (page.redirect || page.file.endsWith('404.html')) continue;
+    const id = `${page.locale}${page.path}`;
+    if (seen.has(id)) continue;
+    seen.add(id);
+    const alternates = S.locales.map((code) =>
+      `    <xhtml:link rel="alternate" hreflang="${code}" href="${abs(code, page.path)}"/>`).join('\n');
+    entries.push(`  <url>
+    <loc>${abs(page.locale, page.path)}</loc>
+${alternates}
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>${p.path === '/' ? '1.0' : '0.7'}</priority>
-  </url>`)
-    .join('\n');
+    <priority>${page.path === '/' ? '1.0' : '0.7'}</priority>
+  </url>`);
+  }
   return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${entries.join('\n')}
 </urlset>
 `;
 }
 
 for (const page of pages) {
-  const target = path.join(OUT, page.file);
+  const prefix = page.redirect || page.file.endsWith('404.html') || page.locale === DEFAULT_LOCALE
+    ? ''
+    : page.locale;
+  const target = path.join(OUT, prefix, page.file);
   await fs.mkdir(path.dirname(target), { recursive: true });
   await fs.writeFile(target, page.html);
 }
@@ -545,4 +635,7 @@ await fs.writeFile(path.join(OUT, '.nojekyll'), '');
 if (S.customDomain) await fs.writeFile(path.join(OUT, 'CNAME'), `${S.customDomain}\n`);
 
 console.log(`built ${pages.length} pages into ${path.relative(ROOT, OUT)}/`);
-for (const p of pages) console.log(`  ${p.path.padEnd(28)} ${p.file}`);
+for (const locale of S.locales) {
+  const n = pages.filter((p) => p.locale === locale && !p.redirect).length;
+  console.log(`  ${locale}: ${n} pages`);
+}
