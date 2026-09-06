@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.vasisotirova.com/sitemap.xml
+Sitemap: https://edgarbarrantes.github.io/vasi-sotirova/sitemap.xml

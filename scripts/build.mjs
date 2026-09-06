@@ -31,11 +31,20 @@ const esc = (value = '') => String(value)
 
 const attr = (value = '') => esc(value).replace(/'/g, '&#39;');
 
-const abs = (href) => new URL(href, S.baseUrl).href;
+/**
+ * Every internal path is written root-relative ("/gallery/") and passed
+ * through url() so the whole site can be served from a subdirectory —
+ * a GitHub Pages project URL, for instance. Set site.basePath to "" once
+ * it lives at a domain root.
+ */
+const BASE = (S.basePath || '').replace(/\/$/, '');
+const url = (href) => `${BASE}${href}`;
+
+const abs = (href) => new URL(url(href), S.baseUrl).href;
 
 function srcset(key, ext) {
-  if (ext === 'webp') return `/assets/img/${key}-${FALLBACK_WIDTH}.webp`;
-  return WIDTHS.map((w) => `/assets/img/${key}-${w}.avif ${w}w`).join(', ');
+  if (ext === 'webp') return url(`/assets/img/${key}-${FALLBACK_WIDTH}.webp`);
+  return WIDTHS.map((w) => `${url(`/assets/img/${key}-${w}.avif`)} ${w}w`).join(', ');
 }
 
 /**
@@ -50,7 +59,7 @@ function picture(img, { sizes, loading = 'lazy', className = '', fetchpriority }
   const placeholder = lqip[key] ? ` style="background-image:url(${lqip[key]})"` : '';
   return `<picture class="${`blur-up ${className}`.trim()}"${placeholder}>
         <source type="image/avif" srcset="${srcset(key, 'avif')}" sizes="${attr(sizes)}">
-        <img src="/assets/img/${key}-${FALLBACK_WIDTH}.webp" width="${w}" height="${h}"
+        <img src="${url(`/assets/img/${key}-${FALLBACK_WIDTH}.webp`)}" width="${w}" height="${h}"
              alt="${attr(img.alt || '')}" loading="${loading}" decoding="async"${
     fetchpriority ? ` fetchpriority="${fetchpriority}"` : ''
   }>
@@ -68,7 +77,7 @@ function layout({ title, description, path: pagePath, body, ogImage, structuredD
   const image = ogImage ? abs(`/assets/img/${keyFor(ogImage)}-${FALLBACK_WIDTH}.webp`) : null;
   const nav = site.nav.map((item) => {
     const current = item.href === pagePath ? ' aria-current="page"' : '';
-    return `<li><a class="nav__link" href="${item.href}"${current}>${esc(item.label)}</a></li>`;
+    return `<li><a class="nav__link" href="${url(item.href)}"${current}>${esc(item.label)}</a></li>`;
   }).join('\n            ');
 
   return `<!DOCTYPE html>
@@ -88,11 +97,11 @@ function layout({ title, description, path: pagePath, body, ogImage, structuredD
   ${image ? `<meta property="og:image" content="${image}">` : ''}
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="${url('/assets/favicon.svg')}" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Montserrat:wght@300;400;600&display=swap">
-  <link rel="stylesheet" href="/assets/styles.css">
+  <link rel="stylesheet" href="${url('/assets/styles.css')}">
   ${structuredData.map(jsonLd).join('\n  ')}
 </head>
 <body>
@@ -100,8 +109,8 @@ function layout({ title, description, path: pagePath, body, ogImage, structuredD
 
   <header class="masthead">
     <div class="shell">
-      <a class="masthead__monogram" href="/" aria-hidden="true" tabindex="-1">${esc(S.monogram)}</a>
-      <p class="masthead__title"><a href="/">${esc(S.title)}</a></p>
+      <a class="masthead__monogram" href="${url('/')}" aria-hidden="true" tabindex="-1">${esc(S.monogram)}</a>
+      <p class="masthead__title"><a href="${url('/')}">${esc(S.title)}</a></p>
     </div>
     <nav class="nav" aria-label="Primary">
       <div class="shell">
@@ -125,7 +134,7 @@ ${body}
     </div>
   </footer>
 
-  <script src="/assets/app.js" defer></script>
+  <script src="${url('/assets/app.js')}" defer></script>
 </body>
 </html>
 `;
@@ -136,14 +145,14 @@ ${body}
 function artworkGrid(category) {
   if (!category.images.length) {
     return `      <p class="empty-note">There are no works on show here just yet — please check back soon, or
-        <a href="/contact/">get in touch</a> to ask what is currently available.</p>`;
+        <a href="${url('/contact/')}">get in touch</a> to ask what is currently available.</p>`;
   }
   const items = category.images.map((img, i) => {
     const key = keyFor(img.media);
     const alt = img.alt || `${category.title.replace(/s$/, '')} painting by ${S.name}`;
     return `        <li class="artwork">
           <button class="artwork__button" type="button"
-                  data-lightbox data-full="/assets/img/${key}-1600.avif"
+                  data-lightbox data-full="${url(`/assets/img/${key}-1600.avif`)}"
                   data-fullset="${srcset(key, 'avif')}"
                   data-alt="${attr(alt)}" data-width="${img.width || ''}" data-height="${img.height || ''}"
                   aria-label="View ${attr(alt)} larger">
@@ -164,7 +173,7 @@ function homePage() {
           ${picture(hero, { sizes: '(min-width: 800px) 760px, 100vw', loading: 'eager', fetchpriority: 'high' })}
         </div>
         <p class="hero__intro">${esc(site.home.intro)}</p>
-        <a class="button" href="/gallery/">View the gallery</a>
+        <a class="button" href="${url('/gallery/')}">View the gallery</a>
       </section>`;
   return {
     file: 'index.html',
@@ -203,7 +212,7 @@ function galleryPage() {
     const cover = { media: cat.cover, alt: '', width: 900, height: 1200 };
     const count = cat.images.length;
     return `        <li>
-          <a class="category" href="/${cat.slug}/">
+          <a class="category" href="${url(`/${cat.slug}/`)}">
             <span class="category__frame">
               ${picture(cover, { sizes: '(min-width: 1100px) 280px, (min-width: 700px) 30vw, 92vw' })}
             </span>
@@ -248,7 +257,7 @@ ${cards}
 }
 
 function categoryPage(cat) {
-  const body = `      <a class="backlink" href="/gallery/">Back to gallery</a>
+  const body = `      <a class="backlink" href="${url('/gallery/')}">Back to gallery</a>
       <div class="page-head">
         <h1 class="page-head__title">${esc(cat.title)}</h1>
         <p class="page-head__lead">${esc(cat.description)}</p>
@@ -375,7 +384,7 @@ function notFoundPage() {
   const body = `      <div class="page-head">
         <h1 class="page-head__title">Page not found</h1>
         <p class="page-head__lead">That page has moved or never existed.
-          Try the <a href="/gallery/">gallery</a> instead.</p>
+          Try the <a href="${url('/gallery/')}">gallery</a> instead.</p>
       </div>`;
   return {
     file: '404.html',
@@ -395,10 +404,10 @@ function redirect(from, to) {
   <meta charset="utf-8">
   <title>Redirecting…</title>
   <link rel="canonical" href="${abs(to)}">
-  <meta http-equiv="refresh" content="0; url=${to}">
+  <meta http-equiv="refresh" content="0; url=${url(to)}">
   <meta name="robots" content="noindex">
 </head>
-<body><p>This page has moved to <a href="${to}">${to}</a>.</p></body>
+<body><p>This page has moved to <a href="${url(to)}">${to}</a>.</p></body>
 </html>
 `,
   };
@@ -458,6 +467,10 @@ await fs.copyFile(path.join(ROOT, 'src', 'app.js'), path.join(OUT, 'assets', 'ap
 await fs.writeFile(path.join(OUT, 'assets', 'favicon.svg'), FAVICON);
 await fs.writeFile(path.join(OUT, 'robots.txt'), ROBOTS);
 await fs.writeFile(path.join(OUT, 'sitemap.xml'), sitemap());
+// Tells GitHub Pages to serve the directory as-is rather than running Jekyll.
+await fs.writeFile(path.join(OUT, '.nojekyll'), '');
+// A CNAME is only written when a custom domain is configured.
+if (S.customDomain) await fs.writeFile(path.join(OUT, 'CNAME'), `${S.customDomain}\n`);
 
 console.log(`built ${pages.length} pages into ${path.relative(ROOT, OUT)}/`);
 for (const p of pages) console.log(`  ${p.path.padEnd(28)} ${p.file}`);
