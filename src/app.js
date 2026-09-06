@@ -82,9 +82,11 @@
       lastFocus = origin || document.activeElement;
       box.hidden = false;
       render(i);
-      // Next frame, so the transition has a starting state to animate from.
-      requestAnimationFrame(function () { box.classList.add('is-open'); });
       document.body.classList.add('is-locked');
+      // Flush layout so the fade has a starting state to animate from, then
+      // move focus into the now-visible dialog.
+      void box.offsetWidth;
+      box.classList.add('is-open');
       closeBtn.focus();
     }
 

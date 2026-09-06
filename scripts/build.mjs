@@ -199,7 +199,8 @@ function homePage() {
 
 function galleryPage() {
   const cards = site.categories.map((cat) => {
-    const cover = { media: cat.cover, alt: `${cat.title} — paintings by ${S.name}`, width: 900, height: 1200 };
+    // The link already reads out the collection name, so the cover is decorative.
+    const cover = { media: cat.cover, alt: '', width: 900, height: 1200 };
     const count = cat.images.length;
     return `        <li>
           <a class="category" href="/${cat.slug}/">

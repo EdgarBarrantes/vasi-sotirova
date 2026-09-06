@@ -496,12 +496,14 @@ main { padding-block: clamp(2rem, 5vw, 4rem) clamp(3rem, 7vw, 5.5rem); }
   padding: clamp(.75rem, 2.5vw, 2rem);
   background: rgba(8, 8, 8, .94);
   opacity: 0;
-  visibility: hidden;
-  transition: opacity .2s ease, visibility .2s ease;
+  transition: opacity .2s ease;
 }
 
-.lightbox[open],
-.lightbox.is-open { opacity: 1; visibility: visible; }
+/* Hidden via the attribute rather than `visibility`, so that focus can move
+   into the dialog the moment it is shown. */
+.lightbox[hidden] { display: none; }
+
+.lightbox.is-open { opacity: 1; }
 
 .lightbox__stage {
   display: grid;
