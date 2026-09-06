@@ -150,6 +150,10 @@ a {
   margin: 0 auto;
   padding: .85rem 0;
   list-style: none;
+  /* Claim the whole row so the language switcher always sits underneath on
+     narrow screens, rather than only when the labels are long enough to
+     push it down — which made the placement differ between languages. */
+  flex-basis: 100%;
 }
 
 .lang {
@@ -162,6 +166,7 @@ a {
 }
 
 @media (min-width: 700px) {
+  .nav__list { flex-basis: auto; }
   .lang { position: absolute; right: 0; padding: 0; }
 }
 
