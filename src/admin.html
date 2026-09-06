@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add a painting</title>
+  <!-- Kept out of search results and AI crawlers. robots.txt also disallows
+       /admin/, and the page is linked from nowhere on the public site. -->
+  <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow">
+  <link rel="icon" href="__BASE__/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="__BASE__/assets/styles.css">
+  <style>
+    body { background: var(--ground-soft); }
+    .admin { width: min(100% - 2rem, 40rem); margin: clamp(1.5rem, 5vw, 3rem) auto; }
+    .admin__panel {
+      background: var(--ground);
+      border: 1px solid var(--rule);
+      padding: clamp(1.25rem, 4vw, 2rem);
+    }
+    .admin h1 { font-size: 1.35rem; font-weight: 400; margin: 0 0 .35rem; letter-spacing: .02em; }
+    .admin__sub { margin: 0 0 1.75rem; color: var(--ink-faint); font-size: .88rem; }
+    .field { display: block; margin-bottom: 1.1rem; }
+    .field > span {
+      display: block; margin-bottom: .35rem; font-size: .72rem;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft);
+    }
+    .field input, .field select, .field textarea {
+      width: 100%; padding: .7rem .85rem; font: inherit; font-size: .95rem;
+      color: var(--ink); background: var(--ground);
+      border: 1px solid var(--rule); border-radius: 2px;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--ink); }
+    .field textarea { min-height: 5rem; resize: vertical; }
+    .field__hint { font-size: .78rem; color: var(--ink-faint); text-transform: none; letter-spacing: 0; }
+    .row { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; }
+    @media (max-width: 34rem) { .row { grid-template-columns: 1fr; } }
+    .preview {
+      display: none; margin: 0 0 1.1rem; padding: .75rem; border: 1px solid var(--rule);
+      background: var(--ground-soft);
+    }
+    .preview img { max-height: 15rem; margin: 0 auto; }
+    .preview figcaption { margin-top: .5rem; text-align: center; font-size: .78rem; color: var(--ink-faint); }
+    .status { margin: 1rem 0 0; font-size: .9rem; min-height: 1.4em; }
+    .status--error { color: #b3261e; }
+    .status--ok { color: #1b6b3a; }
+    @media (prefers-color-scheme: dark) {
+      .status--error { color: #f2b8b5; }
+      .status--ok { color: #7bd7a0; }
+    }
+    .admin__note {
+      margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--rule);
+      font-size: .82rem; color: var(--ink-faint);
+    }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <main class="admin">
+    <div class="admin__panel">
+      <h1>Add a painting</h1>
+      <p class="admin__sub" id="subtitle">Sign in to publish to the gallery.</p>
+
+      <form id="login-form">
+        <label class="field">
+          <span>Password</span>
+          <input type="password" id="password" autocomplete="current-password" required>
+        </label>
+        <button class="button" type="submit">Sign in</button>
+        <p class="status" id="login-status" role="status"></p>
+      </form>
+
+      <form id="upload-form" hidden>
+        <label class="field">
+          <span>Photograph of the painting</span>
+          <input type="file" id="file" accept="image/jpeg,image/png,image/webp" required>
+          <span class="field__hint">JPEG, PNG or WebP, up to 12 MB. The largest version you have is best.</span>
+        </label>
+
+        <figure class="preview" id="preview">
+          <img id="preview-img" alt="">
+          <figcaption id="preview-caption"></figcaption>
+        </figure>
+
+        <div class="row">
+          <label class="field">
+            <span>Collection</span>
+            <select id="category" required></select>
+          </label>
+          <label class="field">
+            <span>Place it</span>
+            <select id="position">
+              <option value="start">First in the collection</option>
+              <option value="end">Last in the collection</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Description (English)</span>
+          <textarea id="alt-en" required maxlength="300"
+            placeholder="Oil painting of red poppies in a small ochre bowl"></textarea>
+          <span class="field__hint">Describe what the painting shows. Screen readers and search engines read this.</span>
+        </label>
+
+        <label class="field">
+          <span>Описание (български)</span>
+          <textarea id="alt-bg" required maxlength="300"
+            placeholder="Картина с маслени бои на червени макове в малка охрена купа"></textarea>
+        </label>
+
+        <button class="button" type="submit" id="submit">Publish</button>
+        <p class="status" id="upload-status" role="status"></p>
+
+        <p class="admin__note">
+          Publishing commits the painting to the site. It appears live a couple of minutes later,
+          once the site rebuilds.
+        </p>
+      </form>
+    </div>
+  </main>
+
+  <script>
+  (function () {
+    'use strict';
+    var CONFIG = __CONFIG__;
+    var MAX_BYTES = 12 * 1024 * 1024;
+
+    var loginForm = document.getElementById('login-form');
+    var uploadForm = document.getElementById('upload-form');
+    var loginStatus = document.getElementById('login-status');
+    var uploadStatus = document.getElementById('upload-status');
+    var subtitle = document.getElementById('subtitle');
+    var fileInput = document.getElementById('file');
+    var categorySelect = document.getElementById('category');
+    var submitBtn = document.getElementById('submit');
+    var preview = document.getElementById('preview');
+    var previewImg = document.getElementById('preview-img');
+    var previewCaption = document.getElementById('preview-caption');
+
+    CONFIG.categories.forEach(function (c) {
+      var opt = document.createElement('option');
+      opt.value = c.slug;
+      opt.textContent = c.title;
+      categorySelect.appendChild(opt);
+    });
+
+    function setStatus(el, message, kind) {
+      el.textContent = message;
+      el.className = 'status' + (kind ? ' status--' + kind : '');
+    }
+
+    if (!CONFIG.api) {
+      setStatus(loginStatus, 'No upload service is configured yet (site.adminApi in data/site.json).', 'error');
+      loginForm.querySelector('button').disabled = true;
+    }
+
+    function token() { return sessionStorage.getItem('vs_admin_token'); }
+
+    function showUpload() {
+      loginForm.hidden = true;
+      uploadForm.hidden = false;
+      subtitle.textContent = 'Signed in. Add a painting to the gallery.';
+    }
+
+    if (token()) showUpload();
+
+    loginForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var password = document.getElementById('password').value;
+      setStatus(loginStatus, 'Checking…');
+      fetch(CONFIG.api + '/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: password })
+      }).then(function (res) {
+        return res.json().then(function (body) { return { ok: res.ok, body: body }; });
+      }).then(function (r) {
+        if (!r.ok) throw new Error(r.body.error || 'Sign in failed');
+        sessionStorage.setItem('vs_admin_token', r.body.token);
+        document.getElementById('password').value = '';
+        setStatus(loginStatus, '');
+        showUpload();
+      }).catch(function (err) {
+        setStatus(loginStatus, err.message, 'error');
+      });
+    });
+
+    fileInput.addEventListener('change', function () {
+      var file = fileInput.files[0];
+      if (!file) { preview.style.display = 'none'; return; }
+      previewImg.src = URL.createObjectURL(file);
+      previewCaption.textContent = file.name + ' — ' + (file.size / 1048576).toFixed(1) + ' MB';
+      preview.style.display = 'block';
+      setStatus(uploadStatus, file.size > MAX_BYTES ? 'That file is over 12 MB.' : '',
+        file.size > MAX_BYTES ? 'error' : '');
+    });
+
+    function readAsBase64(file) {
+      return new Promise(function (resolve, reject) {
+        var reader = new FileReader();
+        reader.onload = function () {
+          // strip the "data:<type>;base64," prefix
+          resolve(String(reader.result).split(',')[1]);
+        };
+        reader.onerror = function () { reject(new Error('Could not read the file')); };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    uploadForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var file = fileInput.files[0];
+      if (!file) return;
+      if (file.size > MAX_BYTES) {
+        setStatus(uploadStatus, 'That file is over 12 MB.', 'error');
+        return;
+      }
+      submitBtn.disabled = true;
+      setStatus(uploadStatus, 'Uploading…');
+
+      readAsBase64(file).then(function (data) {
+        return fetch(CONFIG.api + '/upload', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + token()
+          },
+          body: JSON.stringify({
+            filename: file.name,
+            contentType: file.type,
+            data: data,
+            category: categorySelect.value,
+            position: document.getElementById('position').value,
+            alt: {
+              en: document.getElementById('alt-en').value.trim(),
+              bg: document.getElementById('alt-bg').value.trim()
+            }
+          })
+        });
+      }).then(function (res) {
+        return res.json().then(function (body) { return { ok: res.ok, status: res.status, body: body }; });
+      }).then(function (r) {
+        if (r.status === 401) {
+          sessionStorage.removeItem('vs_admin_token');
+          uploadForm.hidden = true;
+          loginForm.hidden = false;
+          subtitle.textContent = 'Your session expired. Sign in again.';
+          throw new Error('Session expired');
+        }
+        if (!r.ok) throw new Error(r.body.error || 'Upload failed');
+        uploadForm.reset();
+        preview.style.display = 'none';
+        setStatus(uploadStatus, 'Published. It will appear on the site in a couple of minutes.', 'ok');
+      }).catch(function (err) {
+        setStatus(uploadStatus, err.message, 'error');
+      }).then(function () {
+        submitBtn.disabled = false;
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

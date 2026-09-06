@@ -5,13 +5,15 @@
   "description": "Static portfolio site for the painter Vasilka Sotirova",
   "type": "module",
   "scripts": {
-    "assets": "node scripts/fetch-assets.mjs",
-    "assets:force": "node scripts/fetch-assets.mjs --force",
+    "process-uploads": "node scripts/process-uploads.mjs",
     "build": "node scripts/build.mjs",
     "serve": "node scripts/serve.mjs",
     "start": "npm run build && npm run serve"
   },
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "sharp": "^0.35.4"
   }
 }

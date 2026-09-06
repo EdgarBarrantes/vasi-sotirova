@@ -14,12 +14,10 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { keyFor } from './fetch-assets.mjs';
+import { keyFor, WIDTHS, FALLBACK_WIDTH } from './images.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'site');
-const WIDTHS = [480, 960, 1600];
-const FALLBACK_WIDTH = 960;
 
 const site = JSON.parse(await fs.readFile(path.join(ROOT, 'data', 'site.json'), 'utf8'));
 const lqip = JSON.parse(await fs.readFile(path.join(ROOT, 'data', 'lqip.json'), 'utf8'));
@@ -576,6 +574,7 @@ const FAVICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
 
 const ROBOTS = INDEXABLE
   ? `User-agent: *
+Disallow: /admin/
 Allow: /
 
 Sitemap: ${abs(DEFAULT_LOCALE, '/sitemap.xml')}
@@ -627,6 +626,24 @@ await fs.mkdir(path.join(OUT, 'assets'), { recursive: true });
 await fs.copyFile(path.join(ROOT, 'src', 'styles.css'), path.join(OUT, 'assets', 'styles.css'));
 await fs.copyFile(path.join(ROOT, 'src', 'app.js'), path.join(OUT, 'assets', 'app.js'));
 await fs.writeFile(path.join(OUT, 'assets', 'favicon.svg'), FAVICON);
+// The admin page: unlisted, unlinked, and excluded from robots.txt and the
+// sitemap. It holds no secrets — the password is checked by the worker.
+const adminTemplate = await fs.readFile(path.join(ROOT, 'src', 'admin.html'), 'utf8');
+const adminConfig = {
+  api: (S.adminApi || '').replace(/\/$/, ''),
+  categories: site.categories.map((c) => ({
+    slug: c.slug,
+    title: LOCALES[DEFAULT_LOCALE].categories[c.slug].title,
+  })),
+};
+await fs.mkdir(path.join(OUT, 'admin'), { recursive: true });
+await fs.writeFile(
+  path.join(OUT, 'admin', 'index.html'),
+  adminTemplate
+    .replaceAll('__BASE__', BASE)
+    .replace('__CONFIG__', JSON.stringify(adminConfig)),
+);
+
 await fs.writeFile(path.join(OUT, 'robots.txt'), ROBOTS);
 await fs.writeFile(path.join(OUT, 'sitemap.xml'), sitemap());
 // Tells GitHub Pages to serve the directory as-is rather than running Jekyll.

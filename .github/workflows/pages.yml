@@ -5,13 +5,14 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# Allow the workflow to publish to Pages.
 permissions:
-  contents: read
+  contents: write   # the upload step commits processed paintings back
   pages: write
   id-token: write
 
-# One deploy at a time; don't cancel a run that is already publishing.
+# One deploy at a time; don't cancel a run that is already publishing. This
+# also serialises the commit-back, so two uploads in quick succession can't
+# race each other.
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -25,6 +26,27 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Turns anything the admin page left in uploads/ into a published
+      # painting: derives the image set and records it in data/.
+      - name: Process pending uploads
+        run: npm run process-uploads
+
+      - name: Commit processed uploads
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "nothing to commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Publish uploaded painting(s)"
+          git pull --rebase --autostash origin main
+          git push origin HEAD:main
 
       # Images are committed, so the build never reaches out to the old host.
       - name: Build site
