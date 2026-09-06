@@ -104,17 +104,8 @@ a {
   text-align: center;
 }
 
-.masthead__monogram {
-  display: inline-block;
-  font-family: var(--display);
-  font-size: clamp(2rem, 4vw, 3.1rem);
-  line-height: 1;
-  text-decoration: none;
-  color: var(--ink);
-}
-
 .masthead__title {
-  margin: .1em 0 0;
+  margin: 0;
   font-family: var(--display);
   font-weight: 700;
   font-size: clamp(2.2rem, 6vw, 3.75rem);
@@ -215,9 +206,14 @@ main { padding-block: clamp(2rem, 5vw, 4rem) clamp(3rem, 7vw, 5.5rem); }
 .hero__intro {
   margin: clamp(1.5rem, 3vw, 2.25rem) auto 0;
   max-width: var(--measure);
-  font-size: clamp(1rem, 1.4vw, 1.12rem);
+  font-size: clamp(1rem, 1.4vw, 1.08rem);
   color: var(--ink-soft);
+  text-align: left;
 }
+
+.hero__intro p { margin: 0 0 1em; }
+
+.hero__intro p:last-child { margin-bottom: 0; }
 
 .button {
   display: inline-block;
@@ -426,50 +422,47 @@ main { padding-block: clamp(2rem, 5vw, 4rem) clamp(3rem, 7vw, 5.5rem); }
 
 .contact__email {
   display: inline-block;
-  margin: .35rem 0 2.25rem;
-  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  margin: .35rem 0 1.75rem;
+  font-size: clamp(1.1rem, 2.4vw, 1.4rem);
   letter-spacing: .02em;
 }
 
-.form {
-  display: grid;
-  gap: .85rem;
-  text-align: left;
+.contact__note {
+  color: var(--ink-soft);
+  font-size: .95rem;
 }
 
-.form label {
-  font-size: .74rem;
+.contact__follow {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-soft);
+}
+
+.social {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .85rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.social-link {
+  display: inline-block;
+  padding: .65rem 1.6rem;
+  border: 1px solid var(--rule);
+  font-size: .78rem;
   letter-spacing: .14em;
   text-transform: uppercase;
+  text-decoration: none;
   color: var(--ink-soft);
+  transition: border-color .18s ease, color .18s ease;
 }
 
-.form input,
-.form textarea {
-  width: 100%;
-  margin-top: .35rem;
-  padding: .7rem .85rem;
-  font: inherit;
-  font-size: .95rem;
-  color: var(--ink);
-  background: var(--ground);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-}
-
-.form input:focus,
-.form textarea:focus { border-color: var(--ink); outline-offset: 1px; }
-
-.form textarea { min-height: 9rem; resize: vertical; }
-
-.form .button { justify-self: start; margin-top: .5rem; }
-
-.form__status {
-  margin: 0;
-  min-height: 1.4em;
-  font-size: .9rem;
-  color: var(--ink-soft);
-}
+.social-link:hover,
+.social-link:focus-visible { border-color: var(--ink); color: var(--ink); }
 
 /* ---------------------------------------------------------------- footer */
 
@@ -483,7 +476,24 @@ main { padding-block: clamp(2rem, 5vw, 4rem) clamp(3rem, 7vw, 5.5rem); }
 
 .footer a { color: var(--ink-soft); }
 
-.footer__line + .footer__line { margin-top: .4rem; }
+.footer__line + .footer__line { margin-top: .5rem; }
+
+.footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.footer__social a {
+  font-size: .78rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.footer__social a:hover,
+.footer__social a:focus-visible { color: var(--ink); text-decoration: underline; }
 
 /* -------------------------------------------------------------- lightbox */
 

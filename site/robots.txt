@@ -1,4 +1,4 @@
+# Staging build (no custom domain configured) — keep it out of the index
+# so it cannot compete with the live site.
 User-agent: *
-Allow: /
-
-Sitemap: https://edgarbarrantes.github.io/vasi-sotirova/sitemap.xml
+Disallow: /

@@ -72,13 +72,30 @@ function jsonLd(data) {
 
 /* -------------------------------------------------------------- layout */
 
-function layout({ title, description, path: pagePath, body, ogImage, structuredData = [] }) {
+/**
+ * Search engines should only ever index the real site. While this builds for
+ * the temporary Pages URL (no custom domain configured) every page is marked
+ * noindex, so the staging copy cannot compete with vasisotirova.com.
+ */
+const INDEXABLE = Boolean(S.customDomain);
+
+function layout({
+  title, description, path: pagePath, body, ogImage, keywords = [],
+  structuredData = [], isHome = false,
+}) {
   const canonical = abs(pagePath);
   const image = ogImage ? abs(`/assets/img/${keyFor(ogImage)}-${FALLBACK_WIDTH}.webp`) : null;
   const nav = site.nav.map((item) => {
     const current = item.href === pagePath ? ' aria-current="page"' : '';
     return `<li><a class="nav__link" href="${url(item.href)}"${current}>${esc(item.label)}</a></li>`;
   }).join('\n            ');
+  const social = (S.social || []).map((s) =>
+    `<a href="${attr(s.href)}" rel="me noopener" target="_blank">${esc(s.label)}</a>`
+  ).join('\n        ');
+  // On the home page the site name is the page's main heading; elsewhere the
+  // page's own <h1> holds that role.
+  const titleTag = isHome ? 'h1' : 'p';
+  const allKeywords = [...new Set([...(S.keywords || []), ...keywords])];
 
   return `<!DOCTYPE html>
 <html lang="${S.lang}" class="no-js">
@@ -87,6 +104,10 @@ function layout({ title, description, path: pagePath, body, ogImage, structuredD
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${esc(title)}</title>
   <meta name="description" content="${attr(description)}">
+  ${allKeywords.length ? `<meta name="keywords" content="${attr(allKeywords.join(', '))}">` : ''}
+  <meta name="author" content="${attr(S.name)}">
+  ${INDEXABLE ? '<meta name="robots" content="index, follow, max-image-preview:large">'
+              : '<meta name="robots" content="noindex, follow">'}
   <link rel="canonical" href="${canonical}">
 
   <meta property="og:type" content="website">
@@ -109,8 +130,7 @@ function layout({ title, description, path: pagePath, body, ogImage, structuredD
 
   <header class="masthead">
     <div class="shell">
-      <a class="masthead__monogram" href="${url('/')}" aria-hidden="true" tabindex="-1">${esc(S.monogram)}</a>
-      <p class="masthead__title"><a href="${url('/')}">${esc(S.title)}</a></p>
+      <${titleTag} class="masthead__title"><a href="${url('/')}">${esc(S.title)}</a></${titleTag}>
     </div>
     <nav class="nav" aria-label="Primary">
       <div class="shell">
@@ -129,8 +149,11 @@ ${body}
 
   <footer class="footer">
     <div class="shell">
-      <p class="footer__line">Paintings and images &copy; ${new Date().getFullYear()} ${esc(S.name)}. All rights reserved.</p>
       <p class="footer__line"><a href="mailto:${attr(S.email)}">${esc(S.email)}</a></p>
+      <p class="footer__line footer__social">
+        ${social}
+      </p>
+      <p class="footer__line">Paintings and images &copy; ${new Date().getFullYear()} ${esc(S.name)}. All rights reserved.</p>
     </div>
   </footer>
 
@@ -168,11 +191,16 @@ function artworkGrid(category) {
 
 function homePage() {
   const hero = site.home.hero;
+  const intro = [].concat(site.home.intro)
+    .map((p) => `          <p>${esc(p)}</p>`)
+    .join('\n');
   const body = `      <section class="hero">
         <div class="hero__frame">
           ${picture(hero, { sizes: '(min-width: 800px) 760px, 100vw', loading: 'eager', fetchpriority: 'high' })}
         </div>
-        <p class="hero__intro">${esc(site.home.intro)}</p>
+        <div class="hero__intro">
+${intro}
+        </div>
         <a class="button" href="${url('/gallery/')}">View the gallery</a>
       </section>`;
   return {
@@ -183,26 +211,48 @@ function homePage() {
       description: S.defaultDescription,
       path: '/',
       ogImage: hero.media,
+      isHome: true,
       body,
-      structuredData: [
-        {
-          '@context': 'https://schema.org',
-          '@type': 'Person',
-          name: S.name,
-          jobTitle: 'Artist',
-          email: `mailto:${S.email}`,
-          url: S.baseUrl,
-          nationality: 'Bulgarian',
-          description: S.defaultDescription,
-        },
-        {
-          '@context': 'https://schema.org',
-          '@type': 'WebSite',
-          name: S.title,
-          url: S.baseUrl,
-        },
-      ],
+      structuredData: [personSchema(), {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: S.title,
+        url: abs('/'),
+        about: { '@type': 'Person', name: S.name },
+      }],
     }),
+  };
+}
+
+/**
+ * The Person record is what search engines read to connect the name, the
+ * profession, the country and the social accounts into one entity — the thing
+ * that gets her surfaced for "Bulgarian artist" rather than just her own name.
+ */
+function personSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: S.name,
+    alternateName: 'Vasi Sotirova',
+    jobTitle: 'Artist',
+    description: S.defaultDescription,
+    email: `mailto:${S.email}`,
+    url: abs('/'),
+    image: abs(`/assets/img/${keyFor(site.bio.images[0].media)}-960.webp`),
+    nationality: { '@type': 'Country', name: 'Bulgaria' },
+    birthPlace: { '@type': 'Place', name: 'Varna, Bulgaria' },
+    birthDate: '1965',
+    alumniOf: [
+      { '@type': 'EducationalOrganization', name: 'High School of Applied Arts, Tryavna' },
+      { '@type': 'EducationalOrganization', name: 'University of Fine Arts "Todor Samodumov", Dupnitsa' },
+    ],
+    knowsAbout: [
+      'Oil painting', 'Acrylic painting', 'Dry pastel', 'Watercolour',
+      'Portrait painting', 'Pet portraits', 'Landscape painting',
+      'Still life', 'Abstract painting',
+    ],
+    sameAs: (S.social || []).map((s) => s.href),
   };
 }
 
@@ -236,12 +286,13 @@ ${cards}
     file: 'gallery/index.html',
     path: '/gallery/',
     html: layout({
-      title: `Gallery | ${S.name} paintings`,
-      description: `Browse paintings by ${S.name} by collection: portraits, animal portraits, still life, landscapes and abstract work.`,
+      title: `Gallery | Paintings by ${S.name}, Bulgarian Artist`,
+      description: `Browse original paintings by Bulgarian artist ${S.name} by collection: portraits, pet portraits, still life, Bulgarian landscapes, architectural scenes and abstract work.`,
       path: '/gallery/',
       ogImage: site.categories[0]?.cover,
+      keywords: ['art gallery', 'original paintings', 'Bulgarian paintings', 'paintings for sale'],
       body,
-      structuredData: [{
+      structuredData: [breadcrumbs([['Gallery', '/gallery/']]), {
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
         name: 'Gallery',
@@ -268,12 +319,14 @@ ${artworkGrid(cat)}`;
     file: `${cat.slug}/index.html`,
     path: `/${cat.slug}/`,
     html: layout({
-      title: `${cat.title} | ${S.name} paintings`,
+      title: `${cat.title} by ${S.name} | Bulgarian Artist`,
       description: cat.description,
       path: `/${cat.slug}/`,
       ogImage: cat.cover || cat.images[0]?.media,
+      keywords: cat.keywords || [],
       body,
-      structuredData: cat.images.length ? [{
+      structuredData: [breadcrumbs([['Gallery', '/gallery/'], [cat.title, `/${cat.slug}/`]]),
+        ...(cat.images.length ? [{
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
         name: cat.title,
@@ -288,13 +341,28 @@ ${artworkGrid(cat)}`;
             item: {
               '@type': 'VisualArtwork',
               name: img.alt || `${cat.title} painting`,
-              creator: { '@type': 'Person', name: S.name },
+              creator: { '@type': 'Person', name: S.name, nationality: 'Bulgarian' },
+              artform: 'Painting',
               image: abs(`/assets/img/${keyFor(img.media)}-1600.avif`),
             },
           })),
         },
-      }] : [],
+      }] : [])],
     }),
+  };
+}
+
+/** Breadcrumb trail, so results show Gallery › Portraits rather than a bare URL. */
+function breadcrumbs(trail) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [['Home', '/'], ...trail].map(([name, href], i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name,
+      item: abs(href),
+    })),
   };
 }
 
@@ -328,53 +396,51 @@ ${portraits}
     file: 'bio/index.html',
     path: '/bio/',
     html: layout({
-      title: `Bio | ${S.name}`,
-      description: `Biography of ${S.name}, Bulgarian painter — training, exhibitions and collections.`,
+      title: `Biography | ${S.name}, Bulgarian Painter`,
+      description: `Biography of ${S.name}, a Bulgarian painter born in Varna in 1965 — training in Tryavna and Dupnitsa, and paintings held in private collections across Europe and North America.`,
       path: '/bio/',
       ogImage: bio.images[0]?.media,
+      keywords: ['Bulgarian painter biography', 'Varna artist', 'Bulgarian art education', 'artist biography'],
       body,
+      structuredData: [breadcrumbs([['Bio', '/bio/']]), personSchema()],
     }),
   };
 }
 
 function contactPage() {
   const c = site.contact;
-  const endpoint = c.formEndpoint || '';
+  const links = (S.social || []).map((s) =>
+    `          <li><a class="social-link" href="${attr(s.href)}" rel="me noopener" target="_blank">${esc(s.label)}</a></li>`
+  ).join('\n');
+
   const body = `      <div class="page-head">
         <h1 class="page-head__title">${esc(c.title)}</h1>
       </div>
       <div class="contact">
         <p>${esc(c.lead)}</p>
         <a class="contact__email" href="mailto:${attr(S.email)}">${esc(S.email)}</a>
+        <p class="contact__note">${esc(c.note)}</p>
 
-        <p>${esc(c.formNote)}</p>
-        <form class="form" data-contact-form data-endpoint="${attr(endpoint)}"
-              action="${endpoint || `mailto:${attr(S.email)}`}" method="post"
-              ${endpoint ? '' : 'enctype="text/plain"'}>
-          <p><label for="name">Name</label>
-            <input id="name" name="name" type="text" autocomplete="name" required maxlength="100"></p>
-          <p><label for="email">Email</label>
-            <input id="email" name="email" type="email" autocomplete="email" required maxlength="250"></p>
-          <p><label for="message">Message</label>
-            <textarea id="message" name="message" required maxlength="2000"></textarea></p>
-          <button class="button" type="submit">Send</button>
-          <p class="form__status" role="status"></p>
-        </form>
+        <p class="contact__follow">${esc(c.followLead)}</p>
+        <ul class="social">
+${links}
+        </ul>
       </div>`;
 
   return {
     file: 'contact/index.html',
     path: '/contact/',
     html: layout({
-      title: `Contact | ${S.name}`,
-      description: `Contact ${S.name} to order a painting, commission a portrait, or ask about available work. Shipping worldwide.`,
+      title: `Contact | Commission a Painting from ${S.name}`,
+      description: `Contact Bulgarian artist ${S.name} to order an original painting or commission a portrait or pet portrait. Paintings ship worldwide.`,
       path: '/contact/',
+      keywords: ['commission a painting', 'buy Bulgarian art', 'portrait commission', 'contact artist'],
       body,
       structuredData: [{
         '@context': 'https://schema.org',
         '@type': 'ContactPage',
         url: abs('/contact/'),
-        mainEntity: { '@type': 'Person', name: S.name, email: `mailto:${S.email}` },
+        mainEntity: personSchema(),
       }],
     }),
   };
@@ -431,10 +497,16 @@ const FAVICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
 </svg>
 `;
 
-const ROBOTS = `User-agent: *
+const ROBOTS = INDEXABLE
+  ? `User-agent: *
 Allow: /
 
 Sitemap: ${abs('/sitemap.xml')}
+`
+  : `# Staging build (no custom domain configured) — keep it out of the index
+# so it cannot compete with the live site.
+User-agent: *
+Disallow: /
 `;
 
 function sitemap() {

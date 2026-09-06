@@ -142,37 +142,10 @@
     }, { passive: true });
   }
 
-  /* ------------------------------------------------------ contact form */
-
-  function initForm() {
-    var form = document.querySelector('[data-contact-form]');
-    if (!form) return;
-    var status = form.querySelector('.form__status');
-    var endpoint = form.getAttribute('data-endpoint');
-
-    form.addEventListener('submit', function (event) {
-      if (!endpoint) return; // no endpoint configured: fall through to mailto
-      event.preventDefault();
-      status.textContent = 'Sending…';
-      fetch(endpoint, {
-        method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: new FormData(form)
-      }).then(function (res) {
-        if (!res.ok) throw new Error('Request failed');
-        form.reset();
-        status.textContent = 'Thanks for your message — I will be in touch soon.';
-      }).catch(function () {
-        status.textContent = 'Sorry, that did not send. Please email me directly.';
-      });
-    });
-  }
-
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () { revealImages(); initLightbox(); initForm(); });
+    document.addEventListener('DOMContentLoaded', function () { revealImages(); initLightbox(); });
   } else {
     revealImages();
     initLightbox();
-    initForm();
   }
 })();

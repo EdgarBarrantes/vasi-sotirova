@@ -54,11 +54,28 @@ written through it, so nothing is hard-coded to one host.
 Do step 2 before step 3 if you want to avoid a window where the old URL has
 stopped working and the new one has not started.
 
+## Search visibility
+
+Copy, page titles and descriptions are written around the terms the work
+should be found under — Bulgarian artist, Bulgarian painter, portrait and pet
+portrait commissions, and the specific subjects of each collection. Alongside
+that, each page carries JSON-LD: a `Person` record tying the name to her
+nationality, birthplace, training and social profiles, `BreadcrumbList` on the
+inner pages, and a `VisualArtwork` entry per painting.
+
+**Indexing is deliberately off while there is no custom domain.** With
+`site.customDomain` empty, every page renders `noindex` and `robots.txt`
+disallows crawling, so this build cannot compete with the live site for the
+same content. Setting `customDomain` (see above) flips both to `index, follow`
+automatically — nothing else to remember.
+
+Once it is live on the real domain, the things that move the needle are outside
+this repo: verify the domain in Google Search Console and submit
+`sitemap.xml`, and get the site linked from her Facebook and Instagram
+profiles, gallery and exhibition listings, and any press.
+
 ## Notes
 
-- `data/site.json` → `contact.formEndpoint` is empty, so the contact form falls
-  back to opening the visitor's mail client. Set it to a form handler
-  (Formspree, Netlify Forms, or your own) to submit in the background instead.
 - `/bio-1/` redirects to `/bio/`; the other page URLs match the old site.
 - The Current Exhibition gallery was empty when the content was captured, so
   that page renders an empty state until images are added to `data/site.json`.
