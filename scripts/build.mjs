@@ -74,6 +74,14 @@ const relPrefix = (file) => {
 
 const resolveLinks = (html, file) => html.split(`${REL}/`).join(relPrefix(file));
 
+/**
+ * 404.html is the one page that cannot use relative references: the host
+ * serves it for any missing path, so "../assets" would resolve against
+ * whatever URL was requested rather than the file's own location. It gets
+ * absolute paths, which are correct on the real domain.
+ */
+const resolveAbsolute = (html) => html.split(`${REL}/`).join(`${BASE}/`);
+
 /** Fills {placeholders} in a translated string. */
 const fill = (template, values) =>
   String(template).replace(/\{(\w+)\}/g, (m, k) => (k in values ? values[k] : m));
@@ -645,7 +653,10 @@ for (const page of pages) {
   const relFile = prefix ? `${prefix}/${page.file}` : page.file;
   const target = path.join(OUT, relFile);
   await fs.mkdir(path.dirname(target), { recursive: true });
-  await fs.writeFile(target, resolveLinks(page.html, relFile));
+  const html = page.file.endsWith('404.html')
+    ? resolveAbsolute(page.html)
+    : resolveLinks(page.html, relFile);
+  await fs.writeFile(target, html);
 }
 
 await fs.mkdir(path.join(OUT, 'assets'), { recursive: true });

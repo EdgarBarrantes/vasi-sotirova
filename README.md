@@ -89,27 +89,21 @@ Pushing to `main` runs `.github/workflows/pages.yml`, which builds `site/` and
 publishes it to GitHub Pages. Enable it once, under **Settings → Pages →
 Build and deployment → Source: GitHub Actions**.
 
-The site currently builds for the project URL,
-`https://edgarbarrantes.github.io/vasi-sotirova/`. That subdirectory comes from
-`site.basePath` in `data/site.json`; every internal link and asset URL is
-written through it, so nothing is hard-coded to one host.
+The site is configured for **www.vasisotirova.com**, set by `baseUrl`,
+`basePath` and `customDomain` in `data/site.json`. `customDomain` is what makes
+the build emit the `CNAME` file, and that file is what tells GitHub which
+repository owns the domain — there is nothing to type into the Pages settings,
+and a DNS record cannot name a repository anyway, only a hostname.
 
-### Switching to www.vasisotirova.com
+Internal links and asset references are written **relative**, resolved to the
+right number of `../` steps for each page as it is written out. One build
+therefore works wherever it is mounted — at the domain root, or under a project
+path like `/vasi-sotirova/`. Canonical, hreflang, Open Graph and the sitemap
+stay absolute on `baseUrl`, since those have to name one true home.
 
-1. In `data/site.json`, set:
-   ```json
-   "baseUrl": "https://www.vasisotirova.com",
-   "basePath": "",
-   "customDomain": "www.vasisotirova.com"
-   ```
-   `customDomain` makes the build emit a `CNAME` file, which is what tells
-   Pages to answer on that hostname.
-2. Point DNS at GitHub: a `CNAME` record for `www` → `edgarbarrantes.github.io`
-   (and, for the apex, `A` records to GitHub's Pages IPs).
-3. Push. Once DNS resolves, tick **Enforce HTTPS** in Settings → Pages.
-
-Do step 2 before step 3 if you want to avoid a window where the old URL has
-stopped working and the new one has not started.
+The exception is `404.html`: GitHub serves it for any missing path, so relative
+references would resolve against whatever URL was requested. It uses absolute
+paths instead, which means it is styled correctly only on the real domain.
 
 ## Search visibility
 
