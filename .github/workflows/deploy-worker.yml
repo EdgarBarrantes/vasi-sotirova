@@ -36,8 +36,18 @@ jobs:
 
       - run: npm install
 
+      # pipefail matters here: without it the exit status of the pipeline is
+      # tee's, so a failed deploy would report success and the job would carry
+      # on to set secrets against a worker that was never deployed.
       - name: Deploy
-        run: npx wrangler deploy 2>&1 | tee deploy.log
+        run: |
+          set -o pipefail
+          if ! npx wrangler deploy 2>&1 | tee deploy.log; then
+            if grep -q 'workers\.dev subdomain' deploy.log; then
+              echo "::error::This Cloudflare account has no workers.dev subdomain yet. Register one (any name) at https://dash.cloudflare.com/?to=/:account/workers/onboarding then run this workflow again."
+            fi
+            exit 1
+          fi
 
       # The worker exists now, so its secrets can be set. Anything not supplied
       # is skipped, so you can set those in the Cloudflare dashboard instead.
@@ -71,10 +81,11 @@ jobs:
       - name: Record the worker URL
         working-directory: .
         run: |
-          URL=$(grep -oE 'https://[a-z0-9.-]+\.workers\.dev' worker/deploy.log | head -1 || true)
+          # Strip wrangler's colour codes before matching.
+          URL=$(sed -r 's/\x1B\[[0-9;]*[a-zA-Z]//g' worker/deploy.log \
+                | grep -oE 'https://[a-z0-9.-]+\.workers\.dev' | head -1 || true)
           if [ -z "$URL" ]; then
-            echo "Could not read the worker URL from the deploy output."
-            echo "Set site.adminApi in data/site.json by hand."
+            echo "::warning::Deploy succeeded but no worker URL appeared in its output. Set site.adminApi in data/site.json by hand."
             exit 0
           fi
           echo "worker URL: $URL"

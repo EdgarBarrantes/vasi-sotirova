@@ -3,6 +3,7 @@
     "baseUrl": "https://edgarbarrantes.github.io",
     "basePath": "/vasi-sotirova",
     "customDomain": "",
+    "adminApi": "",
     "email": "artvasi7@gmail.com",
     "defaultLocale": "en",
     "locales": [

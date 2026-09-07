@@ -10,34 +10,40 @@ Everything below is a browser form. The **Deploy upload worker** workflow does
 the rest — it deploys the worker, sets its secrets, and writes the resulting
 URL into `data/site.json` so the admin page is wired up automatically.
 
-**1. Cloudflare — get an API token and your account ID.**
+**1. Cloudflare — register a workers.dev subdomain.**
+*Workers & Pages* → if it offers to pick a subdomain, do it (any name; it
+becomes `<worker>.<yourname>.workers.dev`). A brand-new account has none, and
+without one a deploy fails with *"You need to register a workers.dev
+subdomain"* — there is nowhere to publish to. One-off.
+
+**2. Cloudflare — get an API token and your account ID.**
 In the Cloudflare dashboard: *Manage Account → Account API Tokens → Create
 Token*, and use the **Edit Cloudflare Workers** template. Copy the token; it is
 shown once. Your account ID is on the Workers overview page (also the hex
 string in the dashboard URL).
 
-**2. GitHub — a fine-grained personal access token.**
+**3. GitHub — a fine-grained personal access token.**
 *Settings → Developer settings → Personal access tokens → Fine-grained*. Scope
 it to this repository only, and give it exactly one permission:
 **Repository permissions → Contents → Read and write**. This is what lets the
 worker commit an upload.
 
-**3. GitHub — add four repository secrets.**
+**4. GitHub — add four repository secrets.**
 In this repo: *Settings → Secrets and variables → Actions → New repository
 secret*.
 
 | Secret | Value |
 |---|---|
-| `CLOUDFLARE_API_TOKEN` | from step 1 |
-| `CLOUDFLARE_ACCOUNT_ID` | from step 1 |
-| `GH_UPLOAD_TOKEN` | from step 2 |
+| `CLOUDFLARE_API_TOKEN` | from step 2 |
+| `CLOUDFLARE_ACCOUNT_ID` | from step 2 |
+| `GH_UPLOAD_TOKEN` | from step 3 |
 | `ADMIN_PASSWORD` | what she will type to sign in — choose a strong one |
 
 `GH_UPLOAD_TOKEN` is named that way because GitHub reserves the `GITHUB_`
 prefix for its own secrets; the workflow stores it in the worker as
 `GITHUB_TOKEN`.
 
-**4. Run it.** *Actions → Deploy upload worker → Run workflow*.
+**5. Run it.** *Actions → Deploy upload worker → Run workflow*.
 
 When it finishes the admin page is live and working. There is no
 `SESSION_SECRET` to invent — it is derived from the password unless you set one,
@@ -50,7 +56,7 @@ cd worker
 npm install
 npx wrangler login
 npx wrangler secret put ADMIN_PASSWORD
-npx wrangler secret put GITHUB_TOKEN     # the fine-grained token from step 2
+npx wrangler secret put GITHUB_TOKEN     # the fine-grained token from step 3
 npx wrangler deploy
 ```
 
