@@ -2,6 +2,16 @@ name = "vasisotirova-admin"
 main = "src/index.js"
 compatibility_date = "2025-09-01"
 
+# Login attempts per IP. Dashboard rate-limiting rules are scoped to zones you
+# own, so they do not cover a workers.dev address — this binding does.
+[[ratelimits]]
+name = "LOGIN_LIMITER"
+namespace_id = "1001"
+
+  [ratelimits.simple]
+  limit = 8
+  period = 60
+
 [vars]
 # The repository the admin page publishes into.
 GITHUB_REPO = "EdgarBarrantes/vasi-sotirova"

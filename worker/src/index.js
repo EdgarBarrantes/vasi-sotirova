@@ -158,13 +158,23 @@ async function commitFiles(env, files, message) {
 /* -------------------------------------------------------------- handlers */
 
 async function handleLogin(request, env) {
+  // Cap attempts per caller before doing any work. The binding is configured
+  // in wrangler.toml; if an older deployment lacks it, fall through rather
+  // than lock everyone out.
+  if (env.LOGIN_LIMITER) {
+    const who = request.headers.get('CF-Connecting-IP') || 'unknown';
+    const { success } = await env.LOGIN_LIMITER.limit({ key: `login:${who}` });
+    if (!success) {
+      return json({ error: 'Too many attempts. Wait a minute and try again.' }, 429, env);
+    }
+  }
+
   const { password } = await request.json().catch(() => ({}));
   if (typeof password !== 'string' || !password) {
     return json({ error: 'Enter the password.' }, 400, env);
   }
   if (!await safeEqual(password, env.ADMIN_PASSWORD || '')) {
-    // Slow down guessing a little. Real rate limiting belongs in front of the
-    // worker — see worker/README.md.
+    // Adds cost to each individual guess on top of the per-minute cap.
     await sleep(1000);
     return json({ error: 'That password is not right.' }, 401, env);
   }

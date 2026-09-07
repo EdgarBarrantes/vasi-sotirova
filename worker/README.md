@@ -77,11 +77,16 @@ The upload is written as a **single commit** containing both the image and its
 JSON sidecar. That matters: a commit carrying only one of the two would start a
 build that couldn't finish the job.
 
-## Worth doing
+## Rate limiting
 
-Add a Cloudflare **Rate limiting rule** on `/login` (something like 10 requests
-per minute per IP). The worker delays a second on a wrong password, which slows
-guessing down but is not a substitute for rate limiting at the edge.
+Built in: `/login` allows 8 attempts per minute per IP, via the `[[ratelimits]]`
+binding in `wrangler.toml`. A wrong password also costs a second, so guessing is
+slow as well as capped.
+
+This is done in the worker rather than with a dashboard rule because Cloudflare's
+rate-limiting rules apply to zones you own, and a `workers.dev` address is not
+one. If the worker ever moves onto a route on your own domain, a WAF rule
+becomes an option too.
 
 When the custom domain goes live, update `ALLOWED_ORIGIN` in `wrangler.toml`
 to `https://www.vasisotirova.com` and redeploy, or the browser will refuse the
