@@ -19,7 +19,7 @@ GITHUB_BRANCH = "main"
 # Only these origins may call this worker. Both are listed so the admin page
 # keeps working either side of the domain move; drop the github.io entry once
 # the custom domain has settled.
-ALLOWED_ORIGIN = "https://www.vasisotirova.com, https://edgarbarrantes.github.io"
+ALLOWED_ORIGIN = "https://www.vasisotirova.com, https://vasisotirova.com, https://edgarbarrantes.github.io"
 
 # Secrets are NOT set here — they would end up in git. Set them once with:
 #   wrangler secret put ADMIN_PASSWORD
