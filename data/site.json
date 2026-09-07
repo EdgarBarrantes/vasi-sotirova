@@ -1,8 +1,8 @@
 {
   "site": {
-    "baseUrl": "https://edgarbarrantes.github.io",
-    "basePath": "/vasi-sotirova",
-    "customDomain": "",
+    "baseUrl": "https://www.vasisotirova.com",
+    "basePath": "",
+    "customDomain": "www.vasisotirova.com",
     "adminApi": "https://vasisotirova-admin.erian-s-account.workers.dev",
     "email": "artvasi7@gmail.com",
     "defaultLocale": "en",

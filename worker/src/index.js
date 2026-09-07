@@ -85,17 +85,29 @@ async function verifyToken(secret, token) {
   }
 }
 
-const corsHeaders = (env) => ({
-  'Access-Control-Allow-Origin': env.ALLOWED_ORIGIN || '*',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-  'Access-Control-Max-Age': '86400',
-  Vary: 'Origin',
-});
+/**
+ * ALLOWED_ORIGIN is a comma-separated allowlist, so the site can be reachable
+ * at more than one address at once — during a domain move, for instance. The
+ * matching origin is echoed back rather than the whole list, which is what the
+ * CORS spec requires; Vary: Origin keeps caches honest.
+ */
+const corsHeaders = (env, request) => {
+  const allowed = String(env.ALLOWED_ORIGIN || '')
+    .split(',').map((s) => s.trim()).filter(Boolean);
+  const origin = request ? request.headers.get('Origin') : null;
+  return {
+    'Access-Control-Allow-Origin':
+      origin && allowed.includes(origin) ? origin : (allowed[0] || '*'),
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Access-Control-Max-Age': '86400',
+    Vary: 'Origin',
+  };
+};
 
-const json = (body, status, env) => new Response(JSON.stringify(body), {
+const json = (body, status, env, request) => new Response(JSON.stringify(body), {
   status,
-  headers: { 'Content-Type': 'application/json', ...corsHeaders(env) },
+  headers: { 'Content-Type': 'application/json', ...corsHeaders(env, request) },
 });
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -165,46 +177,46 @@ async function handleLogin(request, env) {
     const who = request.headers.get('CF-Connecting-IP') || 'unknown';
     const { success } = await env.LOGIN_LIMITER.limit({ key: `login:${who}` });
     if (!success) {
-      return json({ error: 'Too many attempts. Wait a minute and try again.' }, 429, env);
+      return json({ error: 'Too many attempts. Wait a minute and try again.' }, 429, env, request);
     }
   }
 
   const { password } = await request.json().catch(() => ({}));
   if (typeof password !== 'string' || !password) {
-    return json({ error: 'Enter the password.' }, 400, env);
+    return json({ error: 'Enter the password.' }, 400, env, request);
   }
   if (!await safeEqual(password, env.ADMIN_PASSWORD || '')) {
     // Adds cost to each individual guess on top of the per-minute cap.
     await sleep(1000);
-    return json({ error: 'That password is not right.' }, 401, env);
+    return json({ error: 'That password is not right.' }, 401, env, request);
   }
-  return json(await issueToken(await sessionKey(env)), 200, env);
+  return json(await issueToken(await sessionKey(env)), 200, env, request);
 }
 
 async function handleUpload(request, env) {
   const auth = request.headers.get('Authorization') || '';
   const token = auth.startsWith('Bearer ') ? auth.slice(7) : '';
   if (!await verifyToken(await sessionKey(env), token)) {
-    return json({ error: 'Session expired.' }, 401, env);
+    return json({ error: 'Session expired.' }, 401, env, request);
   }
 
   const body = await request.json().catch(() => null);
-  if (!body) return json({ error: 'Malformed request.' }, 400, env);
+  if (!body) return json({ error: 'Malformed request.' }, 400, env, request);
 
   const extension = ALLOWED_TYPES[body.contentType];
-  if (!extension) return json({ error: 'Use a JPEG, PNG or WebP image.' }, 400, env);
+  if (!extension) return json({ error: 'Use a JPEG, PNG or WebP image.' }, 400, env, request);
 
   if (typeof body.data !== 'string' || !body.data) {
-    return json({ error: 'No image data received.' }, 400, env);
+    return json({ error: 'No image data received.' }, 400, env, request);
   }
   // base64 encodes 3 bytes as 4 characters.
   if (Math.floor(body.data.length * 0.75) > MAX_IMAGE_BYTES) {
-    return json({ error: 'That image is over 12 MB.' }, 413, env);
+    return json({ error: 'That image is over 12 MB.' }, 413, env, request);
   }
 
   const category = String(body.category || '');
   if (!/^[a-z0-9-]{1,60}$/.test(category)) {
-    return json({ error: 'Choose a collection.' }, 400, env);
+    return json({ error: 'Choose a collection.' }, 400, env, request);
   }
 
   const alt = body.alt && typeof body.alt === 'object' ? body.alt : {};
@@ -215,7 +227,7 @@ async function handleUpload(request, env) {
     }
   }
   if (!descriptions.en) {
-    return json({ error: 'An English description is required.' }, 400, env);
+    return json({ error: 'An English description is required.' }, 400, env, request);
   }
 
   const key = crypto.randomUUID().replace(/-/g, '').slice(0, 12);
@@ -239,7 +251,7 @@ async function handleUpload(request, env) {
     },
   ], `Add a painting to ${category}\n\nUploaded through the admin page.`);
 
-  return json({ ok: true, key, commit: sha }, 200, env);
+  return json({ ok: true, key, commit: sha }, 200, env, request);
 }
 
 export default {
@@ -247,20 +259,20 @@ export default {
     const url = new URL(request.url);
 
     if (request.method === 'OPTIONS') {
-      return new Response(null, { status: 204, headers: corsHeaders(env) });
+      return new Response(null, { status: 204, headers: corsHeaders(env, request) });
     }
     if (request.method !== 'POST') {
-      return json({ error: 'Not found.' }, 404, env);
+      return json({ error: 'Not found.' }, 404, env, request);
     }
 
     try {
-      if (url.pathname === '/login') return await handleLogin(request, env);
-      if (url.pathname === '/upload') return await handleUpload(request, env);
-      return json({ error: 'Not found.' }, 404, env);
+      if (url.pathname === '/login') return await handleLogin(request, env, request);
+      if (url.pathname === '/upload') return await handleUpload(request, env, request);
+      return json({ error: 'Not found.' }, 404, env, request);
     } catch (err) {
       // Never surface the GitHub response verbatim — it can echo the token.
       console.error(err);
-      return json({ error: 'Something went wrong publishing that. Try again.' }, 500, env);
+      return json({ error: 'Something went wrong publishing that. Try again.' }, 500, env, request);
     }
   },
 };

@@ -1,4 +1,5 @@
-# Staging build (no custom domain configured) — keep it out of the index
-# so it cannot compete with the live site.
 User-agent: *
-Disallow: /
+Disallow: /admin/
+Allow: /
+
+Sitemap: https://www.vasisotirova.com/sitemap.xml
