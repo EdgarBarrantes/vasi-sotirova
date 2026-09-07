@@ -47,9 +47,32 @@ const attr = (value = '') => esc(value).replace(/'/g, '&#39;');
  */
 const BASE = (S.basePath || '').replace(/\/$/, '');
 const localised = (locale, href) => (locale === DEFAULT_LOCALE ? href : `/${locale}${href}`);
-const url = (href) => `${BASE}${href}`;
+
+/**
+ * Links and asset references are emitted with a marker instead of a leading
+ * slash, and each page rewrites the marker into the right number of "../"
+ * steps for its own depth as it is written out. Relative references mean one
+ * build works wherever it is mounted — at a domain root and under a project
+ * path like /vasi-sotirova/ — which matters while a domain move is in flight
+ * and both addresses are serving.
+ *
+ * Absolute URLs (canonical, hreflang, Open Graph, sitemap) must still name one
+ * true home, so those go through sitePath()/abs() and keep site.basePath.
+ */
+const REL = '__REL__';
+const url = (href) => `${REL}${href}`;
 const href = (locale, path_) => url(localised(locale, path_));
-const abs = (locale, path_) => new URL(href(locale, path_), S.baseUrl).href;
+
+const sitePath = (locale, path_) => `${BASE}${localised(locale, path_)}`;
+const abs = (locale, path_) => new URL(sitePath(locale, path_), S.baseUrl).href;
+
+/** "" at the root, "../" one level down, and so on. */
+const relPrefix = (file) => {
+  const depth = file.split('/').length - 1;
+  return depth === 0 ? '' : '../'.repeat(depth);
+};
+
+const resolveLinks = (html, file) => html.split(`${REL}/`).join(relPrefix(file));
 
 /** Fills {placeholders} in a translated string. */
 const fill = (template, values) =>
@@ -617,9 +640,12 @@ for (const page of pages) {
   const prefix = page.redirect || page.file.endsWith('404.html') || page.locale === DEFAULT_LOCALE
     ? ''
     : page.locale;
-  const target = path.join(OUT, prefix, page.file);
+  // Depth is measured from the file's real location, locale folder included,
+  // so /bg/portraits/index.html climbs two levels and not one.
+  const relFile = prefix ? `${prefix}/${page.file}` : page.file;
+  const target = path.join(OUT, relFile);
   await fs.mkdir(path.dirname(target), { recursive: true });
-  await fs.writeFile(target, page.html);
+  await fs.writeFile(target, resolveLinks(page.html, relFile));
 }
 
 await fs.mkdir(path.join(OUT, 'assets'), { recursive: true });
@@ -639,9 +665,12 @@ const adminConfig = {
 await fs.mkdir(path.join(OUT, 'admin'), { recursive: true });
 await fs.writeFile(
   path.join(OUT, 'admin', 'index.html'),
-  adminTemplate
-    .replaceAll('__BASE__', BASE)
-    .replace('__CONFIG__', JSON.stringify(adminConfig)),
+  resolveLinks(
+    adminTemplate
+      .replaceAll('__BASE__', REL)
+      .replace('__CONFIG__', JSON.stringify(adminConfig)),
+    'admin/index.html',
+  ),
 );
 
 await fs.writeFile(path.join(OUT, 'robots.txt'), ROBOTS);
