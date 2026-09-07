@@ -54,6 +54,17 @@ async function safeEqual(a, b) {
   return diff === 0;
 }
 
+/**
+ * Key used to sign session tokens. Deriving it from the password by default
+ * means there is one less secret to set up — and changing the password then
+ * also invalidates any session already issued, which is the behaviour you
+ * want anyway. Set SESSION_SECRET to decouple the two.
+ */
+async function sessionKey(env) {
+  if (env.SESSION_SECRET) return env.SESSION_SECRET;
+  return b64url(await hmac(env.ADMIN_PASSWORD || '', 'vasisotirova-session-v1'));
+}
+
 async function issueToken(secret) {
   const expiresAt = Math.floor(Date.now() / 1000) + SESSION_TTL_SECONDS;
   const payload = b64url(encoder.encode(JSON.stringify({ exp: expiresAt })));
@@ -157,13 +168,13 @@ async function handleLogin(request, env) {
     await sleep(1000);
     return json({ error: 'That password is not right.' }, 401, env);
   }
-  return json(await issueToken(env.SESSION_SECRET), 200, env);
+  return json(await issueToken(await sessionKey(env)), 200, env);
 }
 
 async function handleUpload(request, env) {
   const auth = request.headers.get('Authorization') || '';
   const token = auth.startsWith('Bearer ') ? auth.slice(7) : '';
-  if (!await verifyToken(env.SESSION_SECRET, token)) {
+  if (!await verifyToken(await sessionKey(env), token)) {
     return json({ error: 'Session expired.' }, 401, env);
   }
 

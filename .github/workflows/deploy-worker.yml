@@ -1,0 +1,98 @@
+name: Deploy upload worker
+
+# Run this by hand: Actions → "Deploy upload worker" → Run workflow.
+# It deploys worker/ to Cloudflare, sets the worker's secrets from this
+# repository's secrets, and writes the resulting URL into data/site.json so the
+# admin page knows where to send uploads.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: worker
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check credentials are present
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "Missing CLOUDFLARE_API_TOKEN or CLOUDFLARE_ACCOUNT_ID."
+            echo "Add them under Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+
+      - run: npm install
+
+      - name: Deploy
+        run: npx wrangler deploy 2>&1 | tee deploy.log
+
+      # The worker exists now, so its secrets can be set. Anything not supplied
+      # is skipped, so you can set those in the Cloudflare dashboard instead.
+      - name: Set worker secrets
+        env:
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          GH_UPLOAD_TOKEN: ${{ secrets.GH_UPLOAD_TOKEN }}
+          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+        run: |
+          set -e
+          if [ -n "$ADMIN_PASSWORD" ]; then
+            printf '%s' "$ADMIN_PASSWORD" | npx wrangler secret put ADMIN_PASSWORD
+            echo "set ADMIN_PASSWORD"
+          else
+            echo "ADMIN_PASSWORD not supplied — set it in the Cloudflare dashboard"
+          fi
+          if [ -n "$GH_UPLOAD_TOKEN" ]; then
+            printf '%s' "$GH_UPLOAD_TOKEN" | npx wrangler secret put GITHUB_TOKEN
+            echo "set GITHUB_TOKEN"
+          else
+            echo "GH_UPLOAD_TOKEN not supplied — set GITHUB_TOKEN in the Cloudflare dashboard"
+          fi
+          if [ -n "$SESSION_SECRET" ]; then
+            printf '%s' "$SESSION_SECRET" | npx wrangler secret put SESSION_SECRET
+            echo "set SESSION_SECRET"
+          else
+            echo "SESSION_SECRET not supplied — derived from the password, which is fine"
+          fi
+
+      # Wire the deployed URL into the site so the admin page can reach it.
+      - name: Record the worker URL
+        working-directory: .
+        run: |
+          URL=$(grep -oE 'https://[a-z0-9.-]+\.workers\.dev' worker/deploy.log | head -1 || true)
+          if [ -z "$URL" ]; then
+            echo "Could not read the worker URL from the deploy output."
+            echo "Set site.adminApi in data/site.json by hand."
+            exit 0
+          fi
+          echo "worker URL: $URL"
+          node -e '
+            const fs = require("fs");
+            const p = "data/site.json";
+            const d = JSON.parse(fs.readFileSync(p, "utf8"));
+            if (d.site.adminApi === process.argv[1]) { console.log("already set"); process.exit(0); }
+            d.site.adminApi = process.argv[1];
+            fs.writeFileSync(p, JSON.stringify(d, null, 2) + "\n");
+            console.log("updated data/site.json");
+          ' "$URL"
+          if [ -n "$(git status --porcelain data/site.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/site.json
+            git commit -m "Point the admin page at the deployed worker"
+            git pull --rebase --autostash origin main
+            git push origin HEAD:main
+            echo "Pushed — the site will rebuild with the admin page wired up."
+          fi
