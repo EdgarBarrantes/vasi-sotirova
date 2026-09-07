@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  actions: write   # to start the site rebuild after committing the URL
 
 jobs:
   deploy:
@@ -80,6 +81,9 @@ jobs:
       # Wire the deployed URL into the site so the admin page can reach it.
       - name: Record the worker URL
         working-directory: .
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
         run: |
           # Strip wrangler's colour codes before matching.
           URL=$(sed -r 's/\x1B\[[0-9;]*[a-zA-Z]//g' worker/deploy.log \
@@ -105,5 +109,15 @@ jobs:
             git commit -m "Point the admin page at the deployed worker"
             git pull --rebase --autostash origin main
             git push origin HEAD:main
-            echo "Pushed — the site will rebuild with the admin page wired up."
+            # A push made with GITHUB_TOKEN deliberately does not trigger other
+            # workflows, so the site would never pick this commit up. Start the
+            # rebuild by hand — workflow_dispatch is the documented exception
+            # to that rule.
+            curl -sS --fail -X POST \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/$REPO/actions/workflows/pages.yml/dispatches" \
+              -d '{"ref":"main"}'
+            echo "Pushed, and the site rebuild has been started."
           fi
