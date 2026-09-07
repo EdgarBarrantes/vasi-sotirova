@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Add a painting</title>
+  <title>Paintings</title>
   <!-- Kept out of search results and AI crawlers. robots.txt also disallows
        /admin/, and the page is linked from nowhere on the public site. -->
   <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="__BASE__/assets/styles.css">
   <style>
     body { background: var(--ground-soft); }
-    .admin { width: min(100% - 2rem, 40rem); margin: clamp(1.5rem, 5vw, 3rem) auto; }
+    .admin { width: min(100% - 2rem, 46rem); margin: clamp(1.5rem, 5vw, 3rem) auto; }
     .admin__panel {
       background: var(--ground);
       border: 1px solid var(--rule);
@@ -31,7 +31,7 @@
       border: 1px solid var(--rule); border-radius: 2px;
     }
     .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--ink); }
-    .field textarea { min-height: 5rem; resize: vertical; }
+    .field textarea { min-height: 4.5rem; resize: vertical; }
     .field__hint { font-size: .78rem; color: var(--ink-faint); text-transform: none; letter-spacing: 0; }
     .row { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; }
     @media (max-width: 34rem) { .row { grid-template-columns: 1fr; } }
@@ -52,71 +52,185 @@
       margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--rule);
       font-size: .82rem; color: var(--ink-faint);
     }
+    fieldset {
+      margin: 0 0 1.25rem; padding: 1rem 1rem .25rem;
+      border: 1px solid var(--rule); border-radius: 2px;
+    }
+    legend {
+      padding: 0 .4rem; font-size: .7rem; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--ink-faint);
+    }
+
+    /* tabs */
+    .tabs { display: flex; gap: .5rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--rule); }
+    .tab {
+      padding: .6rem 1rem; border: 0; background: none; font: inherit; font-size: .78rem;
+      letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint);
+      cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px;
+    }
+    .tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--ink); }
+
+    /* manage list */
+    .group { margin-bottom: 1.75rem; }
+    .group__name {
+      margin: 0 0 .6rem; font-size: .74rem; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--ink-soft);
+    }
+    .works { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+    .work {
+      display: grid; grid-template-columns: 3.5rem 1fr auto; gap: .85rem;
+      align-items: center; padding: .5rem; border: 1px solid var(--rule);
+    }
+    .work--hidden { opacity: .55; background: var(--ground-soft); }
+    .work img { width: 3.5rem; height: 3.5rem; object-fit: cover; }
+    .work__text { min-width: 0; }
+    .work__title {
+      font-size: .9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .work__state { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); }
+    .work__actions { display: flex; gap: .4rem; align-items: center; }
+    .work__toggle {
+      padding: .45rem .9rem; border: 1px solid var(--rule); background: none; font: inherit;
+      font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--ink-soft); cursor: pointer; white-space: nowrap;
+    }
+    .work__toggle:hover:not(:disabled) { border-color: var(--ink); color: var(--ink); }
+    .work__toggle:disabled { opacity: .5; cursor: default; }
+    .work__link { font-size: .72rem; color: var(--ink-faint); text-decoration: none; }
+    .work__link:hover { color: var(--ink); }
     [hidden] { display: none !important; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+      overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+    }
   </style>
 </head>
 <body>
   <main class="admin">
     <div class="admin__panel">
-      <h1>Add a painting</h1>
-      <p class="admin__sub" id="subtitle">Sign in to publish to the gallery.</p>
+      <h1>Paintings</h1>
+      <p class="admin__sub" id="subtitle">Sign in to manage the gallery.</p>
 
       <form id="login-form">
+        <!-- A username, even a fixed one, is what lets a browser or password
+             manager offer to save and refill the password. -->
+        <label class="sr-only" for="username">Account</label>
+        <input class="sr-only" id="username" name="username" type="text"
+               autocomplete="username" value="vasilka" readonly tabindex="-1">
         <label class="field">
           <span>Password</span>
-          <input type="password" id="password" autocomplete="current-password" required>
+          <input type="password" id="password" name="password"
+                 autocomplete="current-password" required>
         </label>
         <button class="button" type="submit">Sign in</button>
         <p class="status" id="login-status" role="status"></p>
       </form>
 
-      <form id="upload-form" hidden>
-        <label class="field">
-          <span>Photograph of the painting</span>
-          <input type="file" id="file" accept="image/jpeg,image/png,image/webp" required>
-          <span class="field__hint">JPEG, PNG or WebP, up to 12 MB. The largest version you have is best.</span>
-        </label>
-
-        <figure class="preview" id="preview">
-          <img id="preview-img" alt="">
-          <figcaption id="preview-caption"></figcaption>
-        </figure>
-
-        <div class="row">
-          <label class="field">
-            <span>Collection</span>
-            <select id="category" required></select>
-          </label>
-          <label class="field">
-            <span>Place it</span>
-            <select id="position">
-              <option value="start">First in the collection</option>
-              <option value="end">Last in the collection</option>
-            </select>
-          </label>
+      <div id="workspace" hidden>
+        <div class="tabs" role="tablist">
+          <button class="tab" type="button" role="tab" id="tab-add"
+                  aria-selected="true" aria-controls="panel-add">Add a painting</button>
+          <button class="tab" type="button" role="tab" id="tab-manage"
+                  aria-selected="false" aria-controls="panel-manage">On the site</button>
         </div>
 
-        <label class="field">
-          <span>Description (English)</span>
-          <textarea id="alt-en" required maxlength="300"
-            placeholder="Oil painting of red poppies in a small ochre bowl"></textarea>
-          <span class="field__hint">Describe what the painting shows. Screen readers and search engines read this.</span>
-        </label>
+        <!-- ------------------------------------------------------ add -->
+        <form id="upload-form" role="tabpanel" aria-labelledby="tab-add">
+          <label class="field">
+            <span>Photograph of the painting</span>
+            <input type="file" id="file" accept="image/jpeg,image/png,image/webp" required>
+            <span class="field__hint">JPEG, PNG or WebP, up to 12 MB. The largest version you have is best.</span>
+          </label>
 
-        <label class="field">
-          <span>Описание (български)</span>
-          <textarea id="alt-bg" required maxlength="300"
-            placeholder="Картина с маслени бои на червени макове в малка охрена купа"></textarea>
-        </label>
+          <figure class="preview" id="preview">
+            <img id="preview-img" alt="">
+            <figcaption id="preview-caption"></figcaption>
+          </figure>
 
-        <button class="button" type="submit" id="submit">Publish</button>
-        <p class="status" id="upload-status" role="status"></p>
+          <div class="row">
+            <label class="field">
+              <span>Collection</span>
+              <select id="category" required></select>
+            </label>
+            <label class="field">
+              <span>Place it</span>
+              <select id="position">
+                <option value="start">First in the collection</option>
+                <option value="end">Last in the collection</option>
+              </select>
+            </label>
+          </div>
 
-        <p class="admin__note">
-          Publishing commits the painting to the site. It appears live a couple of minutes later,
-          once the site rebuilds.
-        </p>
-      </form>
+          <label class="field">
+            <span>Description (English)</span>
+            <textarea id="alt-en" required maxlength="300"
+              placeholder="Oil painting of red poppies in a small ochre bowl"></textarea>
+            <span class="field__hint">What the painting shows. Screen readers and search engines read this.</span>
+          </label>
+
+          <label class="field">
+            <span>Описание (български)</span>
+            <textarea id="alt-bg" required maxlength="300"
+              placeholder="Картина с маслени бои на червени макове в малка охрена купа"></textarea>
+          </label>
+
+          <fieldset>
+            <legend>Optional details</legend>
+            <div class="row">
+              <label class="field">
+                <span>Technique</span>
+                <select id="technique">
+                  <option value="">—</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Size</span>
+                <input type="text" id="size" maxlength="60" placeholder="50 × 70 cm">
+              </label>
+            </div>
+            <div class="row">
+              <label class="field">
+                <span>Title (English)</span>
+                <input type="text" id="title-en" maxlength="120">
+              </label>
+              <label class="field">
+                <span>Заглавие (български)</span>
+                <input type="text" id="title-bg" maxlength="120">
+              </label>
+            </div>
+            <div class="row">
+              <label class="field">
+                <span>Note (English)</span>
+                <textarea id="note-en" maxlength="600"></textarea>
+              </label>
+              <label class="field">
+                <span>Бележка (български)</span>
+                <textarea id="note-bg" maxlength="600"></textarea>
+              </label>
+            </div>
+          </fieldset>
+
+          <button class="button" type="submit" id="submit">Publish</button>
+          <p class="status" id="upload-status" role="status"></p>
+
+          <p class="admin__note">
+            Publishing commits the painting to the site. It appears live a couple of minutes later,
+            once the site rebuilds. Anything left blank is simply not shown.
+          </p>
+        </form>
+
+        <!-- --------------------------------------------------- manage -->
+        <div id="panel-manage" role="tabpanel" aria-labelledby="tab-manage" hidden>
+          <p class="admin__sub" id="manage-intro">Loading…</p>
+          <div id="manage-list"></div>
+          <p class="status" id="manage-status" role="status"></p>
+          <p class="admin__note">
+            Hiding a painting takes it off the site but keeps it here — the photograph and its
+            descriptions stay in place, so it can be put back at any time. Changes appear on the
+            site a couple of minutes later.
+          </p>
+        </div>
+      </div>
     </div>
   </main>
 
@@ -126,17 +240,21 @@
     var CONFIG = __CONFIG__;
     var MAX_BYTES = 12 * 1024 * 1024;
 
-    var loginForm = document.getElementById('login-form');
-    var uploadForm = document.getElementById('upload-form');
-    var loginStatus = document.getElementById('login-status');
-    var uploadStatus = document.getElementById('upload-status');
-    var subtitle = document.getElementById('subtitle');
-    var fileInput = document.getElementById('file');
-    var categorySelect = document.getElementById('category');
-    var submitBtn = document.getElementById('submit');
-    var preview = document.getElementById('preview');
-    var previewImg = document.getElementById('preview-img');
-    var previewCaption = document.getElementById('preview-caption');
+    var $ = function (id) { return document.getElementById(id); };
+    var loginForm = $('login-form');
+    var uploadForm = $('upload-form');
+    var workspace = $('workspace');
+    var loginStatus = $('login-status');
+    var uploadStatus = $('upload-status');
+    var manageStatus = $('manage-status');
+    var subtitle = $('subtitle');
+    var fileInput = $('file');
+    var categorySelect = $('category');
+    var techniqueSelect = $('technique');
+    var submitBtn = $('submit');
+    var preview = $('preview');
+    var previewImg = $('preview-img');
+    var previewCaption = $('preview-caption');
 
     CONFIG.categories.forEach(function (c) {
       var opt = document.createElement('option');
@@ -157,34 +275,60 @@
 
     function token() { return sessionStorage.getItem('vs_admin_token'); }
 
-    function showUpload() {
-      loginForm.hidden = true;
-      uploadForm.hidden = false;
-      subtitle.textContent = 'Signed in. Add a painting to the gallery.';
+    function signedOut(message) {
+      sessionStorage.removeItem('vs_admin_token');
+      workspace.hidden = true;
+      loginForm.hidden = false;
+      subtitle.textContent = message || 'Sign in to manage the gallery.';
     }
 
-    if (token()) showUpload();
+    function showWorkspace() {
+      loginForm.hidden = true;
+      workspace.hidden = false;
+      subtitle.textContent = 'Signed in.';
+      loadPaintings();
+    }
+
+    if (token()) showWorkspace();
+
+    /* ------------------------------------------------------------ auth */
 
     loginForm.addEventListener('submit', function (e) {
       e.preventDefault();
-      var password = document.getElementById('password').value;
       setStatus(loginStatus, 'Checking…');
       fetch(CONFIG.api + '/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password: password })
+        body: JSON.stringify({ password: $('password').value })
       }).then(function (res) {
         return res.json().then(function (body) { return { ok: res.ok, body: body }; });
       }).then(function (r) {
         if (!r.ok) throw new Error(r.body.error || 'Sign in failed');
         sessionStorage.setItem('vs_admin_token', r.body.token);
-        document.getElementById('password').value = '';
         setStatus(loginStatus, '');
-        showUpload();
+        showWorkspace();
       }).catch(function (err) {
         setStatus(loginStatus, err.message, 'error');
       });
     });
+
+    /* ------------------------------------------------------------ tabs */
+
+    var tabs = [
+      { tab: $('tab-add'), panel: uploadForm },
+      { tab: $('tab-manage'), panel: $('panel-manage') }
+    ];
+    tabs.forEach(function (entry) {
+      entry.tab.addEventListener('click', function () {
+        tabs.forEach(function (other) {
+          var active = other === entry;
+          other.tab.setAttribute('aria-selected', String(active));
+          other.panel.hidden = !active;
+        });
+      });
+    });
+
+    /* ---------------------------------------------------------- upload */
 
     fileInput.addEventListener('change', function () {
       var file = fileInput.files[0];
@@ -192,17 +336,14 @@
       previewImg.src = URL.createObjectURL(file);
       previewCaption.textContent = file.name + ' — ' + (file.size / 1048576).toFixed(1) + ' MB';
       preview.style.display = 'block';
-      setStatus(uploadStatus, file.size > MAX_BYTES ? 'That file is over 12 MB.' : '',
-        file.size > MAX_BYTES ? 'error' : '');
+      var tooBig = file.size > MAX_BYTES;
+      setStatus(uploadStatus, tooBig ? 'That file is over 12 MB.' : '', tooBig ? 'error' : '');
     });
 
     function readAsBase64(file) {
       return new Promise(function (resolve, reject) {
         var reader = new FileReader();
-        reader.onload = function () {
-          // strip the "data:<type>;base64," prefix
-          resolve(String(reader.result).split(',')[1]);
-        };
+        reader.onload = function () { resolve(String(reader.result).split(',')[1]); };
         reader.onerror = function () { reject(new Error('Could not read the file')); };
         reader.readAsDataURL(file);
       });
@@ -222,32 +363,22 @@
       readAsBase64(file).then(function (data) {
         return fetch(CONFIG.api + '/upload', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + token()
-          },
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token() },
           body: JSON.stringify({
             filename: file.name,
             contentType: file.type,
             data: data,
             category: categorySelect.value,
-            position: document.getElementById('position').value,
-            alt: {
-              en: document.getElementById('alt-en').value.trim(),
-              bg: document.getElementById('alt-bg').value.trim()
-            }
+            position: $('position').value,
+            technique: techniqueSelect.value,
+            size: $('size').value.trim(),
+            alt: { en: $('alt-en').value.trim(), bg: $('alt-bg').value.trim() },
+            title: { en: $('title-en').value.trim(), bg: $('title-bg').value.trim() },
+            note: { en: $('note-en').value.trim(), bg: $('note-bg').value.trim() }
           })
         });
-      }).then(function (res) {
-        return res.json().then(function (body) { return { ok: res.ok, status: res.status, body: body }; });
-      }).then(function (r) {
-        if (r.status === 401) {
-          sessionStorage.removeItem('vs_admin_token');
-          uploadForm.hidden = true;
-          loginForm.hidden = false;
-          subtitle.textContent = 'Your session expired. Sign in again.';
-          throw new Error('Session expired');
-        }
+      }).then(readJson).then(function (r) {
+        if (r.status === 401) { signedOut('Your session expired. Sign in again.'); throw new Error('Session expired'); }
         if (!r.ok) throw new Error(r.body.error || 'Upload failed');
         uploadForm.reset();
         preview.style.display = 'none';
@@ -258,6 +389,134 @@
         submitBtn.disabled = false;
       });
     });
+
+    function readJson(res) {
+      return res.json().catch(function () { return {}; }).then(function (body) {
+        return { ok: res.ok, status: res.status, body: body };
+      });
+    }
+
+    /* ---------------------------------------------------------- manage */
+
+    function loadPaintings() {
+      // Rebuilt with the site, so it always reflects what is currently live.
+      fetch('paintings.json?t=' + Date.now()).then(function (res) {
+        if (!res.ok) throw new Error('Could not load the list');
+        return res.json();
+      }).then(function (data) {
+        // The technique options come from the same manifest, so the two stay
+        // in step without being listed twice.
+        Object.keys(data.techniques || {}).forEach(function (k) {
+          var opt = document.createElement('option');
+          opt.value = k;
+          opt.textContent = data.techniques[k];
+          techniqueSelect.appendChild(opt);
+        });
+        renderPaintings(data);
+      }).catch(function (err) {
+        $('manage-intro').textContent = err.message;
+      });
+    }
+
+    function renderPaintings(data) {
+      var total = 0;
+      var hiddenCount = 0;
+      var list = $('manage-list');
+      list.textContent = '';
+
+      data.categories.forEach(function (cat) {
+        if (!cat.images.length) return;
+        var group = document.createElement('div');
+        group.className = 'group';
+        var name = document.createElement('h2');
+        name.className = 'group__name';
+        name.textContent = cat.title + ' (' + cat.images.length + ')';
+        group.appendChild(name);
+
+        var works = document.createElement('ul');
+        works.className = 'works';
+        cat.images.forEach(function (img) {
+          total += 1;
+          if (img.hidden) hiddenCount += 1;
+          works.appendChild(workRow(img));
+        });
+        group.appendChild(works);
+        list.appendChild(group);
+      });
+
+      $('manage-intro').textContent =
+        total + ' painting' + (total === 1 ? '' : 's') + ' — ' +
+        (hiddenCount ? hiddenCount + ' hidden from the site.' : 'all showing.');
+    }
+
+    function workRow(img) {
+      var li = document.createElement('li');
+      li.className = 'work' + (img.hidden ? ' work--hidden' : '');
+
+      var thumb = document.createElement('img');
+      thumb.src = img.thumb;
+      thumb.alt = '';
+      thumb.loading = 'lazy';
+      li.appendChild(thumb);
+
+      var text = document.createElement('div');
+      text.className = 'work__text';
+      var title = document.createElement('div');
+      title.className = 'work__title';
+      title.textContent = img.title.en || img.alt.en || img.key;
+      var state = document.createElement('div');
+      state.className = 'work__state';
+      state.textContent = img.hidden ? 'Hidden' : 'On the site';
+      text.appendChild(title);
+      text.appendChild(state);
+      li.appendChild(text);
+
+      var actions = document.createElement('div');
+      actions.className = 'work__actions';
+      if (!img.hidden) {
+        var view = document.createElement('a');
+        view.className = 'work__link';
+        view.href = img.page;
+        view.target = '_blank';
+        view.rel = 'noopener';
+        view.textContent = 'View';
+        actions.appendChild(view);
+      }
+      var toggle = document.createElement('button');
+      toggle.className = 'work__toggle';
+      toggle.type = 'button';
+      toggle.textContent = img.hidden ? 'Show' : 'Hide';
+      toggle.addEventListener('click', function () {
+        setVisibility(img, !img.hidden, toggle, li, state, actions);
+      });
+      actions.appendChild(toggle);
+      li.appendChild(actions);
+      return li;
+    }
+
+    function setVisibility(img, hide, toggle, li, state, actions) {
+      toggle.disabled = true;
+      setStatus(manageStatus, hide ? 'Hiding…' : 'Restoring…');
+      fetch(CONFIG.api + '/visibility', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token() },
+        body: JSON.stringify({ key: img.key, hidden: hide })
+      }).then(readJson).then(function (r) {
+        if (r.status === 401) { signedOut('Your session expired. Sign in again.'); throw new Error('Session expired'); }
+        if (!r.ok) throw new Error(r.body.error || 'Could not change that');
+        img.hidden = hide;
+        li.className = 'work' + (hide ? ' work--hidden' : '');
+        state.textContent = hide ? 'Hidden' : 'On the site';
+        toggle.textContent = hide ? 'Show' : 'Hide';
+        var link = actions.querySelector('.work__link');
+        if (link) link.hidden = hide;
+        setStatus(manageStatus, 'Saved. The site updates in a couple of minutes.', 'ok');
+      }).catch(function (err) {
+        setStatus(manageStatus, err.message, 'error');
+      }).then(function () {
+        toggle.disabled = false;
+      });
+    }
   })();
   </script>
 </body>

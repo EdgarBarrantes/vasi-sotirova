@@ -74,6 +74,30 @@ What happens next:
 Anything it can't publish — an unknown collection, a corrupt image — is moved
 to `uploads/rejected/` rather than retried on every future build.
 
+Alongside the description, a painting can carry a technique, a size, a title
+and a short note. All are optional and per-language where it matters; a
+painting without them simply shows less.
+
+## Hiding a painting
+
+The **On the site** tab of `/admin/` lists everything, hidden works included,
+and can pull one off the site. That sets `hidden: true` on its record — the
+photograph, the original and the descriptions all stay, so it can be restored
+at any time. A hidden painting gets no gallery tile, no page and no sitemap
+entry.
+
+The build clears its previous output before writing, so a page that should no
+longer exist does not linger from an earlier build. `site/assets/` is the one
+thing it keeps, since that holds the images themselves.
+
+## A link to one painting
+
+Every published painting has its own page at `/<collection>/<key>/`, in both
+languages, carrying its title, technique, size, note and `VisualArtwork`
+structured data. Gallery tiles are real links to those pages, so the grid works
+without JavaScript; when scripting is available the lightbox opens instead and
+offers a way through to the page.
+
 The admin page carries no credentials: it is a form that talks to the worker,
 which holds the password and the GitHub token. Setup is in
 [`worker/README.md`](worker/README.md); set `site.adminApi` in `data/site.json`

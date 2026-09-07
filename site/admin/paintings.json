@@ -1,0 +1,1825 @@
+{
+  "generatedAt": "2026-09-07T22:49:22.230Z",
+  "techniques": {
+    "oil": "Oil",
+    "acrylic": "Acrylic",
+    "watercolour": "Watercolour",
+    "pastel": "Dry pastel",
+    "mixed": "Mixed media"
+  },
+  "categories": [
+    {
+      "slug": "portraits",
+      "title": "Portraits",
+      "images": [
+        {
+          "key": "abdd74161ad4",
+          "hidden": false,
+          "thumb": "/assets/img/abdd74161ad4-480.avif",
+          "page": "/portraits/abdd74161ad4/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil portrait of a bride and groom, the bride holding a bouquet of cream roses",
+            "bg": "Портрет с маслени бои на младоженци, булката държи букет от кремави рози"
+          }
+        },
+        {
+          "key": "e80dc66705fa",
+          "hidden": false,
+          "thumb": "/assets/img/e80dc66705fa-480.avif",
+          "page": "/portraits/e80dc66705fa/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Pastel portrait of a smiling girl in Bulgarian folk dress on a swing, holding a basket of eggs",
+            "bg": "Портрет със сух пастел на усмихнато момиче в българска народна носия на люлка, с кошница с яйца"
+          }
+        },
+        {
+          "key": "b2ad36052da6",
+          "hidden": false,
+          "thumb": "/assets/img/b2ad36052da6-480.avif",
+          "page": "/portraits/b2ad36052da6/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil portrait of a young woman seen from behind, her hair pinned up with small white flowers",
+            "bg": "Портрет с маслени бои на млада жена, видяна в гръб, с прибрана коса, украсена с дребни бели цветя"
+          }
+        },
+        {
+          "key": "c799d4d2f638",
+          "hidden": false,
+          "thumb": "/assets/img/c799d4d2f638-480.avif",
+          "page": "/portraits/c799d4d2f638/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil portrait of a dark-haired girl in a knitted lilac hat",
+            "bg": "Портрет с маслени бои на тъмнокосо момиче с плетена лилава шапка"
+          }
+        },
+        {
+          "key": "bed167e2b465",
+          "hidden": false,
+          "thumb": "/assets/img/bed167e2b465-480.avif",
+          "page": "/portraits/bed167e2b465/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil portrait of a laughing couple standing together on a wooden jetty by a river",
+            "bg": "Портрет с маслени бои на смееща се двойка на дървен кей край река"
+          }
+        },
+        {
+          "key": "1e05b511c567",
+          "hidden": false,
+          "thumb": "/assets/img/1e05b511c567-480.avif",
+          "page": "/portraits/1e05b511c567/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil portrait of a woman in an elaborate white ball gown beside a column",
+            "bg": "Портрет с маслени бои на жена в разкошна бяла бална рокля до колона"
+          }
+        },
+        {
+          "key": "becee091e84c",
+          "hidden": false,
+          "thumb": "/assets/img/becee091e84c-480.avif",
+          "page": "/portraits/becee091e84c/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil portrait of a fair-haired young boy in a navy argyle sweater",
+            "bg": "Портрет с маслени бои на русо момче в тъмносин пуловер с ромбове"
+          }
+        },
+        {
+          "key": "243b21899f27",
+          "hidden": false,
+          "thumb": "/assets/img/243b21899f27-480.avif",
+          "page": "/portraits/243b21899f27/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil portrait of a blonde woman in a yellow polo neck against a blue background",
+            "bg": "Портрет с маслени бои на руса жена с жълто поло на син фон"
+          }
+        },
+        {
+          "key": "b489f79ac04d",
+          "hidden": false,
+          "thumb": "/assets/img/b489f79ac04d-480.avif",
+          "page": "/portraits/b489f79ac04d/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil portrait of a blue-eyed baby in a red checked pinafore",
+            "bg": "Портрет с маслени бои на синеоко бебе в червена карирана рокличка"
+          }
+        },
+        {
+          "key": "9bc165f890de",
+          "hidden": false,
+          "thumb": "/assets/img/9bc165f890de-480.avif",
+          "page": "/portraits/9bc165f890de/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil portrait of a smiling older man in a naval captain's cap",
+            "bg": "Портрет с маслени бои на усмихнат възрастен мъж с капитанска фуражка"
+          }
+        },
+        {
+          "key": "0a65d88a413f",
+          "hidden": false,
+          "thumb": "/assets/img/0a65d88a413f-480.avif",
+          "page": "/portraits/0a65d88a413f/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil portrait of a girl with blonde plaits tied with pink ribbons",
+            "bg": "Портрет с маслени бои на момиче с руси плитки, вързани с розови панделки"
+          }
+        },
+        {
+          "key": "27396ae67ac4",
+          "hidden": false,
+          "thumb": "/assets/img/27396ae67ac4-480.avif",
+          "page": "/portraits/27396ae67ac4/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a small child crouching in the snow, hand resting on one cheek",
+            "bg": "Картина с маслени бои на малко дете, клекнало в снега, с ръка на бузата"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "animal-portraits",
+      "title": "Animal Portraits",
+      "images": [
+        {
+          "key": "fd9b2ce7b61d",
+          "hidden": false,
+          "thumb": "/assets/img/fd9b2ce7b61d-480.avif",
+          "page": "/animal-portraits/fd9b2ce7b61d/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Acrylic painting of two horses, one white one brown",
+            "bg": "Акрилна картина на два коня, единият бял, другият кафяв"
+          }
+        },
+        {
+          "key": "d1f4b2e569ec",
+          "hidden": false,
+          "thumb": "/assets/img/d1f4b2e569ec-480.avif",
+          "page": "/animal-portraits/d1f4b2e569ec/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Pastel painting of two tabby kittens against a golden ochre background",
+            "bg": "Картина със сух пастел на две тигрови котета на златисто-охрен фон"
+          }
+        },
+        {
+          "key": "8855ebaf6047",
+          "hidden": false,
+          "thumb": "/assets/img/8855ebaf6047-480.avif",
+          "page": "/animal-portraits/8855ebaf6047/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a black horse galloping through swirling mist",
+            "bg": "Картина с маслени бои на черен кон, галопиращ във вихреща се мъгла"
+          }
+        },
+        {
+          "key": "7e1f567ce35a",
+          "hidden": false,
+          "thumb": "/assets/img/7e1f567ce35a-480.avif",
+          "page": "/animal-portraits/7e1f567ce35a/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a dapple-grey horse with a pale mane running through cloud",
+            "bg": "Картина с маслени бои на сив кон със светла грива, тичащ сред облак прах"
+          }
+        },
+        {
+          "key": "fc498724ed4e",
+          "hidden": false,
+          "thumb": "/assets/img/fc498724ed4e-480.avif",
+          "page": "/animal-portraits/fc498724ed4e/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil portrait of a black and white cocker spaniel sitting upright",
+            "bg": "Портрет с маслени бои на черно-бял кокер шпаньол, седнал изправено"
+          }
+        },
+        {
+          "key": "27f6fe9bd5ab",
+          "hidden": false,
+          "thumb": "/assets/img/27f6fe9bd5ab-480.avif",
+          "page": "/animal-portraits/27f6fe9bd5ab/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Blue ballpoint pen drawing of a sleeping cat's head",
+            "bg": "Рисунка със син химикал на глава на спяща котка"
+          }
+        },
+        {
+          "key": "f3fae12adae1",
+          "hidden": false,
+          "thumb": "/assets/img/f3fae12adae1-480.avif",
+          "page": "/animal-portraits/f3fae12adae1/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil portrait of a curly-coated black and white dog panting in a flowering meadow",
+            "bg": "Портрет с маслени бои на черно-бяло куче с къдрава козина сред цъфтяща поляна"
+          }
+        },
+        {
+          "key": "1b9f9f4cbcbe",
+          "hidden": false,
+          "thumb": "/assets/img/1b9f9f4cbcbe-480.avif",
+          "page": "/animal-portraits/1b9f9f4cbcbe/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Pastel study of a chestnut horse's eye in close-up",
+            "bg": "Етюд със сух пастел на око на кестеняв кон в близък план"
+          }
+        },
+        {
+          "key": "3894bda540ed",
+          "hidden": false,
+          "thumb": "/assets/img/3894bda540ed-480.avif",
+          "page": "/animal-portraits/3894bda540ed/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a bay horse cantering along a sunlit beach",
+            "bg": "Картина с маслени бои на дорест кон, препускащ по огрян от слънце плаж"
+          }
+        },
+        {
+          "key": "fc5445bdf45a",
+          "hidden": false,
+          "thumb": "/assets/img/fc5445bdf45a-480.avif",
+          "page": "/animal-portraits/fc5445bdf45a/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Pastel close-up of a horse's dark eye and lashes against a chestnut coat",
+            "bg": "Близък план със сух пастел на тъмно конско око и мигли на фона на кестенява козина"
+          }
+        },
+        {
+          "key": "eabd45ea151c",
+          "hidden": false,
+          "thumb": "/assets/img/eabd45ea151c-480.avif",
+          "page": "/animal-portraits/eabd45ea151c/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Pastel portrait of a grey long-haired cat on a black background",
+            "bg": "Портрет със сух пастел на сива дългокосместа котка на черен фон"
+          }
+        },
+        {
+          "key": "0e1724db207b",
+          "hidden": false,
+          "thumb": "/assets/img/0e1724db207b-480.avif",
+          "page": "/animal-portraits/0e1724db207b/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Pastel portrait of a ginger long-haired cat with green eyes on black",
+            "bg": "Портрет със сух пастел на рижа дългокосместа котка със зелени очи на черен фон"
+          }
+        },
+        {
+          "key": "2a6279a6b940",
+          "hidden": false,
+          "thumb": "/assets/img/2a6279a6b940-480.avif",
+          "page": "/animal-portraits/2a6279a6b940/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Pastel portrait of a tortoiseshell cat with green eyes on a dark background",
+            "bg": "Портрет със сух пастел на трицветна котка със зелени очи на тъмен фон"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "still-life",
+      "title": "Still Life",
+      "images": [
+        {
+          "key": "fd6c99ee39a8",
+          "hidden": false,
+          "thumb": "/assets/img/fd6c99ee39a8-480.avif",
+          "page": "/still-life/fd6c99ee39a8/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of red poppies and white daisies in a small ochre bowl",
+            "bg": "Картина с маслени бои на червени макове и бели маргаритки в малка охрена купа"
+          }
+        },
+        {
+          "key": "150db19a2811",
+          "hidden": false,
+          "thumb": "/assets/img/150db19a2811-480.avif",
+          "page": "/still-life/150db19a2811/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a mixed wildflower bouquet in a white ceramic vase",
+            "bg": "Картина с маслени бои на букет от полски цветя в бяла керамична ваза"
+          }
+        },
+        {
+          "key": "ca36f74b054f",
+          "hidden": false,
+          "thumb": "/assets/img/ca36f74b054f-480.avif",
+          "page": "/still-life/ca36f74b054f/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of red and peach roses in a pale blue vase beside a window",
+            "bg": "Картина с маслени бои на червени и прасковени рози в светлосиня ваза до прозорец"
+          }
+        },
+        {
+          "key": "24e1c600ad5a",
+          "hidden": false,
+          "thumb": "/assets/img/24e1c600ad5a-480.avif",
+          "page": "/still-life/24e1c600ad5a/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of pink peonies and garden flowers in a wicker basket",
+            "bg": "Картина с маслени бои на розови божури и градински цветя в плетена кошница"
+          }
+        },
+        {
+          "key": "c8f6b2494020",
+          "hidden": false,
+          "thumb": "/assets/img/c8f6b2494020-480.avif",
+          "page": "/still-life/c8f6b2494020/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of zinnias in a white enamel jug against a deep red ground",
+            "bg": "Картина с маслени бои на циннии в бяла емайлирана кана на тъмночервен фон"
+          }
+        },
+        {
+          "key": "db7a0a37770b",
+          "hidden": false,
+          "thumb": "/assets/img/db7a0a37770b-480.avif",
+          "page": "/still-life/db7a0a37770b/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of grapes, apples and pears in a glass tazza on red cloth",
+            "bg": "Картина с маслени бои на грозде, ябълки и круши в стъклена фруктиера върху червена покривка"
+          }
+        },
+        {
+          "key": "f80d4c858039",
+          "hidden": false,
+          "thumb": "/assets/img/f80d4c858039-480.avif",
+          "page": "/still-life/f80d4c858039/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a summer bouquet in a white wicker basket at a blue window",
+            "bg": "Картина с маслени бои на летен букет в бяла плетена кошница до син прозорец"
+          }
+        },
+        {
+          "key": "01aa5a92c2d4",
+          "hidden": false,
+          "thumb": "/assets/img/01aa5a92c2d4-480.avif",
+          "page": "/still-life/01aa5a92c2d4/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of purple and pink sweet peas in a cobalt vase on a sunlit table",
+            "bg": "Картина с маслени бои на лилаво и розово секирче в кобалтова ваза на огряна от слънце маса"
+          }
+        },
+        {
+          "key": "3eeb553418c4",
+          "hidden": false,
+          "thumb": "/assets/img/3eeb553418c4-480.avif",
+          "page": "/still-life/3eeb553418c4/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of lilies, gladioli and asters in a deep blue globe vase",
+            "bg": "Картина с маслени бои на лилии, гладиоли и астри в тъмносиня кръгла ваза"
+          }
+        },
+        {
+          "key": "d4cc71398e51",
+          "hidden": false,
+          "thumb": "/assets/img/d4cc71398e51-480.avif",
+          "page": "/still-life/d4cc71398e51/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of sunflowers in a zinc watering can with apples on red cloth",
+            "bg": "Картина с маслени бои на слънчогледи в поцинкована лейка с ябълки върху червена покривка"
+          }
+        },
+        {
+          "key": "e0f9602f9b62",
+          "hidden": false,
+          "thumb": "/assets/img/e0f9602f9b62-480.avif",
+          "page": "/still-life/e0f9602f9b62/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of white hibiscus and delphiniums in a turquoise vase",
+            "bg": "Картина с маслени бои на бял хибискус и ралица в тюркоазена ваза"
+          }
+        },
+        {
+          "key": "a905210a6e1a",
+          "hidden": false,
+          "thumb": "/assets/img/a905210a6e1a-480.avif",
+          "page": "/still-life/a905210a6e1a/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of daisies, gerberas and a yellow lily in a woven basket",
+            "bg": "Картина с маслени бои на маргаритки, гербери и жълта лилия в плетена кошница"
+          }
+        },
+        {
+          "key": "d3b370e83499",
+          "hidden": false,
+          "thumb": "/assets/img/d3b370e83499-480.avif",
+          "page": "/still-life/d3b370e83499/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of tulips and yellow lilies in a shallow patterned bowl",
+            "bg": "Картина с маслени бои на лалета и жълти лилии в плитка декорирана купа"
+          }
+        },
+        {
+          "key": "be16b270b372",
+          "hidden": false,
+          "thumb": "/assets/img/be16b270b372-480.avif",
+          "page": "/still-life/be16b270b372/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a sunflower with lilies and phlox in a white bowl",
+            "bg": "Картина с маслени бои на слънчоглед с лилии и флокс в бяла купа"
+          }
+        },
+        {
+          "key": "2762c5d26a63",
+          "hidden": false,
+          "thumb": "/assets/img/2762c5d26a63-480.avif",
+          "page": "/still-life/2762c5d26a63/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of pink and yellow roses in a glass vase",
+            "bg": "Картина с маслени бои на розови и жълти рози в стъклена ваза"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "landscapes",
+      "title": "Landscapes",
+      "images": [
+        {
+          "key": "087fcfb8422f",
+          "hidden": false,
+          "thumb": "/assets/img/087fcfb8422f-480.avif",
+          "page": "/landscapes/087fcfb8422f/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Bold oil painting of a snow-covered river valley below sunlit autumn hills",
+            "bg": "Изразителна картина с маслени бои на заснежена речна долина под огрени от слънце есенни хълмове"
+          }
+        },
+        {
+          "key": "2d4b12866af1",
+          "hidden": false,
+          "thumb": "/assets/img/2d4b12866af1-480.avif",
+          "page": "/landscapes/2d4b12866af1/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a footpath running along a golden mountain ridge",
+            "bg": "Картина с маслени бои на пътека по златисто планинско било"
+          }
+        },
+        {
+          "key": "911ef7f280e8",
+          "hidden": false,
+          "thumb": "/assets/img/911ef7f280e8-480.avif",
+          "page": "/landscapes/911ef7f280e8/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a sunlit track through hills covered in purple heather",
+            "bg": "Картина с маслени бои на огряна от слънце пътека през хълмове, покрити с лилав пирен"
+          }
+        },
+        {
+          "key": "e29c52cffd0b",
+          "hidden": false,
+          "thumb": "/assets/img/e29c52cffd0b-480.avif",
+          "page": "/landscapes/e29c52cffd0b/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of pink fireweed in flower above a mountain lake",
+            "bg": "Картина с маслени бои на цъфтяща розова върбовка над планинско езеро"
+          }
+        },
+        {
+          "key": "c975dfb22cbf",
+          "hidden": false,
+          "thumb": "/assets/img/c975dfb22cbf-480.avif",
+          "page": "/landscapes/c975dfb22cbf/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a mountain lake and meadow scattered with wildflowers",
+            "bg": "Картина с маслени бои на планинско езеро и поляна, осеяна с диви цветя"
+          }
+        },
+        {
+          "key": "6bded511c130",
+          "hidden": false,
+          "thumb": "/assets/img/6bded511c130-480.avif",
+          "page": "/landscapes/6bded511c130/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a path over golden autumn ridges under a wide sky",
+            "bg": "Картина с маслени бои на пътека по златисти есенни била под широко небе"
+          }
+        },
+        {
+          "key": "6e9318c80e67",
+          "hidden": false,
+          "thumb": "/assets/img/6e9318c80e67-480.avif",
+          "page": "/landscapes/6e9318c80e67/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a waterfall falling between green cliffs",
+            "bg": "Картина с маслени бои на водопад, спускащ се между зелени скали"
+          }
+        },
+        {
+          "key": "0114bbca6b56",
+          "hidden": false,
+          "thumb": "/assets/img/0114bbca6b56-480.avif",
+          "page": "/landscapes/0114bbca6b56/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a village nestled below dark basalt cliffs",
+            "bg": "Картина с маслени бои на село, сгушено под тъмни базалтови скали"
+          }
+        },
+        {
+          "key": "77002ae832f7",
+          "hidden": false,
+          "thumb": "/assets/img/77002ae832f7-480.avif",
+          "page": "/landscapes/77002ae832f7/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a green hillside strewn with pale boulders",
+            "bg": "Картина с маслени бои на зелен склон, осеян със светли камъни"
+          }
+        },
+        {
+          "key": "18a77e2e2ed7",
+          "hidden": false,
+          "thumb": "/assets/img/18a77e2e2ed7-480.avif",
+          "page": "/landscapes/18a77e2e2ed7/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a mountain slope in autumn gold and rust",
+            "bg": "Картина с маслени бои на планински склон в есенно злато и ръждивочервено"
+          }
+        },
+        {
+          "key": "75831cf19239",
+          "hidden": false,
+          "thumb": "/assets/img/75831cf19239-480.avif",
+          "page": "/landscapes/75831cf19239/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of horses on a hillside at dusk in violet light",
+            "bg": "Картина с маслени бои на коне по склон в здрача, в лилава светлина"
+          }
+        },
+        {
+          "key": "43b6ddbbe670",
+          "hidden": false,
+          "thumb": "/assets/img/43b6ddbbe670-480.avif",
+          "page": "/landscapes/43b6ddbbe670/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a chamois on a rocky summit above a sea of cloud",
+            "bg": "Картина с маслени бои на дива коза на скалист връх над море от облаци"
+          }
+        },
+        {
+          "key": "f552616522a0",
+          "hidden": false,
+          "thumb": "/assets/img/f552616522a0-480.avif",
+          "page": "/landscapes/f552616522a0/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of two figures on a clifftop under towering clouds",
+            "bg": "Картина с маслени бои на две фигури на скален ръб под високи облаци"
+          }
+        },
+        {
+          "key": "92174a07d645",
+          "hidden": false,
+          "thumb": "/assets/img/92174a07d645-480.avif",
+          "page": "/landscapes/92174a07d645/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a glacial lake below a rocky peak",
+            "bg": "Картина с маслени бои на ледниково езеро под скалист връх"
+          }
+        },
+        {
+          "key": "31a1bac611b5",
+          "hidden": false,
+          "thumb": "/assets/img/31a1bac611b5-480.avif",
+          "page": "/landscapes/31a1bac611b5/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of reeds and still water under a pale blue sky",
+            "bg": "Картина с маслени бои на тръстики и спокойна вода под бледосиньо небе"
+          }
+        },
+        {
+          "key": "1c67006dcc39",
+          "hidden": false,
+          "thumb": "/assets/img/1c67006dcc39-480.avif",
+          "page": "/landscapes/1c67006dcc39/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a path between lavender fields and blossoming trees",
+            "bg": "Картина с маслени бои на пътека между лавандулови поля и цъфнали дървета"
+          }
+        },
+        {
+          "key": "a804b12b2420",
+          "hidden": false,
+          "thumb": "/assets/img/a804b12b2420-480.avif",
+          "page": "/landscapes/a804b12b2420/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of breaking waves on a sunlit shore",
+            "bg": "Картина с маслени бои на разбиващи се вълни на огрян от слънце бряг"
+          }
+        },
+        {
+          "key": "709dd7a45801",
+          "hidden": false,
+          "thumb": "/assets/img/709dd7a45801-480.avif",
+          "page": "/landscapes/709dd7a45801/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a small boat under trees on a quiet bay, in a crackle-finish frame",
+            "bg": "Картина с маслени бои на малка лодка под дървета в тих залив, в рамка с кракелюр"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "abstract-landscapes",
+      "title": "Abstract Landscapes",
+      "images": [
+        {
+          "key": "16cc05736c88",
+          "hidden": false,
+          "thumb": "/assets/img/16cc05736c88-480.avif",
+          "page": "/abstract-landscapes/16cc05736c88/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Abstract landscape in purple, red and ochre with a slender tree and winding path",
+            "bg": "Абстрактен пейзаж в лилаво, червено и охра със стройно дърво и криволичеща пътека"
+          }
+        },
+        {
+          "key": "6204f147c8d4",
+          "hidden": false,
+          "thumb": "/assets/img/6204f147c8d4-480.avif",
+          "page": "/abstract-landscapes/6204f147c8d4/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Soft abstract landscape of a yellow meadow below misty blue mountains",
+            "bg": "Мек абстрактен пейзаж на жълта поляна под мъгливи сини планини"
+          }
+        },
+        {
+          "key": "91b8f271a3bd",
+          "hidden": false,
+          "thumb": "/assets/img/91b8f271a3bd-480.avif",
+          "page": "/abstract-landscapes/91b8f271a3bd/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Abstract landscape in warm russet and green with flowering ground",
+            "bg": "Абстрактен пейзаж в топло ръждиво и зелено с цъфтяща земя"
+          }
+        },
+        {
+          "key": "b72f6d4ff6e7",
+          "hidden": false,
+          "thumb": "/assets/img/b72f6d4ff6e7-480.avif",
+          "page": "/abstract-landscapes/b72f6d4ff6e7/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Abstract landscape of two windswept trees beside a pale track",
+            "bg": "Абстрактен пейзаж с две превити от вятъра дървета край светла пътека"
+          }
+        },
+        {
+          "key": "dfca51e4b7ad",
+          "hidden": false,
+          "thumb": "/assets/img/dfca51e4b7ad-480.avif",
+          "page": "/abstract-landscapes/dfca51e4b7ad/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Textured abstract landscape with a pink path through gold and green fields",
+            "bg": "Текстурен абстрактен пейзаж с розова пътека през златисти и зелени поля"
+          }
+        },
+        {
+          "key": "b6faffbebea7",
+          "hidden": false,
+          "thumb": "/assets/img/b6faffbebea7-480.avif",
+          "page": "/abstract-landscapes/b6faffbebea7/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Muted abstract landscape of a farmhouse among trees in an autumn field",
+            "bg": "Приглушен абстрактен пейзаж с къща сред дървета в есенно поле"
+          }
+        },
+        {
+          "key": "b1df7bb5d0d8",
+          "hidden": false,
+          "thumb": "/assets/img/b1df7bb5d0d8-480.avif",
+          "page": "/abstract-landscapes/b1df7bb5d0d8/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Abstract landscape of a flowering meadow under a heavy sky",
+            "bg": "Абстрактен пейзаж на цъфтяща поляна под тежко небе"
+          }
+        },
+        {
+          "key": "d1595be1f96c",
+          "hidden": false,
+          "thumb": "/assets/img/d1595be1f96c-480.avif",
+          "page": "/abstract-landscapes/d1595be1f96c/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Soft abstract landscape of a stream through a yellow flowering field",
+            "bg": "Мек абстрактен пейзаж с поток през жълто цъфтящо поле"
+          }
+        },
+        {
+          "key": "b19dad04d78c",
+          "hidden": false,
+          "thumb": "/assets/img/b19dad04d78c-480.avif",
+          "page": "/abstract-landscapes/b19dad04d78c/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Abstract landscape of a stream cutting through golden fields",
+            "bg": "Абстрактен пейзаж с поток, прорязващ златисти поля"
+          }
+        },
+        {
+          "key": "57d4810827c3",
+          "hidden": false,
+          "thumb": "/assets/img/57d4810827c3-480.avif",
+          "page": "/abstract-landscapes/57d4810827c3/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Abstract landscape of trees and wildflowers under a violet sky",
+            "bg": "Абстрактен пейзаж с дървета и диви цветя под виолетово небе"
+          }
+        },
+        {
+          "key": "55dde2cb4f44",
+          "hidden": false,
+          "thumb": "/assets/img/55dde2cb4f44-480.avif",
+          "page": "/abstract-landscapes/55dde2cb4f44/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Impressionist landscape of a flowering meadow before a line of trees",
+            "bg": "Импресионистичен пейзаж на цъфтяща поляна пред редица дървета"
+          }
+        },
+        {
+          "key": "bf781a9e9c3e",
+          "hidden": false,
+          "thumb": "/assets/img/bf781a9e9c3e-480.avif",
+          "page": "/abstract-landscapes/bf781a9e9c3e/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Abstract landscape of birches beside a track through green and gold fields",
+            "bg": "Абстрактен пейзаж с брези край пътека през зелени и златисти поля"
+          }
+        },
+        {
+          "key": "c285329042d2",
+          "hidden": false,
+          "thumb": "/assets/img/c285329042d2-480.avif",
+          "page": "/abstract-landscapes/c285329042d2/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Soft abstract landscape of rolling meadows below distant blue hills",
+            "bg": "Мек абстрактен пейзаж на полегати поляни под далечни сини хълмове"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "architectural-landscapes",
+      "title": "Architectural Landscapes",
+      "images": [
+        {
+          "key": "fd6fffe161bf",
+          "hidden": false,
+          "thumb": "/assets/img/fd6fffe161bf-480.avif",
+          "page": "/architectural-landscapes/fd6fffe161bf/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a stone bridge and clock tower in a Bulgarian old town",
+            "bg": "Картина с маслени бои на каменен мост и часовникова кула в български стар град"
+          }
+        },
+        {
+          "key": "417932df8a89",
+          "hidden": false,
+          "thumb": "/assets/img/417932df8a89-480.avif",
+          "page": "/architectural-landscapes/417932df8a89/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Vivid oil painting of a Revival-period house with red doors below wooded hills",
+            "bg": "Наситена картина с маслени бои на възрожденска къща с червени порти под гористи хълмове"
+          }
+        },
+        {
+          "key": "e22ba4136b49",
+          "hidden": false,
+          "thumb": "/assets/img/e22ba4136b49-480.avif",
+          "page": "/architectural-landscapes/e22ba4136b49/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of terracotta-roofed houses climbing a hillside",
+            "bg": "Картина с маслени бои на къщи с керемидени покриви, изкачващи се по склон"
+          }
+        },
+        {
+          "key": "4278fc06a23f",
+          "hidden": false,
+          "thumb": "/assets/img/4278fc06a23f-480.avif",
+          "page": "/architectural-landscapes/4278fc06a23f/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a whitewashed old house with stone-tiled roofs among trees",
+            "bg": "Картина с маслени бои на бяла стара къща с каменни покриви сред дървета"
+          }
+        },
+        {
+          "key": "aa00755c5a83",
+          "hidden": false,
+          "thumb": "/assets/img/aa00755c5a83-480.avif",
+          "page": "/architectural-landscapes/aa00755c5a83/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of red-roofed Revival houses stacked up a steep slope",
+            "bg": "Картина с маслени бои на възрожденски къщи с червени покриви по стръмен склон"
+          }
+        },
+        {
+          "key": "09d31912d9ee",
+          "hidden": false,
+          "thumb": "/assets/img/09d31912d9ee-480.avif",
+          "page": "/architectural-landscapes/09d31912d9ee/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Night oil painting of a lit hilltop church above a floodlit fortress",
+            "bg": "Нощна картина с маслени бои на осветена църква на хълм над огряна крепост"
+          }
+        },
+        {
+          "key": "06db748b97d3",
+          "hidden": false,
+          "thumb": "/assets/img/06db748b97d3-480.avif",
+          "page": "/architectural-landscapes/06db748b97d3/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Watercolour of a timber-framed old house among autumn trees",
+            "bg": "Акварел на стара къща с дървена конструкция сред есенни дървета"
+          }
+        },
+        {
+          "key": "70087be28066",
+          "hidden": false,
+          "thumb": "/assets/img/70087be28066-480.avif",
+          "page": "/architectural-landscapes/70087be28066/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting looking through a fortress gateway towards a hilltop church",
+            "bg": "Картина с маслени бои, гледаща през крепостна порта към църква на хълм"
+          }
+        },
+        {
+          "key": "a82a71fbeac3",
+          "hidden": false,
+          "thumb": "/assets/img/a82a71fbeac3-480.avif",
+          "page": "/architectural-landscapes/a82a71fbeac3/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a stone bridge beside a white clock-tower building by a river",
+            "bg": "Картина с маслени бои на каменен мост до бяла сграда с часовникова кула край река"
+          }
+        },
+        {
+          "key": "7d398156c34e",
+          "hidden": false,
+          "thumb": "/assets/img/7d398156c34e-480.avif",
+          "page": "/architectural-landscapes/7d398156c34e/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a white house with a red gate under a bright blue sky",
+            "bg": "Картина с маслени бои на бяла къща с червена порта под ярко синьо небе"
+          }
+        },
+        {
+          "key": "23a160f42e9a",
+          "hidden": false,
+          "thumb": "/assets/img/23a160f42e9a-480.avif",
+          "page": "/architectural-landscapes/23a160f42e9a/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a fortress gate and hilltop church in evening light",
+            "bg": "Картина с маслени бои на крепостна порта и църква на хълм във вечерна светлина"
+          }
+        },
+        {
+          "key": "f5ba9a9cd306",
+          "hidden": false,
+          "thumb": "/assets/img/f5ba9a9cd306-480.avif",
+          "page": "/architectural-landscapes/f5ba9a9cd306/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of the approach to a hilltop fortress at dusk",
+            "bg": "Картина с маслени бои на подстъпа към крепост на хълм по здрач"
+          }
+        },
+        {
+          "key": "1e13986118ae",
+          "hidden": false,
+          "thumb": "/assets/img/1e13986118ae-480.avif",
+          "page": "/architectural-landscapes/1e13986118ae/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a clock tower and old houses, framed in crackled paint",
+            "bg": "Картина с маслени бои на часовникова кула и стари къщи, в рамка с кракелюр"
+          }
+        },
+        {
+          "key": "c74884fefa50",
+          "hidden": false,
+          "thumb": "/assets/img/c74884fefa50-480.avif",
+          "page": "/architectural-landscapes/c74884fefa50/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a cobbled old-town street in warm evening light",
+            "bg": "Картина с маслени бои на калдъръмена улица в стария град в топла вечерна светлина"
+          }
+        },
+        {
+          "key": "cde866235b8f",
+          "hidden": false,
+          "thumb": "/assets/img/cde866235b8f-480.avif",
+          "page": "/architectural-landscapes/cde866235b8f/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a stone house with a vine-covered balcony on a sunlit street",
+            "bg": "Картина с маслени бои на каменна къща с обвит в лоза балкон на огряна от слънце улица"
+          }
+        },
+        {
+          "key": "0f0101c8fa1a",
+          "hidden": false,
+          "thumb": "/assets/img/0f0101c8fa1a-480.avif",
+          "page": "/architectural-landscapes/0f0101c8fa1a/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a narrow old-town lane with a street lamp, framed in crackled paint",
+            "bg": "Картина с маслени бои на тясна уличка в стария град с улична лампа, в рамка с кракелюр"
+          }
+        },
+        {
+          "key": "4fe09247368c",
+          "hidden": false,
+          "thumb": "/assets/img/4fe09247368c-480.avif",
+          "page": "/architectural-landscapes/4fe09247368c/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a cobbled lane between flower-covered old houses",
+            "bg": "Картина с маслени бои на калдъръмена уличка между стари къщи, обрасли с цветя"
+          }
+        },
+        {
+          "key": "65ae6e139d29",
+          "hidden": false,
+          "thumb": "/assets/img/65ae6e139d29-480.avif",
+          "page": "/architectural-landscapes/65ae6e139d29/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a hexagonal clock tower rising above an old-town street",
+            "bg": "Картина с маслени бои на шестоъгълна часовникова кула над улица в стария град"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "abstract-paintings",
+      "title": "Abstract Paintings",
+      "images": [
+        {
+          "key": "6556374f075f",
+          "hidden": false,
+          "thumb": "/assets/img/6556374f075f-480.avif",
+          "page": "/abstract-paintings/6556374f075f/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Abstract painting of a figure with a cello in blue, red and yellow",
+            "bg": "Абстрактна картина на фигура с виолончело в синьо, червено и жълто"
+          }
+        },
+        {
+          "key": "a6cdb6926194",
+          "hidden": false,
+          "thumb": "/assets/img/a6cdb6926194-480.avif",
+          "page": "/abstract-paintings/a6cdb6926194/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Abstract painting of a red figure playing a turquoise violin",
+            "bg": "Абстрактна картина на червена фигура, свиреща на тюркоазена цигулка"
+          }
+        },
+        {
+          "key": "008d94063f96",
+          "hidden": false,
+          "thumb": "/assets/img/008d94063f96-480.avif",
+          "page": "/abstract-paintings/008d94063f96/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Abstract composition of flowing blue, red and green forms on yellow",
+            "bg": "Абстрактна композиция от преливащи сини, червени и зелени форми върху жълто"
+          }
+        },
+        {
+          "key": "1c76f84194d0",
+          "hidden": false,
+          "thumb": "/assets/img/1c76f84194d0-480.avif",
+          "page": "/abstract-paintings/1c76f84194d0/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Abstract painting of a white sun above a burst of colour on yellow",
+            "bg": "Абстрактна картина на бяло слънце над избухване от цвят върху жълто"
+          }
+        },
+        {
+          "key": "941e6f407604",
+          "hidden": false,
+          "thumb": "/assets/img/941e6f407604-480.avif",
+          "page": "/abstract-paintings/941e6f407604/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Bold abstract composition in red, yellow and blue",
+            "bg": "Смела абстрактна композиция в червено, жълто и синьо"
+          }
+        },
+        {
+          "key": "41e939aae01f",
+          "hidden": false,
+          "thumb": "/assets/img/41e939aae01f-480.avif",
+          "page": "/abstract-paintings/41e939aae01f/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Abstract composition of yellow and orange forms on a deep blue ground",
+            "bg": "Абстрактна композиция от жълти и оранжеви форми на тъмносин фон"
+          }
+        },
+        {
+          "key": "038dceac1f60",
+          "hidden": false,
+          "thumb": "/assets/img/038dceac1f60-480.avif",
+          "page": "/abstract-paintings/038dceac1f60/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Abstract painting of a swirling red and yellow form on dark blue",
+            "bg": "Абстрактна картина на вихрена червено-жълта форма върху тъмносиньо"
+          }
+        },
+        {
+          "key": "e4879f861ca6",
+          "hidden": false,
+          "thumb": "/assets/img/e4879f861ca6-480.avif",
+          "page": "/abstract-paintings/e4879f861ca6/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Abstract composition in blues and greens with scattered warm accents",
+            "bg": "Абстрактна композиция в сини и зелени тонове с топли акценти"
+          }
+        },
+        {
+          "key": "a0b187fb3ae6",
+          "hidden": false,
+          "thumb": "/assets/img/a0b187fb3ae6-480.avif",
+          "page": "/abstract-paintings/a0b187fb3ae6/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Abstract painting of blue and white shards against green",
+            "bg": "Абстрактна картина от сини и бели късове върху зелено"
+          }
+        },
+        {
+          "key": "0013d8dc67a8",
+          "hidden": false,
+          "thumb": "/assets/img/0013d8dc67a8-480.avif",
+          "page": "/abstract-paintings/0013d8dc67a8/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Abstract composition in red and yellow with a green central form",
+            "bg": "Абстрактна композиция в червено и жълто със зелена централна форма"
+          }
+        },
+        {
+          "key": "209228792fc4",
+          "hidden": false,
+          "thumb": "/assets/img/209228792fc4-480.avif",
+          "page": "/abstract-paintings/209228792fc4/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Abstract painting of angular yellow, red and blue forms",
+            "bg": "Абстрактна картина от ъгловати жълти, червени и сини форми"
+          }
+        },
+        {
+          "key": "459ac89dc9ea",
+          "hidden": false,
+          "thumb": "/assets/img/459ac89dc9ea-480.avif",
+          "page": "/abstract-paintings/459ac89dc9ea/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Abstract composition of yellow and red forms on blue and green",
+            "bg": "Абстрактна композиция от жълти и червени форми върху синьо и зелено"
+          }
+        },
+        {
+          "key": "aafa19f8c42b",
+          "hidden": false,
+          "thumb": "/assets/img/aafa19f8c42b-480.avif",
+          "page": "/abstract-paintings/aafa19f8c42b/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Abstract painting of red and blue strokes across an orange ground",
+            "bg": "Абстрактна картина от червени и сини щрихи върху оранжев фон"
+          }
+        },
+        {
+          "key": "63003023720f",
+          "hidden": false,
+          "thumb": "/assets/img/63003023720f-480.avif",
+          "page": "/abstract-paintings/63003023720f/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Abstract composition of yellow shapes on teal blue",
+            "bg": "Абстрактна композиция от жълти форми върху тюркоазено синьо"
+          }
+        },
+        {
+          "key": "c666ea5a9b5b",
+          "hidden": false,
+          "thumb": "/assets/img/c666ea5a9b5b-480.avif",
+          "page": "/abstract-paintings/c666ea5a9b5b/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Abstract painting in scarlet and cream with flashes of blue",
+            "bg": "Абстрактна картина в алено и кремаво със сини акценти"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "other-nature-scenes",
+      "title": "Other Nature Scenes",
+      "images": [
+        {
+          "key": "eaf40aaff483",
+          "hidden": false,
+          "thumb": "/assets/img/eaf40aaff483-480.avif",
+          "page": "/other-nature-scenes/eaf40aaff483/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of butterflies resting on two orange sunflowers",
+            "bg": "Картина с маслени бои на пеперуди върху два оранжеви слънчогледа"
+          }
+        },
+        {
+          "key": "700ad75a1c06",
+          "hidden": false,
+          "thumb": "/assets/img/700ad75a1c06-480.avif",
+          "page": "/other-nature-scenes/700ad75a1c06/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of butterflies among purple flowers and green leaves",
+            "bg": "Картина с маслени бои на пеперуди сред лилави цветя и зелени листа"
+          }
+        },
+        {
+          "key": "a28bfe4a10fe",
+          "hidden": false,
+          "thumb": "/assets/img/a28bfe4a10fe-480.avif",
+          "page": "/other-nature-scenes/a28bfe4a10fe/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Soft oil painting of a small mouse among pink orchids",
+            "bg": "Мека картина с маслени бои на мишка сред розови орхидеи"
+          }
+        },
+        {
+          "key": "7b5040b43420",
+          "hidden": false,
+          "thumb": "/assets/img/7b5040b43420-480.avif",
+          "page": "/other-nature-scenes/7b5040b43420/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of red poppies and seed heads on a patchwork of green and blue",
+            "bg": "Картина с маслени бои на червени макове и семенни кутийки върху пъстра зелено-синя основа"
+          }
+        },
+        {
+          "key": "504f7cdf6da5",
+          "hidden": false,
+          "thumb": "/assets/img/504f7cdf6da5-480.avif",
+          "page": "/other-nature-scenes/504f7cdf6da5/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of a pale butterfly on a pink thistle flower",
+            "bg": "Картина с маслени бои на светла пеперуда върху розов магарешки бодил"
+          }
+        },
+        {
+          "key": "58ef9575d6c0",
+          "hidden": false,
+          "thumb": "/assets/img/58ef9575d6c0-480.avif",
+          "page": "/other-nature-scenes/58ef9575d6c0/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Oil painting of deep pink flowers against silvery foliage",
+            "bg": "Картина с маслени бои на тъмнорозови цветя на фона на сребриста листна маса"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "current-exhibition",
+      "title": "Current Exhibition",
+      "images": []
+    }
+  ]
+}

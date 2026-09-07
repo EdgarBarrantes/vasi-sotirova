@@ -43,7 +43,16 @@
     "languageLabel": "Език",
     "rights": "Картини и изображения © {year} {name}. Всички права запазени.",
     "redirectNotice": "Тази страница е преместена на",
-    "primaryNav": "Основна навигация"
+    "primaryNav": "Основна навигация",
+    "untitled": "Без заглавие",
+    "backToCollection": "Обратно към „{collection}“",
+    "detailsSize": "Размер",
+    "detailsTechnique": "Техника",
+    "copyLink": "Копирай връзката",
+    "linkCopied": "Връзката е копирана",
+    "openPainting": "Отвори тази картина",
+    "previousWork": "Предишна творба",
+    "nextWork": "Следваща творба"
   },
   "home": {
     "title": "Василка Сотирова | Българска художничка — картини с маслени бои и пастел",
@@ -309,5 +318,14 @@
     "google": "Caveat:wght@600;700",
     "stack": "\"Caveat\", \"Segoe Script\", cursive",
     "scale": "1.12"
-  }
+  },
+  "techniques": {
+    "oil": "Маслени бои",
+    "acrylic": "Акрил",
+    "watercolour": "Акварел",
+    "pastel": "Сух пастел",
+    "mixed": "Смесена техника"
+  },
+  "titles": {},
+  "notes": {}
 }

@@ -89,6 +89,25 @@ const fill = (template, values) =>
 const plural = (forms, n) => fill(n === 1 ? forms.one : forms.other, { n });
 
 /**
+ * A painting marked hidden keeps its files, its record and its descriptions —
+ * it simply stops being published. That way a photograph that turned out badly
+ * can be pulled from the site without losing anything, and put back later.
+ */
+const visible = (images) => images.filter((img) => !img.hidden);
+
+/** Each painting has its own page, so a link to one can be shared. */
+const paintingPath = (slug, key) => `/${slug}/${key}/`;
+
+/** Falls back to the description, then to the collection name. */
+function titleFor(locale, category, key) {
+  const t = LOCALES[locale];
+  return t.titles[key] || t.alt[key] || t.categories[category.slug].title;
+}
+
+const techniqueLabel = (locale, technique) =>
+  (technique && LOCALES[locale].techniques[technique]) || '';
+
+/**
  * Search engines should only ever index the real site. While this builds for
  * the temporary Pages URL (no custom domain configured) every page is marked
  * noindex, so the staging copy cannot compete with vasisotirova.com.
@@ -282,16 +301,19 @@ function artworkGrid(locale, category) {
   const t = LOCALES[locale];
   const cat = t.categories[category.slug];
 
-  if (!category.images.length) {
+  const shown = visible(category.images);
+  if (!shown.length) {
     const link = `<a href="${href(locale, '/contact/')}">${esc(t.emptyCategoryLink)}</a>`;
     return `      <p class="empty-note">${fill(esc(t.emptyCategory), { link })}</p>`;
   }
 
-  const items = category.images.map((img, i) => {
+  const items = shown.map((img, i) => {
     const key = keyFor(img.media);
     const alt = t.alt[key] || cat.title;
+    // A real link, so the painting can be opened and shared without JavaScript;
+    // the lightbox intercepts the click when scripting is available.
     return `        <li class="artwork">
-          <button class="artwork__button" type="button"
+          <a class="artwork__button" href="${href(locale, paintingPath(category.slug, key))}"
                   data-lightbox data-full="${url(`/assets/img/${key}-1600.avif`)}"
                   data-fullset="${srcset(key, 'avif')}"
                   data-alt="${attr(alt)}" data-width="${img.width || ''}" data-height="${img.height || ''}"
@@ -300,11 +322,11 @@ function artworkGrid(locale, category) {
               sizes: '(min-width: 1100px) 360px, (min-width: 700px) 45vw, 92vw',
               loading: i < 6 ? 'eager' : 'lazy',
             })}
-          </button>
+          </a>
         </li>`;
   }).join('\n');
 
-  return `      <ul class="artworks">\n${items}\n      </ul>`;
+  return `      <ul class="artworks" data-open-label="${attr(t.ui.openPainting)}">\n${items}\n      </ul>`;
 }
 
 function homePage(locale) {
@@ -353,7 +375,7 @@ function galleryPage(locale) {
     const c = t.categories[cat.slug];
     // The link already reads out the collection name, so the cover is decorative.
     const cover = { media: cat.cover, width: 900, height: 1200 };
-    const count = cat.images.length;
+    const count = visible(cat.images).length;
     return `        <li>
           <a class="category" href="${href(locale, `/${cat.slug}/`)}">
             <span class="category__frame">
@@ -421,12 +443,12 @@ ${artworkGrid(locale, cat)}`;
       title: `${c.title} — ${t.name} | ${locale === 'bg' ? 'българска художничка' : 'Bulgarian Artist'}`,
       description: c.description,
       path: `/${cat.slug}/`,
-      ogImage: cat.cover || cat.images[0]?.media,
+      ogImage: cat.cover || visible(cat.images)[0]?.media,
       keywords: c.keywords || [],
       body,
       structuredData: [
         breadcrumbs(locale, [[t.gallery.heading, '/gallery/'], [c.title, `/${cat.slug}/`]]),
-        ...(cat.images.length ? [{
+        ...(visible(cat.images).length ? [{
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
           name: c.title,
@@ -435,8 +457,8 @@ ${artworkGrid(locale, cat)}`;
           inLanguage: t.htmlLang,
           mainEntity: {
             '@type': 'ItemList',
-            numberOfItems: cat.images.length,
-            itemListElement: cat.images.map((img, i) => ({
+            numberOfItems: visible(cat.images).length,
+            itemListElement: visible(cat.images).map((img, i) => ({
               '@type': 'ListItem',
               position: i + 1,
               item: {
@@ -449,6 +471,88 @@ ${artworkGrid(locale, cat)}`;
             })),
           },
         }] : []),
+      ],
+    }),
+  };
+}
+
+/**
+ * One page per painting, so a link to a single work can be shared. Details are
+ * all optional — most paintings have none, and the page simply omits what is
+ * missing rather than showing empty rows.
+ */
+function paintingPage(locale, category, img, index, shown) {
+  const t = LOCALES[locale];
+  const cat = t.categories[category.slug];
+  const key = keyFor(img.media);
+  const alt = t.alt[key] || cat.title;
+  const title = titleFor(locale, category, key);
+  const technique = techniqueLabel(locale, img.technique);
+  const note = t.notes[key] || '';
+
+  const details = [
+    technique ? [t.ui.detailsTechnique, technique] : null,
+    img.size ? [t.ui.detailsSize, img.size] : null,
+  ].filter(Boolean).map(([label, value]) => `            <div class="detail">
+              <dt>${esc(label)}</dt><dd>${esc(value)}</dd>
+            </div>`).join('\n');
+
+  const prev = shown[index - 1];
+  const next = shown[index + 1];
+  const nav = [
+    prev ? `<a class="pager__link" rel="prev" href="${href(locale, paintingPath(category.slug, keyFor(prev.media)))}">← ${esc(t.ui.previousWork)}</a>` : '<span></span>',
+    next ? `<a class="pager__link" rel="next" href="${href(locale, paintingPath(category.slug, keyFor(next.media)))}">${esc(t.ui.nextWork)} →</a>` : '<span></span>',
+  ].join('\n        ');
+
+  const body = `      <a class="backlink" href="${href(locale, `/${category.slug}/`)}">${
+    esc(fill(t.ui.backToCollection, { collection: cat.title }))}</a>
+      <article class="painting">
+        <div class="painting__frame">
+          ${picture(img, alt, { sizes: '(min-width: 900px) 860px, 94vw', loading: 'eager', fetchpriority: 'high' })}
+        </div>
+        <div class="painting__meta">
+          <h1 class="painting__title">${esc(title)}</h1>
+          ${note ? `<p class="painting__note">${esc(note)}</p>` : ''}
+          ${details ? `<dl class="details">\n${details}\n          </dl>` : ''}
+          <button class="copy-link" type="button" data-copy-link
+                  data-copied="${attr(t.ui.linkCopied)}">${esc(t.ui.copyLink)}</button>
+        </div>
+      </article>
+      <nav class="pager" aria-label="${attr(cat.title)}">
+        ${nav}
+      </nav>`;
+
+  return {
+    locale,
+    file: `${category.slug}/${key}/index.html`,
+    path: paintingPath(category.slug, key),
+    html: layout({
+      locale,
+      title: `${title} — ${t.name}`,
+      description: note || alt,
+      path: paintingPath(category.slug, key),
+      ogImage: img.media,
+      keywords: cat.keywords || [],
+      body,
+      structuredData: [
+        breadcrumbs(locale, [
+          [t.gallery.heading, '/gallery/'],
+          [cat.title, `/${category.slug}/`],
+          [title, paintingPath(category.slug, key)],
+        ]),
+        {
+          '@context': 'https://schema.org',
+          '@type': 'VisualArtwork',
+          name: title,
+          description: note || alt,
+          url: abs(locale, paintingPath(category.slug, key)),
+          image: abs(locale, `/assets/img/${key}-1600.avif`),
+          creator: personSchema(locale),
+          artform: locale === 'bg' ? 'Живопис' : 'Painting',
+          ...(technique ? { artMedium: technique } : {}),
+          ...(img.size ? { size: img.size } : {}),
+          inLanguage: t.htmlLang,
+        },
       ],
     }),
   };
@@ -594,6 +698,12 @@ for (const locale of S.locales) {
     bioPage(locale),
     contactPage(locale),
   );
+  // A page per published painting. Hidden ones get no page and no sitemap
+  // entry, so nothing links to a work that has been pulled.
+  for (const cat of site.categories) {
+    const shown = visible(cat.images);
+    shown.forEach((img, i) => pages.push(paintingPage(locale, cat, img, i, shown)));
+  }
 }
 pages.push(notFoundPage(), redirect('/bio-1/', '/bio/'));
 
@@ -644,6 +754,16 @@ ${entries.join('\n')}
 `;
 }
 
+// Clear previously generated output first. Without this a page that should no
+// longer exist — a painting that has just been hidden, say — would linger from
+// an earlier build and still be served, since site/ is committed. Everything
+// except assets/ is regenerated below; assets/img/ holds the paintings
+// themselves and must survive.
+for (const entry of await fs.readdir(OUT, { withFileTypes: true })) {
+  if (entry.name === 'assets') continue;
+  await fs.rm(path.join(OUT, entry.name), { recursive: true, force: true });
+}
+
 for (const page of pages) {
   const prefix = page.redirect || page.file.endsWith('404.html') || page.locale === DEFAULT_LOCALE
     ? ''
@@ -682,6 +802,35 @@ await fs.writeFile(
       .replace('__CONFIG__', JSON.stringify(adminConfig)),
     'admin/index.html',
   ),
+);
+
+// What the admin page reads to show what is already on the site. Hidden
+// paintings are included — that is the point of the list — so it is rebuilt on
+// every deploy and reflects the current state of data/.
+const paintingsManifest = {
+  generatedAt: new Date().toISOString(),
+  techniques: LOCALES[DEFAULT_LOCALE].techniques,
+  categories: site.categories.map((cat) => ({
+    slug: cat.slug,
+    title: LOCALES[DEFAULT_LOCALE].categories[cat.slug].title,
+    images: cat.images.map((img) => {
+      const key = keyFor(img.media);
+      return {
+        key,
+        hidden: Boolean(img.hidden),
+        thumb: `${BASE}/assets/img/${key}-480.avif`,
+        page: sitePath(DEFAULT_LOCALE, paintingPath(cat.slug, key)),
+        technique: img.technique || '',
+        size: img.size || '',
+        title: Object.fromEntries(S.locales.map((c) => [c, LOCALES[c].titles[key] || ''])),
+        alt: Object.fromEntries(S.locales.map((c) => [c, LOCALES[c].alt[key] || ''])),
+      };
+    }),
+  })),
+};
+await fs.writeFile(
+  path.join(OUT, 'admin', 'paintings.json'),
+  `${JSON.stringify(paintingsManifest, null, 2)}\n`,
 );
 
 await fs.writeFile(path.join(OUT, 'robots.txt'), ROBOTS);

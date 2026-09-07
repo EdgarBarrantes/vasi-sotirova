@@ -43,7 +43,16 @@
     "languageLabel": "Language",
     "rights": "Paintings and images © {year} {name}. All rights reserved.",
     "redirectNotice": "This page has moved to",
-    "primaryNav": "Primary"
+    "primaryNav": "Primary",
+    "untitled": "Untitled",
+    "backToCollection": "Back to {collection}",
+    "detailsSize": "Size",
+    "detailsTechnique": "Technique",
+    "copyLink": "Copy link",
+    "linkCopied": "Link copied",
+    "openPainting": "Open this painting",
+    "previousWork": "Previous work",
+    "nextWork": "Next work"
   },
   "home": {
     "title": "Vasilka Sotirova | Bulgarian Artist — Original Oil and Pastel Paintings",
@@ -316,5 +325,14 @@
     "google": "Dancing+Script:wght@600;700",
     "stack": "\"Dancing Script\", \"Apple Chancery\", cursive",
     "scale": "1"
-  }
+  },
+  "techniques": {
+    "oil": "Oil",
+    "acrylic": "Acrylic",
+    "watercolour": "Watercolour",
+    "pastel": "Dry pastel",
+    "mixed": "Mixed media"
+  },
+  "titles": {},
+  "notes": {}
 }

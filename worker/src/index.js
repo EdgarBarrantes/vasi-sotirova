@@ -1,9 +1,10 @@
 /**
  * Upload service for the gallery admin page.
  *
- * Two endpoints:
- *   POST /login   { password }        -> { token, expiresAt }
- *   POST /upload  Bearer <token>      -> commits one painting to the repo
+ * Three endpoints:
+ *   POST /login       { password }                -> { token, expiresAt }
+ *   POST /upload      Bearer <token>              -> commits one painting
+ *   POST /visibility  Bearer <token> { key, hidden } -> publishes or unpublishes one
  *
  * The GitHub credential and the admin password live here as Worker secrets and
  * never reach the browser. A successful login returns a short-lived signed
@@ -133,6 +134,14 @@ async function gh(env, endpoint, init = {}) {
   return res.json();
 }
 
+/** Reads a text file from the repository, with the sha needed to replace it. */
+async function readFile(env, filePath) {
+  const branch = env.GITHUB_BRANCH || 'main';
+  const meta = await gh(env, `/contents/${filePath}?ref=${branch}`);
+  const bytes = Uint8Array.from(atob(meta.content.replace(/\n/g, '')), (c) => c.charCodeAt(0));
+  return { text: new TextDecoder().decode(bytes), sha: meta.sha };
+}
+
 /** Writes several files as one commit on top of the current branch head. */
 async function commitFiles(env, files, message) {
   const branch = env.GITHUB_BRANCH || 'main';
@@ -230,6 +239,19 @@ async function handleUpload(request, env) {
     return json({ error: 'An English description is required.' }, 400, env, request);
   }
 
+  // Optional per-locale text, same shape as the descriptions.
+  const perLocale = (source, limit) => {
+    const out = {};
+    if (source && typeof source === 'object') {
+      for (const [code, text] of Object.entries(source)) {
+        if (/^[a-z]{2}$/.test(code) && typeof text === 'string' && text.trim()) {
+          out[code] = text.trim().slice(0, limit);
+        }
+      }
+    }
+    return out;
+  };
+
   const key = crypto.randomUUID().replace(/-/g, '').slice(0, 12);
   const file = `${key}.${extension}`;
   const sidecar = {
@@ -238,6 +260,10 @@ async function handleUpload(request, env) {
     category,
     position: body.position === 'end' ? 'end' : 'start',
     alt: descriptions,
+    title: perLocale(body.title, 120),
+    note: perLocale(body.note, 600),
+    technique: /^[a-z]{1,20}$/.test(String(body.technique || '')) ? String(body.technique) : '',
+    size: String(body.size || '').trim().slice(0, 60),
     originalName: String(body.filename || '').slice(0, 120),
     uploadedAt: new Date().toISOString(),
   };
@@ -254,6 +280,52 @@ async function handleUpload(request, env) {
   return json({ ok: true, key, commit: sha }, 200, env, request);
 }
 
+/**
+ * Publishes or unpublishes a painting by flipping its `hidden` flag in
+ * data/site.json. Nothing is deleted — the image, its record and its
+ * descriptions all stay put, so the change is reversible.
+ */
+async function handleVisibility(request, env) {
+  const auth = request.headers.get('Authorization') || '';
+  const token = auth.startsWith('Bearer ') ? auth.slice(7) : '';
+  if (!await verifyToken(await sessionKey(env), token)) {
+    return json({ error: 'Session expired.' }, 401, env, request);
+  }
+
+  const body = await request.json().catch(() => null);
+  if (!body || !/^[a-z0-9]{6,32}$/.test(String(body.key || ''))) {
+    return json({ error: 'Which painting?' }, 400, env, request);
+  }
+  const hide = body.hidden === true;
+
+  const { text } = await readFile(env, 'data/site.json');
+  const site = JSON.parse(text);
+
+  let found = null;
+  for (const category of site.categories || []) {
+    for (const image of category.images || []) {
+      const m = /^[a-f0-9]+_([a-f0-9]{12})/.exec(image.media);
+      const imageKey = m ? m[1] : image.media.replace(/[^a-z0-9]/gi, '').slice(0, 12).toLowerCase();
+      if (imageKey !== body.key) continue;
+      if (hide) image.hidden = true;
+      else delete image.hidden;
+      found = { category: category.slug, image };
+      break;
+    }
+    if (found) break;
+  }
+
+  if (!found) return json({ error: 'No painting with that id.' }, 404, env, request);
+
+  await commitFiles(env, [{
+    path: 'data/site.json',
+    content: `${JSON.stringify(site, null, 2)}\n`,
+    encoding: 'utf-8',
+  }], `${hide ? 'Hide' : 'Show'} a painting in ${found.category}\n\nChanged through the admin page.`);
+
+  return json({ ok: true, key: body.key, hidden: hide }, 200, env, request);
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -266,8 +338,9 @@ export default {
     }
 
     try {
-      if (url.pathname === '/login') return await handleLogin(request, env, request);
-      if (url.pathname === '/upload') return await handleUpload(request, env, request);
+      if (url.pathname === '/login') return await handleLogin(request, env);
+      if (url.pathname === '/upload') return await handleUpload(request, env);
+      if (url.pathname === '/visibility') return await handleVisibility(request, env);
       return json({ error: 'Not found.' }, 404, env, request);
     } catch (err) {
       // Never surface the GitHub response verbatim — it can echo the token.

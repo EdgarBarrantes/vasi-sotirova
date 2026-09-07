@@ -98,6 +98,10 @@ async function main() {
     lqip[key] = derived.lqip;
 
     const entry = { media: meta.file, width: derived.width, height: derived.height };
+    // Optional details. Omitted rather than stored empty, so a painting
+    // without them carries no empty fields around.
+    if (meta.technique) entry.technique = String(meta.technique);
+    if (meta.size) entry.size = String(meta.size);
     // Re-uploading the same key replaces the existing record rather than
     // adding a duplicate.
     const existing = category.images.findIndex((i) => keyFor(i.media) === key);
@@ -109,6 +113,13 @@ async function main() {
       const text = (meta.alt && meta.alt[code]) || '';
       if (text) locales[code].alt[key] = text;
       else console.warn(`  ${key}: no ${code} description given`);
+
+      const title = (meta.title && meta.title[code]) || '';
+      const note = (meta.note && meta.note[code]) || '';
+      locales[code].titles = locales[code].titles || {};
+      locales[code].notes = locales[code].notes || {};
+      if (title) locales[code].titles[key] = title;
+      if (note) locales[code].notes[key] = note;
     }
 
     await fs.mkdir(ORIGINALS, { recursive: true });

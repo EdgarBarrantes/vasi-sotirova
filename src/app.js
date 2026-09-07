@@ -32,7 +32,10 @@
         srcset: el.getAttribute('data-fullset') || '',
         alt: el.getAttribute('data-alt') || '',
         width: el.getAttribute('data-width'),
-        height: el.getAttribute('data-height')
+        height: el.getAttribute('data-height'),
+        // The trigger is a real link to the painting's own page, so the
+        // lightbox can offer a way through to something shareable.
+        page: el.getAttribute('href') || ''
       };
     });
 
@@ -49,6 +52,7 @@
       '<button class="lightbox__btn" type="button" data-nav="prev" aria-label="Previous artwork">‹</button>' +
       '<span class="lightbox__count" aria-live="polite"></span>' +
       '<button class="lightbox__btn" type="button" data-nav="next" aria-label="Next artwork">›</button>' +
+      '<a class="lightbox__open" data-open href=""></a>' +
       '</div>';
     document.body.appendChild(box);
 
@@ -57,8 +61,12 @@
     var prevBtn = box.querySelector('[data-nav="prev"]');
     var nextBtn = box.querySelector('[data-nav="next"]');
     var counter = box.querySelector('.lightbox__count');
+    var openLink = box.querySelector('[data-open]');
+    var grid = document.querySelector('.artworks');
     var index = 0;
     var lastFocus = null;
+
+    openLink.textContent = (grid && grid.getAttribute('data-open-label')) || 'Open';
 
     function render(i) {
       index = (i + items.length) % items.length;
@@ -70,6 +78,12 @@
       if (item.width) stageImg.width = item.width;
       if (item.height) stageImg.height = item.height;
       counter.textContent = (index + 1) + ' / ' + items.length;
+      if (item.page) {
+        openLink.href = item.page;
+        openLink.hidden = false;
+      } else {
+        openLink.hidden = true;
+      }
       var single = items.length < 2;
       prevBtn.disabled = single;
       nextBtn.disabled = single;
@@ -142,10 +156,33 @@
     }, { passive: true });
   }
 
+  /* ------------------------------------------------------- copy a link */
+
+  function initCopyLink() {
+    var button = document.querySelector('[data-copy-link]');
+    if (!button) return;
+    var original = button.textContent;
+    button.addEventListener('click', function () {
+      var done = function () {
+        button.textContent = button.getAttribute('data-copied') || 'Copied';
+        window.setTimeout(function () { button.textContent = original; }, 2000);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(location.href).then(done, function () {});
+      } else {
+        // Older browsers: select the URL so it can be copied by hand.
+        window.prompt('Copy this link', location.href);
+      }
+    });
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () { revealImages(); initLightbox(); });
+    document.addEventListener('DOMContentLoaded', function () {
+      revealImages(); initLightbox(); initCopyLink();
+    });
   } else {
     revealImages();
     initLightbox();
+    initCopyLink();
   }
 })();

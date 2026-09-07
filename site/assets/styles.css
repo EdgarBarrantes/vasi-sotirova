@@ -382,6 +382,8 @@ main { padding-block: clamp(2rem, 5vw, 4rem) clamp(3rem, 7vw, 5.5rem); }
   width: 100%;
   padding: 0;
   border: 0;
+  text-decoration: none;
+  color: inherit;
   background: var(--ground-soft);
   box-shadow: var(--shadow);
   cursor: zoom-in;
@@ -421,6 +423,100 @@ main { padding-block: clamp(2rem, 5vw, 4rem) clamp(3rem, 7vw, 5.5rem); }
 
 .blur-up > img.is-loaded,
 .no-js .blur-up > img { opacity: 1; }
+
+/* -------------------------------------------------------- single painting */
+
+.painting {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .painting { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+}
+
+.painting__frame {
+  background: var(--ground-soft);
+  box-shadow: var(--shadow);
+}
+
+.painting__title {
+  margin: 0 0 .75rem;
+  font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+  font-weight: 300;
+  letter-spacing: .02em;
+}
+
+.painting__note { margin: 0 0 1.5rem; color: var(--ink-soft); }
+
+.details { margin: 0 0 1.75rem; }
+
+.detail {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: .5rem;
+  padding: .6rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.detail dt {
+  font-size: .72rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.detail dd { margin: 0; color: var(--ink-soft); }
+
+.copy-link {
+  padding: .6rem 1.4rem;
+  border: 1px solid var(--rule);
+  background: none;
+  font: inherit;
+  font-size: .76rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: border-color .18s ease, color .18s ease;
+}
+
+.copy-link:hover,
+.copy-link:focus-visible { border-color: var(--ink); color: var(--ink); }
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+.pager__link {
+  font-size: .78rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink-soft);
+}
+
+.pager__link:hover,
+.pager__link:focus-visible { color: var(--ink); }
+
+/* A permalink out of the lightbox, so a single work can be shared. */
+.lightbox__open {
+  font-size: .74rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #efefef;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, .4);
+}
+
+.lightbox__open:hover,
+.lightbox__open:focus-visible { border-bottom-color: #fff; }
 
 /* -------------------------------------------------------------------- bio */
 
