@@ -35,8 +35,8 @@
       "href": "/bio/"
     },
     {
-      "key": "contact",
-      "href": "/contact/"
+      "key": "commissions",
+      "href": "/commissions/"
     }
   ],
   "home": {
@@ -63,6 +63,26 @@
         "media": "bd9a4d_44e7c0ae0e27489ca4a37c339750cf26~mv2.jpg",
         "width": 1067,
         "height": 1422
+      }
+    ]
+  },
+  "commissions": {
+    "examples": [
+      {
+        "category": "portraits",
+        "key": "abdd74161ad4"
+      },
+      {
+        "category": "portraits",
+        "key": "bed167e2b465"
+      },
+      {
+        "category": "animal-portraits",
+        "key": "fc498724ed4e"
+      },
+      {
+        "category": "animal-portraits",
+        "key": "f3fae12adae1"
       }
     ]
   },

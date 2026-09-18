@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-07T22:49:22.230Z",
+  "generatedAt": "2026-09-18T18:13:23.723Z",
   "techniques": {
     "oil": "Oil",
     "acrylic": "Acrylic",
@@ -210,6 +210,22 @@
       "slug": "animal-portraits",
       "title": "Animal Portraits",
       "images": [
+        {
+          "key": "cfb28c6ce410",
+          "hidden": false,
+          "thumb": "/assets/img/cfb28c6ce410-480.avif",
+          "page": "/animal-portraits/cfb28c6ce410/",
+          "technique": "",
+          "size": "",
+          "title": {
+            "en": "",
+            "bg": ""
+          },
+          "alt": {
+            "en": "Acrylic painting of two horses, one black and one white",
+            "bg": "Картина с акрилни бои  на два коня, един черен и един бял"
+          }
+        },
         {
           "key": "fd9b2ce7b61d",
           "hidden": false,

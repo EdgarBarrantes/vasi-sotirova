@@ -303,7 +303,7 @@ function artworkGrid(locale, category) {
 
   const shown = visible(category.images);
   if (!shown.length) {
-    const link = `<a href="${href(locale, '/contact/')}">${esc(t.emptyCategoryLink)}</a>`;
+    const link = `<a href="${href(locale, '/commissions/')}">${esc(t.emptyCategoryLink)}</a>`;
     return `      <p class="empty-note">${fill(esc(t.emptyCategory), { link })}</p>`;
   }
 
@@ -342,7 +342,10 @@ function homePage(locale) {
         <div class="hero__intro">
 ${intro}
         </div>
-        <a class="button" href="${href(locale, '/gallery/')}">${esc(t.ui.viewGallery)}</a>
+        <p class="hero__actions">
+          <a class="button" href="${href(locale, '/gallery/')}">${esc(t.ui.viewGallery)}</a>
+          <a class="button" href="${href(locale, '/commissions/')}">${esc(t.ui.commissionCta)}</a>
+        </p>
       </section>`;
 
   return {
@@ -601,44 +604,134 @@ ${portraits}
   };
 }
 
-function contactPage(locale) {
+/**
+ * The one page written for someone searching for a painter to commission,
+ * rather than for her name: what can be ordered, how it works, and how to
+ * get in touch. It replaces the old Contact page, whose only job this was.
+ */
+function commissionsPage(locale) {
   const t = LOCALES[locale];
+  const c = t.commissions;
   const links = (S.social || []).map((s) =>
     `          <li><a class="social-link" href="${attr(s.href)}" rel="me noopener" target="_blank">${esc(s.label)}</a></li>`
   ).join('\n');
 
-  const body = `      <div class="page-head">
-        <h1 class="page-head__title">${esc(t.contact.heading)}</h1>
-      </div>
-      <div class="contact">
-        <p>${esc(t.contact.lead)}</p>
-        <a class="contact__email" href="mailto:${attr(S.email)}">${esc(S.email)}</a>
-        <p class="contact__note">${esc(t.contact.note)}</p>
+  const intro = [].concat(c.intro).map((p) => `        <p>${esc(p)}</p>`).join('\n');
 
-        <p class="contact__follow">${esc(t.contact.followLead)}</p>
-        <ul class="social">
+  const offers = c.what.map((item) => `          <li class="offer">
+            <h3 class="offer__title">${esc(item.title)}</h3>
+            <p>${esc(item.text)}</p>
+            <a class="offer__link" href="${href(locale, item.link)}">${esc(item.linkText)}</a>
+          </li>`).join('\n');
+
+  const steps = c.how.map((step) => `          <li class="step">
+            <h3 class="step__title">${esc(step.title)}</h3>
+            <p>${esc(step.text)}</p>
+          </li>`).join('\n');
+
+  // Four finished commissions, each linking to its own page.
+  const examples = (site.commissions?.examples || []).map(({ category: slug, key }) => {
+    const category = site.categories.find((cat) => cat.slug === slug);
+    const img = category && visible(category.images).find((i) => keyFor(i.media) === key);
+    if (!img) return '';
+    const alt = t.alt[key] || t.categories[slug].title;
+    return `          <li class="artwork">
+            <a class="artwork__button artwork__button--link" href="${href(locale, paintingPath(slug, key))}">
+              ${picture(img, alt, { sizes: '(min-width: 1100px) 260px, (min-width: 700px) 45vw, 92vw' })}
+            </a>
+          </li>`;
+  }).filter(Boolean).join('\n');
+
+  const body = `      <div class="page-head">
+        <h1 class="page-head__title">${esc(c.heading)}</h1>
+      </div>
+      <div class="commissions">
+        <div class="commissions__intro">
+${intro}
+        </div>
+
+        <section class="commissions__section">
+          <h2>${esc(c.whatHeading)}</h2>
+          <ul class="offers">
+${offers}
+          </ul>
+        </section>
+
+        <section class="commissions__section">
+          <h2>${esc(c.howHeading)}</h2>
+          <ol class="steps">
+${steps}
+          </ol>
+        </section>
+
+        <section class="commissions__section">
+          <h2>${esc(c.pricesHeading)}</h2>
+          <p>${esc(c.prices)}</p>
+        </section>
+${examples ? `
+        <section class="commissions__section">
+          <h2>${esc(c.examplesHeading)}</h2>
+          <ul class="artworks artworks--examples">
+${examples}
+          </ul>
+        </section>
+` : ''}
+        <section class="commissions__section contact" id="contact">
+          <h2>${esc(c.contactHeading)}</h2>
+          <p>${esc(c.lead)}</p>
+          <a class="contact__email" href="mailto:${attr(S.email)}">${esc(S.email)}</a>
+          <p class="contact__note">${esc(c.note)}</p>
+
+          <p class="contact__follow">${esc(c.followLead)}</p>
+          <ul class="social">
 ${links}
-        </ul>
+          </ul>
+        </section>
       </div>`;
 
+  const person = personSchema(locale);
   return {
     locale,
-    file: 'contact/index.html',
-    path: '/contact/',
+    file: 'commissions/index.html',
+    path: '/commissions/',
     html: layout({
       locale,
-      title: t.contact.title,
-      description: t.contact.description,
-      path: '/contact/',
-      keywords: t.contact.keywords,
+      title: c.title,
+      description: c.description,
+      path: '/commissions/',
+      keywords: c.keywords,
+      ogImage: site.commissions?.examples?.[0] && site.categories
+        .find((cat) => cat.slug === site.commissions.examples[0].category)?.images
+        .find((i) => keyFor(i.media) === site.commissions.examples[0].key)?.media,
       body,
-      structuredData: [{
-        '@context': 'https://schema.org',
-        '@type': 'ContactPage',
-        url: abs(locale, '/contact/'),
-        inLanguage: t.htmlLang,
-        mainEntity: personSchema(locale),
-      }],
+      structuredData: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'ContactPage',
+          url: abs(locale, '/commissions/'),
+          inLanguage: t.htmlLang,
+          mainEntity: person,
+        },
+        // A commission is a service with a provider and a service area — the
+        // record that answers "commission a painting" rather than a biography.
+        {
+          '@context': 'https://schema.org',
+          '@type': 'Service',
+          name: c.heading,
+          description: c.description,
+          url: abs(locale, '/commissions/'),
+          inLanguage: t.htmlLang,
+          serviceType: c.what.map((item) => item.title),
+          provider: person,
+          areaServed: { '@type': 'Place', name: locale === 'bg' ? 'По целия свят' : 'Worldwide' },
+          availableChannel: {
+            '@type': 'ServiceChannel',
+            serviceUrl: abs(locale, '/commissions/'),
+            availableLanguage: ['bg', 'en'],
+          },
+        },
+        breadcrumbs(locale, [[t.nav.commissions, '/commissions/']]),
+      ],
     }),
   };
 }
@@ -662,14 +755,16 @@ function notFoundPage() {
   };
 }
 
-/** The old Wix site published the biography at /bio-1 — keep that URL alive. */
-function redirect(from, to) {
-  const locale = DEFAULT_LOCALE;
+/**
+ * Old URLs keep working: the Wix site published the biography at /bio-1, and
+ * the Contact page became Commissions. Each locale gets its own stub.
+ */
+function redirect(from, to, locale = DEFAULT_LOCALE) {
   const t = LOCALES[locale];
   const target = href(locale, to);
   return {
     locale,
-    file: `${from.replace(/^\/|\/$/g, '')}/index.html`,
+    file: `${localised(locale, from).replace(/^\/|\/$/g, '')}/index.html`,
     path: from,
     redirect: true,
     html: `<!DOCTYPE html>
@@ -696,7 +791,8 @@ for (const locale of S.locales) {
     galleryPage(locale),
     ...site.categories.map((cat) => categoryPage(locale, cat)),
     bioPage(locale),
-    contactPage(locale),
+    commissionsPage(locale),
+    redirect('/contact/', '/commissions/', locale),
   );
   // A page per published painting. Hidden ones get no page and no sitemap
   // entry, so nothing links to a work that has been pulled.

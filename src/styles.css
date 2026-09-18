@@ -299,6 +299,16 @@ main { padding-block: clamp(2rem, 5vw, 4rem) clamp(3rem, 7vw, 5.5rem); }
 .button:hover,
 .button:focus-visible { background: var(--ink); color: var(--ground); }
 
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .75rem 1rem;
+  margin: 0;
+}
+
+.hero__actions .button { margin-top: 1.6rem; }
+
 /* --------------------------------------------------------------- gallery */
 
 .categories {
@@ -572,6 +582,82 @@ main { padding-block: clamp(2rem, 5vw, 4rem) clamp(3rem, 7vw, 5.5rem); }
 }
 
 .bio__portraits figure { margin: 0; box-shadow: var(--shadow); background: var(--ground-soft); }
+
+/* ------------------------------------------------------------ commissions */
+
+.commissions {
+  max-width: 52rem;
+  margin-inline: auto;
+}
+
+.commissions__intro {
+  max-width: var(--measure);
+  margin-inline: auto;
+  font-size: clamp(1rem, 1.4vw, 1.08rem);
+  color: var(--ink-soft);
+}
+
+.commissions__intro p { margin: 0 0 1em; }
+
+.commissions__section {
+  margin-top: clamp(2.25rem, 5vw, 3.5rem);
+  padding-top: clamp(1.5rem, 3vw, 2.25rem);
+  border-top: 1px solid var(--rule);
+}
+
+.commissions__section h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  font-weight: 300;
+  letter-spacing: .04em;
+}
+
+.commissions__section > p { max-width: var(--measure); color: var(--ink-soft); }
+
+.offers,
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: clamp(1.25rem, 2.6vw, 2rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.steps { counter-reset: step; }
+
+.offer p,
+.step p { margin: .35rem 0 0; color: var(--ink-soft); font-size: .95rem; }
+
+.offer__title,
+.step__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+
+.step__title::before {
+  counter-increment: step;
+  content: counter(step) ". ";
+  color: var(--ink-soft);
+  font-weight: 300;
+}
+
+.offer__link {
+  display: inline-block;
+  margin-top: .5rem;
+  font-size: .85rem;
+  letter-spacing: .04em;
+}
+
+.artworks--examples { columns: 4 150px; }
+
+.artwork__button--link { cursor: pointer; }
+
+.commissions .contact { max-width: none; }
+
+.commissions .contact h2 { text-align: center; }
 
 /* ---------------------------------------------------------------- contact */
 

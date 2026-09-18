@@ -24,7 +24,7 @@
     "home": "Home",
     "gallery": "Gallery",
     "bio": "Bio",
-    "contact": "Contact"
+    "commissions": "Commissions"
   },
   "ui": {
     "skip": "Skip to content",
@@ -52,7 +52,8 @@
     "linkCopied": "Link copied",
     "openPainting": "Open this painting",
     "previousWork": "Previous work",
-    "nextWork": "Next work"
+    "nextWork": "Next work",
+    "commissionCta": "Commission a painting"
   },
   "home": {
     "title": "Vasilka Sotirova | Bulgarian Artist — Original Oil and Pastel Paintings",
@@ -186,20 +187,6 @@
       "Postgraduate degree in \"Pedagogy of the Plastic Arts\"."
     ],
     "note": "Her paintings are owned by private individuals from Bulgaria, Germany, Russia, France, Norway, Sweden, Denmark, England, Canada, the USA and others."
-  },
-  "contact": {
-    "heading": "Contact",
-    "title": "Contact | Commission a Painting from Vasilka Sotirova",
-    "description": "Contact Bulgarian artist Vasilka Sotirova to order an original painting or commission a portrait or pet portrait. Paintings ship worldwide.",
-    "keywords": [
-      "commission a painting",
-      "buy Bulgarian art",
-      "portrait commission",
-      "contact artist"
-    ],
-    "lead": "To order a painting or commission a portrait, get in touch by email:",
-    "note": "For commissions, please include the subject, the size you have in mind and any reference photographs. Paintings ship worldwide.",
-    "followLead": "You can also follow new work here:"
   },
   "notFound": {
     "heading": "Page not found",
@@ -335,5 +322,75 @@
     "mixed": "Mixed media"
   },
   "titles": {},
-  "notes": {}
+  "notes": {},
+  "commissions": {
+    "heading": "Commission a Painting",
+    "title": "Commission a Painting | Bulgarian Painter Vasilka Sotirova",
+    "description": "Commission an original oil or acrylic painting from Bulgarian painter Vasilka Sotirova: portraits, pet portraits and landscapes painted from your photographs and shipped worldwide from Bulgaria.",
+    "keywords": [
+      "commission a painting",
+      "commission a portrait",
+      "pet portrait commission",
+      "commission bulgarian painting",
+      "buy Bulgarian art",
+      "custom oil painting",
+      "contact artist"
+    ],
+    "intro": [
+      "Vasilka Sotirova is a Bulgarian painter based in central Bulgaria, with more than thirty years of commissioned work in oil and acrylic. She paints portraits and landscapes, working from photographs you send or from life itself and her own inspiration. Every commission is an original, one-of-a-kind painting, signed and shipped worldwide."
+    ],
+    "whatHeading": "What you can commission",
+    "what": [
+      {
+        "title": "Portraits",
+        "text": "Single, couple and family portraits in oil or acrylic, from a head-and-shoulders study to a full-length figure. Wedding and anniversary portraits are a specialty.",
+        "link": "/portraits/",
+        "linkText": "See the portraits"
+      },
+      {
+        "title": "Pet portraits",
+        "text": "Dogs, cats and horses painted from your photographs. A good, sharp photo in natural light is all that is needed.",
+        "link": "/animal-portraits/",
+        "linkText": "See the animal portraits"
+      },
+      {
+        "title": "Landscapes and places",
+        "text": "A family house, a village street, a mountain or a stretch of the Black Sea coast, painted in Vasilka’s bold, high-key colour.",
+        "link": "/landscapes/",
+        "linkText": "See the landscapes"
+      },
+      {
+        "title": "Still life and abstract work",
+        "text": "Flower paintings and abstract compositions to a size and palette that suits your room.",
+        "link": "/abstract-paintings/",
+        "linkText": "See the abstract paintings"
+      }
+    ],
+    "howHeading": "How it works",
+    "how": [
+      {
+        "title": "Send your idea",
+        "text": "Email a few reference photographs, the subject, and the size you have in mind. If you are not sure about size or medium, say so and Vasilka will suggest what works best."
+      },
+      {
+        "title": "Agree the details",
+        "text": "You will receive a reply with a proposed size, medium and price. Nothing is started until you approve."
+      },
+      {
+        "title": "The painting is made",
+        "text": "You will see a photograph of the finished painting before it ships."
+      },
+      {
+        "title": "Delivery",
+        "text": "Paintings are carefully packed and shipped worldwide from Bulgaria."
+      }
+    ],
+    "pricesHeading": "Prices",
+    "prices": "Prices depend on the size, the paints used and the number of figures, so every commission is quoted individually. Ask for a quote with no obligation.",
+    "examplesHeading": "Recent commissions",
+    "contactHeading": "Get in touch",
+    "lead": "To start a commission or ask a question, email:",
+    "note": "Please include the subject, the size you have in mind and any reference photographs. Paintings ship worldwide.",
+    "followLead": "You can also follow new work here:"
+  }
 }
