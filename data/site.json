@@ -1,8 +1,8 @@
 {
   "site": {
-    "baseUrl": "https://www.vasisotirova.com",
+    "baseUrl": "https://vasisotirova.com",
     "basePath": "",
-    "customDomain": "www.vasisotirova.com",
+    "customDomain": "vasisotirova.com",
     "adminApi": "https://vasisotirova-admin.erian-s-account.workers.dev",
     "email": "artvasi7@gmail.com",
     "defaultLocale": "en",

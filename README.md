@@ -113,7 +113,7 @@ Pushing to `main` runs `.github/workflows/pages.yml`, which builds `site/` and
 publishes it to GitHub Pages. Enable it once, under **Settings → Pages →
 Build and deployment → Source: GitHub Actions**.
 
-The site is configured for **www.vasisotirova.com**, set by `baseUrl`,
+The site is configured for **vasisotirova.com**, set by `baseUrl`,
 `basePath` and `customDomain` in `data/site.json`. `customDomain` is what makes
 the build emit the `CNAME` file, and that file is what tells GitHub which
 repository owns the domain — there is nothing to type into the Pages settings,

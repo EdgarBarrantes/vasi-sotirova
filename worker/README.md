@@ -89,7 +89,7 @@ one. If the worker ever moves onto a route on your own domain, a WAF rule
 becomes an option too.
 
 When the custom domain goes live, update `ALLOWED_ORIGIN` in `wrangler.toml`
-to `https://www.vasisotirova.com` and redeploy, or the browser will refuse the
+to `https://vasisotirova.com` and redeploy, or the browser will refuse the
 requests.
 
 ## Rotating the password

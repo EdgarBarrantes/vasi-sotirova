@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /admin/
 Allow: /
 
-Sitemap: https://www.vasisotirova.com/sitemap.xml
+Sitemap: https://vasisotirova.com/sitemap.xml
